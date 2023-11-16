@@ -1,2 +1,2 @@
 # mystudy
-My development study
+Bitcamp study
