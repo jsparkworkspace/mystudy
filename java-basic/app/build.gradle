@@ -69,6 +69,7 @@ tasks.named('test') {
     useJUnitPlatform() // 단위 테스트를 수행할 때 JUnit 도구를 사용하도록 지정한다.
 }
 
+
 // eclipse 프로젝트 이름을 설정하기
 eclipse {
     project {

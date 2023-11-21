@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"com.eomcs.lang.ex02","c":"Exam0200","l":"Exam0200()","u":"%3Cinit%3E()"},{"p":"com.eomcs.lang.ex02","c":"Exam0200","l":"main(String[])","u":"main(java.lang.String[])"},{"p":"com.eomcs.lang.ex02","c":"Exam0200","l":"message"}];updateSearchResults();
