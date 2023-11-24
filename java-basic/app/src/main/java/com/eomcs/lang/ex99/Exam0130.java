@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex99;
 
-//# 콘솔로 출력하기 III - 형식을 갖춰서 날짜 값 출력하기 
-// 
+// # 콘솔로 출력하기 III - 형식을 갖춰서 날짜 값 출력하기
+//
 public class Exam0130 {
   public static void main(String[] args) {
     // 현재 날짜 및 시각 정보를 생성한다.
@@ -41,6 +41,7 @@ public class Exam0130 {
     // L : 날짜 및 시각 데이터에서 시각을 추출하여 밀리초를 표현한다.
     // N : 날짜 및 시각 데이터에서 시각을 추출하여 나노초를 표현한다.
     System.out.printf("%1$tS %1$tL %1$tN\n", today);
+    System.out.printf("%tS %tL %tN \n", today, today, today);
 
     // p : 오전 오후 출력하기
     // 소문자 p를 사용하면 am 또는 pm으로 출력하고,

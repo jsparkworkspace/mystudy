@@ -26,6 +26,7 @@ public class mytest0001 {
     System.out.println('"');
     System.out.println("'");
     System.out.println("'/'");
+    System.out.println("\"");
     System.out.println((int) '가');
     System.out.println('가' + 1);
     System.out.println("가" + 1);
