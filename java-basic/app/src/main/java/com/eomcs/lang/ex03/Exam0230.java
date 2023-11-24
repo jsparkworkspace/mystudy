@@ -31,7 +31,7 @@ public class Exam0230 {
     System.out.println(Long.MIN_VALUE); // 8바이트로 표현할 수 있는 정수 최소값
 
     // ## 추가 확인
-    // 1바이트, 2바이트 정수의 최대값과 최소값
+    // 1바이트, 2바이트 정수의 최대값과 최소값 java는 어짜피 int, long만 사용하고 Byte, Short는 사용하지 않는다.
     System.out.println(Byte.MAX_VALUE);
     System.out.println(Byte.MIN_VALUE);
     System.out.println(Short.MAX_VALUE);

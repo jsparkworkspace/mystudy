@@ -33,7 +33,7 @@ public class Exam0100 {
     System.out.println("test" + 78);
     System.out.println(78 + "test");
     // 여기서 + 는 문자열과 숫자를 결합하는 연산으로 사용
-    // 숫자 78이 문자열로 형변환되어 문자열 "test78", "78test"가 출력됨
+    // 숫자 78이 문자열로 형변환되어 String "test78", "78test"가 출력됨
 
 
   }
