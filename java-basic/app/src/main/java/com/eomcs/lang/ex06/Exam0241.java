@@ -1,6 +1,6 @@
 package com.eomcs.lang.ex06;
 
-//# 흐름 제어문 - switch 문법 II
+// # 흐름 제어문 - switch 문법 II
 //
 public class Exam0241 {
 
@@ -10,7 +10,8 @@ public class Exam0241 {
     // 상수를 사용하면 주석없이 바로 이해할 수 있다.
     // => case 문자의 값으로 변수를 사용할 수 없다.
     // => 단 값이 변경되지 않는 final 변수라면 사용할 수 있다.
-    //
+    // 상수를 사용하면서 코드와 메모리 사용량이 늘어나지만
+    // 가독성이 늘어나 유지보수가 쉬워진다. ==> 리펙토링
     final int GUEST = 0, MEMBER = 1, ADMIN = 2;
 
     switch (level) {
