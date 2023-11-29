@@ -2,7 +2,7 @@ package codingtest;
 
 import java.util.Scanner;
 
-public class Exam1_7 {
+public class Exam1_07 {
 
   public static void main(String[] args) {
 

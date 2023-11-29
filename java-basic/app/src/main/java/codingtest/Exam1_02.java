@@ -2,7 +2,7 @@ package codingtest;
 
 import java.util.Scanner;
 
-public class Exam1_6 {
+public class Exam1_02 {
 
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
@@ -10,10 +10,6 @@ public class Exam1_6 {
     int b = sc.nextInt();
 
     System.out.println(a + b);
-    System.out.println(a - b);
-    System.out.println(a * b);
-    System.out.println(a / b);
-    System.out.println(a % b);
   }
 
 }

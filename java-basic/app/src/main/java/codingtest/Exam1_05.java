@@ -2,15 +2,14 @@ package codingtest;
 
 import java.util.Scanner;
 
-public class Exam1_4 {
+public class Exam1_05 {
 
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    int a = sc.nextInt();
-    int b = sc.nextInt();
+    Double a = sc.nextDouble();
+    Double b = sc.nextDouble();
 
-    System.out.println(a * b);
-
+    System.out.println(a / b);
   }
 
 }
