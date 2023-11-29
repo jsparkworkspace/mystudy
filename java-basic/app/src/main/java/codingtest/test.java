@@ -11,16 +11,19 @@ public class test {
     Scanner sc = new Scanner(System.in);
     int a = sc.nextInt();
     int b = sc.nextInt();
-
-    System.out.println("더하기 : " + (a + b)); // 사칙연산 순서로 인해 앞에 문자열 때문에 문자열의 + 가 되어버리니 ()로 묶어서 정수 연산을
-                                            // 하게 만듬
-    System.out.println("빼기 : " + (a - b));
-    System.out.println("곱하기 : " + a * b);
+    // 사칙연산 순서로 인해 앞에 문자열 때문에 문자열의 + 가 되어버리니 ()로 묶어서 정수 연산을 하게 만듬
+    // System.out.println("더하기 : " + (a + b));
+    System.out.println("더하기 : " + add(a, b));
+    // System.out.println("빼기 : " + (a - b));
+    System.out.println("빼기 : " + sub(a, b));
+    // System.out.println("곱하기 : " + a * b);
+    System.out.println("곱하기 : " + mul(a, b));
 
     System.out.println("부동소수점 2개를 입력하세요");
     double c = sc.nextDouble();
     double d = sc.nextDouble();
-    System.out.println(c / d);
+    // System.out.println(c / d);
+    System.out.println("나누기 : " + div(c, d));
 
     System.out.println("문자(유니코드 10진수 값)를 입력하세요(next() 메서드 종류에 리턴 값이 char 형은 없음..)");
     char ch = (char) sc.nextInt();
@@ -35,22 +38,23 @@ public class test {
 
   }
 
-  public int add(int a, int b) {
-    Scanner sc = new Scanner(System.in);
-    int add1 = sc.nextInt();
-    int add2 = sc.nextInt();
-    int result = add1 + add2;
+  public static int add(int a, int b) {
 
-    return result;
+    return a + b;
+
   }
 
-  public int sub(int a, int b) {
-    Scanner sc = new Scanner(System.in);
-    int sub1 = sc.nextInt();
-    int sub2 = sc.nextInt();
-    int result = sub1 - sub2;
-    return result;
+  public static int sub(int a, int b) {
+
+    return a - b;
   }
 
+  public static int mul(int a, int b) {
+    return a * b;
+  }
 
+  public static double div(double a, double b) {
+    return a / b;
+
+  }
 }
