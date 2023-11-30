@@ -1,14 +1,16 @@
-package codingtest;
+package codingtest.Exam1;
 
 import java.util.Scanner;
 
-public class Exam1_08 {
+public class Exam1_04 {
 
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     int a = sc.nextInt();
+    int b = sc.nextInt();
 
-    System.out.println(a - 543);
+    System.out.println(a * b);
+
   }
 
 }
