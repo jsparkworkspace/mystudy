@@ -13,7 +13,6 @@ import com.eomcs.oop.ex02.test.util.Calculator;
 // Calculator 클래스를 향후 유지보수하기 쉽도록 별도의 패키지로 분류한다.
 // - com.eomcs.oop.ex02.util 패키지를 만들어 분류한다.
 // - import 를 이용하여 클래스의 패키지 정보를 지정한다.
-
 public class App {
 
   public static void main(String[] args) {
@@ -28,17 +27,15 @@ public class App {
     c1.multiple(7);
     c1.divide(3);
 
-    c2.plus(4);
-    c2.plus(2);
-    c2.minus(2);
+    c2.plus(3);
+    c2.plus(7);
+    c2.minus(3);
     c2.multiple(8);
-    c2.divide(4);
+    c2.divide(3);
 
     System.out.printf("result = %d\n", c1.result);
     System.out.printf("result = %d\n", c2.result);
   }
-
-
 }
 
 
