@@ -12,7 +12,7 @@ public class AssignmentMenu {
   }
 
   static void execute() {
-    AssignmentData ad = new AssignmentData();
+    AssignmentData ad = new AssignmentData("", "", "");
     printMenu();
     while (true) {
       String input = Prompt.input("메인/과제> ");

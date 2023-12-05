@@ -12,7 +12,9 @@ public class BoardMenu {
   }
 
   static void execute() {
-    BoardData bd = new BoardData();
+//    BoardData bd = new BoardData(Prompt.input("제목? "), Prompt.input("내용? "), Prompt.input("작성자? "),
+//        Prompt.input("작성일? "));
+    BoardData bd = new BoardData("", "", "", "");
     printMenu();
 
     while (true) {

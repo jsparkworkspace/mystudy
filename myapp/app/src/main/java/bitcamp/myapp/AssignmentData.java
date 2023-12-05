@@ -6,6 +6,12 @@ public class AssignmentData {
   String content;
   String deadline;
 
+  public AssignmentData(String title, String content, String deadline) {
+    this.title = title;
+    this.content = content;
+    this.deadline = deadline;
+  }
+
   void add() {
     System.out.println("과제 등록:");
     this.title = Prompt.input("과제명? ");
