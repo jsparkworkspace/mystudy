@@ -1,41 +1,42 @@
 package com.eomcs.oop.ex02.test;
 
-import com.eomcs.oop.ex02.test.util.Calculator;
+import com.eomcs.oop.ex02.test.vo.Score;
 
-// # 관련된 기능(메서드)을 묶어 분류하기
-// 1) 분류 전
-// 2) 메서드를 클래스로 묶어 분류하기
-// 3) 클래스 변수 도입
-// 4) 클래스 변수의 한계 확인
-// 5) 인스턴스 변수 도입
-// 6) 인스턴스 메서드 활용
-// 7) 클래스를 역할에 따라 패키지로 분류하기
-// Calculator 클래스를 향후 유지보수하기 쉽도록 별도의 패키지로 분류한다.
-// - com.eomcs.oop.ex02.util 패키지를 만들어 분류한다.
-// - import 를 이용하여 클래스의 패키지 정보를 지정한다.
+// 0) 낱개 변수 사용
+// 1) 성적 데이터를 저장할 사용자 정의 데이터 타입을 만든다.
+// 2) 리팩토링: 메서드 추출(extract method), static nested class
+// 3) 리팩토링: 메서드 추출(extract method) = 한 개의 메서드는 한 개의 기능을 수행해야 한다.
+// 4) GRASP(General Responsibility Assignment Software Patterns) 패턴
+// => Information Expert: 데이터를 다룰 때는 그 데이터를 갖고 있는 객체에게 묻는다.
+// 리팩토링: 메서드 이동(Move Method)
+// => 메서드를 관련된 클래스로 이동시킨다. => 코드의 이해가 쉽다.
+// 5) 인스턴스 메서드: 인스턴스 주소를 받는 더 쉬운 문법
+// 6) 패키지 멤버 클래스:
+// => 여러 곳에서 사용할 클래스라면 다른 클래스에 안에 두지 말고
+// 패키지의 멤버 클래스로 둬라!
+// 7) 클래스를 역할에 따라 패키지로 분류
+// => 클래스가 많을 경우 유지보수하기 쉽도록 적절한 패키지로 분산 배치한다.
+// => 데이터 타입의 역할을 하는 클래스의 경우
+// 보통 domain, vo(value object), dto(data transfer object) 라는 이름을 가진
+// 패키지에 분류한다.
+// => 패키지가 다르면 modifier 옵션에 따라 접근 범위가 달라진다.
+// 멤버의 접근 범위 설정
+// => public: 모두 공개
+// => protected: 서브 클래스와 같은 패키지의 멤버는 접근 가능
+// => (default): 같은 패키지의 멤버는 접근 가능
+// => private: 접근 불가! 그 멤버가 속한 클래스의 내부에서만 접근 가능
+// 8) 생성자 도입: 인스턴스를 생성할 때 값을 초기화시키는 특별한 메서드
+
 public class App {
 
   public static void main(String[] args) {
-    // 다음 식을 연산자 우선 순위를 고려하지 않고 순서대로 계산하라!
-    // 2 + 3 - 1 * 7 / 3 = ?
-    Calculator c1 = new Calculator();
-    Calculator c2 = new Calculator();
 
-    c1.plus(2);
-    c1.plus(3);
-    c1.minus(1);
-    c1.multiple(7);
-    c1.divide(3);
+    Score s1 = new Score("홍길동", 100, 90, 85);
+    Score s2 = new Score("임꺽정", 90, 80, 75);
+    Score s3 = new Score("유관순", 80, 70, 65);
 
-    c2.plus(3);
-    c2.plus(7);
-    c2.minus(3);
-    c2.multiple(8);
-    c2.divide(3);
-
-    System.out.printf("result = %d\n", c1.result);
-    System.out.printf("result = %d\n", c2.result);
+    s1.printScore();
+    s2.printScore();
+    s3.printScore();
   }
 }
-
-

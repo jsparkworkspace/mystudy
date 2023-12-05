@@ -12,23 +12,23 @@ public class AssignmentMenu {
   }
 
   static void execute() {
+    AssignmentData ad = new AssignmentData();
     printMenu();
-
     while (true) {
-      String input = Prompt.input("메인/과제");
+      String input = Prompt.input("메인/과제> ");
 
       switch (input) {
         case "1":
-          System.out.println("등록입니다.");
+          ad.add();
           break;
         case "2":
-          System.out.println("조회입니다.");
+          ad.view();
           break;
         case "3":
-          System.out.println("변경입니다.");
+          ad.modify();
           break;
         case "4":
-          System.out.println("삭제입니다.");
+          ad.delete();
           break;
         case "0":
           return;
@@ -40,4 +40,6 @@ public class AssignmentMenu {
       }
     }
   }
+
+
 }
