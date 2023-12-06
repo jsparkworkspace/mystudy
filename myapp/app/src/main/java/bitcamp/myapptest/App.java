@@ -1,4 +1,4 @@
-package bitcamp.myapp;
+package bitcamp.myapptest;
 
 public class App {
 

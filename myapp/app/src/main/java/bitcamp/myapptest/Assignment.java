@@ -1,12 +1,12 @@
-package bitcamp.myapp;
+package bitcamp.myapptest;
 
-public class AssignmentData {
+public class Assignment {
 
   String title;
   String content;
   String deadline;
 
-  public AssignmentData(String title, String content, String deadline) {
+  public Assignment(String title, String content, String deadline) {
     this.title = title;
     this.content = content;
     this.deadline = deadline;
