@@ -19,7 +19,7 @@ public class AssignmentAddHandler implements MenuHandler {
 
   @Override
   public void action(Menu menu) {
-    System.out.printf(AnsiEscape.ANSI_BOLD + "(%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
+    System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
 
     if (this.assignmentRepository.length == this.assignmentRepository.assignments.length) {
       //System.out.println("과제를 더이상 등록할 수 없습니다.");

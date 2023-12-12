@@ -18,7 +18,7 @@ public class MemberAddHandler implements MenuHandler {
 
   @Override
   public void action(Menu menu) {
-    System.out.printf(AnsiEscape.ANSI_BOLD + "(%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
+    System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
 
     if (this.memberRepository.length == this.memberRepository.members.length) {
       int oldSize = this.memberRepository.members.length;
