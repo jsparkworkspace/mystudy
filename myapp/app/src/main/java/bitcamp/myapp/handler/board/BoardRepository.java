@@ -48,5 +48,21 @@ public class BoardRepository {
     // 받아서 쓰던가 말던가 호출하는 쪽에서 알아서 처리할 것이다.
     return deleted;
   }
+
+  public Board[] toArray() {
+    Board[] arr = new Board[this.length];
+    for (int i = 0; i < this.length; i++) {
+      arr[i] = this.boards[i];
+    }
+    return arr;
+  }
+
+  public Board get(int index) {
+    if (index < 0 || index >= this.length) {
+      return null;
+    }
+
+    return this.boards[index];
+  }
 }
 
