@@ -5,7 +5,7 @@ public class ObjectRepository {
   private Object[] objects = new Object[3];
   private int length = 0;
 
-  public void add(java.lang.Object object) {
+  public void add(Object object) {
     // 이관
     if (this.length == this.objects.length) {
       int oldSize = this.objects.length;
