@@ -1,25 +1,25 @@
 package bitcamp.myapp.handler.board;
 
-import bitcamp.myapp.vo.Object;
+import bitcamp.myapp.vo.Board;
 
 // 게시글 데이터를 보관하는 일을 한다.
 //
 public class BoardRepository {
 
   // 목록을 저장하는 코드를 외부에서 볼 수 없게 감춘다.
-  private Object[] boards = new Object[3];
+  private Board[] boards = new Board[3];
   private int length = 0;
 
   // 대신 목록에 값을 추가하거나, 꺼내거나 삭제하려면
   // 메서드를 통해 수행하도록 유도한다.
   // => 캡슐화한다.
-  public void add(Object board) {
+  public void add(Board board) {
     // 이관
     if (this.length == this.boards.length) {
       int oldSize = this.boards.length;
       int newSize = oldSize + (oldSize >> 1);
 
-      Object[] arr = new Object[newSize];
+      Board[] arr = new Board[newSize];
       for (int i = 0; i < oldSize; i++) {
         arr[i] = this.boards[i];
       }
@@ -30,14 +30,14 @@ public class BoardRepository {
     this.boards[this.length++] = board;
   }
 
-  public Object remove(int index) {
+  public Board remove(int index) {
     if (index < 0 || index >= this.length) {
       //System.out.println("게시글 번호가 유효하지 않습니다.");
       return null;
     }
 
     // 배열에서 삭제하기 전에 임시 보관해 둔다.
-    Object deleted = this.boards[index];
+    Board deleted = this.boards[index];
 
     for (int i = index; i < (this.length - 1); i++) {
       this.boards[i] = this.boards[i + 1];
@@ -49,15 +49,15 @@ public class BoardRepository {
     return deleted;
   }
 
-  public Object[] toArray() {
-    Object[] arr = new Object[this.length];
+  public Board[] toArray() {
+    Board[] arr = new Board[this.length];
     for (int i = 0; i < this.length; i++) {
       arr[i] = this.boards[i];
     }
     return arr;
   }
 
-  public Object get(int index) {
+  public Board get(int index) {
     if (index < 0 || index >= this.length) {
       return null;
     }
@@ -65,12 +65,12 @@ public class BoardRepository {
     return this.boards[index];
   }
 
-  public Object set(int index, Object board) {
+  public Board set(int index, Board board) {
     if (index < 0 || index >= this.length) {
       return null;
     }
 
-    Object old = this.boards[index];
+    Board old = this.boards[index];
     this.boards[index] = board;
 
     // 새 객체로 교체하기 전에 이전 객체를 리턴한다.
