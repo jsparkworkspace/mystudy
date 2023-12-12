@@ -64,5 +64,18 @@ public class BoardRepository {
 
     return this.boards[index];
   }
+
+  public Board set(int index, Board board) {
+    if (index < 0 || index >= this.length) {
+      return null;
+    }
+
+    Board old = this.boards[index];
+    this.boards[index] = board;
+
+    // 새 객체로 교체하기 전에 이전 객체를 리턴한다.
+    // 호출하는 쪽에서 받아 쓰거나 말거나 알아서 하라고!
+    return old;
+  }
 }
 
