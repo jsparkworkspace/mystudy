@@ -29,4 +29,24 @@ public class BoardRepository {
     // this.boardRepository.boards[this.boardRepository.length++] = board;
     this.boards[this.length++] = board;
   }
+
+  public Board remove(int index) {
+    if (index < 0 || index >= this.length) {
+      //System.out.println("게시글 번호가 유효하지 않습니다.");
+      return null;
+    }
+
+    // 배열에서 삭제하기 전에 임시 보관해 둔다.
+    Board deleted = this.boards[index];
+
+    for (int i = index; i < (this.length - 1); i++) {
+      this.boards[i] = this.boards[i + 1];
+    }
+    this.boards[--this.length] = null;
+
+    // 삭제한 객체를 리턴한다.
+    // 받아서 쓰던가 말던가 호출하는 쪽에서 알아서 처리할 것이다.
+    return deleted;
+  }
 }
+
