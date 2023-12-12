@@ -2,7 +2,7 @@ package bitcamp.myapp.handler.board;
 
 import bitcamp.menu.Menu;
 import bitcamp.menu.MenuHandler;
-import bitcamp.myapp.vo.Board;
+import bitcamp.myapp.vo.Object;
 import bitcamp.util.AnsiEscape;
 import bitcamp.util.Prompt;
 
@@ -24,7 +24,7 @@ public class BoardViewHandler implements MenuHandler {
     System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
 
     int index = this.prompt.inputInt("번호? ");
-    Board board = this.boardRepository.get(index);
+    Object board = this.boardRepository.get(index);
     if (board == null) {
       System.out.println("게시글 번호가 유효하지 않습니다.");
       return;

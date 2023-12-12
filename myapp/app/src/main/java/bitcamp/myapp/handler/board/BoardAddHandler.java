@@ -2,7 +2,7 @@ package bitcamp.myapp.handler.board;
 
 import bitcamp.menu.Menu;
 import bitcamp.menu.MenuHandler;
-import bitcamp.myapp.vo.Board;
+import bitcamp.myapp.vo.Object;
 import bitcamp.util.AnsiEscape;
 import bitcamp.util.Prompt;
 
@@ -36,7 +36,7 @@ public class BoardAddHandler implements MenuHandler {
 //      this.boardRepository.boards = arr;
 //    }
 
-    Board board = new Board();
+    Object board = new Object();
     board.title = this.prompt.input("제목? ");
     board.content = this.prompt.input("내용? ");
     board.writer = this.prompt.input("작성자? ");

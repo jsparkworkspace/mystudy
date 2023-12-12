@@ -2,7 +2,7 @@ package bitcamp.myapp.handler.board;
 
 import bitcamp.menu.Menu;
 import bitcamp.menu.MenuHandler;
-import bitcamp.myapp.vo.Board;
+import bitcamp.myapp.vo.Object;
 import bitcamp.util.AnsiEscape;
 import bitcamp.util.Prompt;
 
@@ -24,7 +24,7 @@ public class BoardModifyHandler implements MenuHandler {
     System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
 
     int index = this.prompt.inputInt("번호? ");
-    Board oldBoard = this.boardRepository.get(index);
+    Object oldBoard = this.boardRepository.get(index);
     if (oldBoard == null) {
       System.out.println("게시글 번호가 유효하지 않습니다.");
       return;
@@ -35,7 +35,7 @@ public class BoardModifyHandler implements MenuHandler {
 //    }
 
 //    Board board = this.boardRepository.boards[index];
-    Board board = new Board();
+    Object board = new Object();
     board.title = this.prompt.input("제목(%s)? ", oldBoard.title);
     board.content = this.prompt.input("내용(%s)? ", oldBoard.content);
     board.writer = this.prompt.input("작성자(%s)? ", oldBoard.writer);
