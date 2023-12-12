@@ -77,5 +77,7 @@ public class BoardRepository {
     // 호출하는 쪽에서 받아 쓰거나 말거나 알아서 하라고!
     return old;
   }
+
+
 }
 
