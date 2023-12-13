@@ -46,10 +46,15 @@ public class ObjectRepository<E> {
 //    return arr;
   }
 
-  public void toArray(E[] arr) {
-    for (int i = 0; i < this.length; i++) {
-      arr[i] = (E) this.objects[i];
+  public E[] toArray(E[] arr) {
+    if (arr.length >= this.length) {
+      System.arraycopy(this.objects, 0, arr, 0, this.length);
+      return arr;
     }
+    return (E[]) Arrays.copyOf(this.objects, this.length, arr.getClass());
+//    for (int i = 0; i < this.length; i++) {
+//      arr[i] = (E) this.objects[i];
+//    }
   }
 
   public E get(int index) {
