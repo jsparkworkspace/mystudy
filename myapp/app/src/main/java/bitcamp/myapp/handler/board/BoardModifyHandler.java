@@ -22,7 +22,7 @@ public class BoardModifyHandler implements MenuHandler {
     System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
 
     int index = this.prompt.inputInt("번호? ");
-    Board oldBoard = (Board) this.objectRepository.get(index);
+    Board oldBoard = this.objectRepository.get(index);
     if (oldBoard == null) {
       System.out.println("게시글 번호가 유효하지 않습니다.");
       return;

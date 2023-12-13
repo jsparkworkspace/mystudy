@@ -10,10 +10,10 @@ import bitcamp.util.Prompt;
 public class AssignmentModifyHandler implements MenuHandler {
 
   Prompt prompt;
-  ObjectRepository objectRepository;
+  ObjectRepository<Assignment> objectRepository;
 
 
-  public AssignmentModifyHandler(ObjectRepository objectRepository, Prompt prompt) {
+  public AssignmentModifyHandler(ObjectRepository<Assignment> objectRepository, Prompt prompt) {
     this.objectRepository = objectRepository;
     this.prompt = prompt;
   }
@@ -23,7 +23,7 @@ public class AssignmentModifyHandler implements MenuHandler {
     System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
 
     int index = this.prompt.inputInt("번호? ");
-    Assignment oldAssignment = (Assignment) this.objectRepository.get(index);
+    Assignment oldAssignment = this.objectRepository.get(index);
     if (oldAssignment == null) {
       System.out.println("과제 번호가 유효하지 않습니다.");
       return;
