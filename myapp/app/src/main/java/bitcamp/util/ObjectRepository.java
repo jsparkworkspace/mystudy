@@ -1,5 +1,7 @@
 package bitcamp.util;
 
+import java.util.Arrays;
+
 public class ObjectRepository<E> {
 
   //수퍼 클래스의 레퍼런스는 서브 클래스의 인스턴스 주소를 담을 수 있다.
@@ -8,19 +10,13 @@ public class ObjectRepository<E> {
   private int length = 0;
 
   public void add(E object) {
-    // 이관
     if (this.length == this.objects.length) {
       int oldSize = this.objects.length;
       int newSize = oldSize + (oldSize >> 1);
 
-      Object[] arr = new Object[newSize];
-//      for (int i = 0; i < oldSize; i++) {
-//        arr[i] = this.objects[i];
-//      }
-      // for문 대신 arraycopy 메서드 사용
-      System.arraycopy(this.objects, 0, arr, 0, oldSize);
-
-      this.objects = arr;
+//      Object[] arr = new Object[newSize];
+//      System.arraycopy(this.objects, 0, arr, 0, oldSize);
+      this.objects = Arrays.copyOf(this.objects, newSize);
     }
     this.objects[this.length++] = object;
   }
@@ -42,11 +38,12 @@ public class ObjectRepository<E> {
   }
 
   public Object[] toArray() {
-    Object[] arr = new Object[this.length];
-    for (int i = 0; i < this.length; i++) {
-      arr[i] = this.objects[i];
-    }
-    return arr;
+    return Arrays.copyOf(this.objects, this.length);
+//    Object[] arr = new Object[this.length];
+//    for (int i = 0; i < this.length; i++) {
+//      arr[i] = this.objects[i];
+//    }
+//    return arr;
   }
 
   public void toArray(E[] arr) {
