@@ -14,9 +14,11 @@ public class ObjectRepository<E> {
       int newSize = oldSize + (oldSize >> 1);
 
       Object[] arr = new Object[newSize];
-      for (int i = 0; i < oldSize; i++) {
-        arr[i] = this.objects[i];
-      }
+//      for (int i = 0; i < oldSize; i++) {
+//        arr[i] = this.objects[i];
+//      }
+      // for문 대신 arraycopy 메서드 사용
+      System.arraycopy(this.objects, 0, arr, 0, oldSize);
 
       this.objects = arr;
     }
@@ -30,9 +32,10 @@ public class ObjectRepository<E> {
 
     Object deleted = this.objects[index];
 
-    for (int i = index; i < (this.length - 1); i++) {
-      this.objects[i] = this.objects[i + 1];
-    }
+    System.arraycopy(this.objects, index + 1, this.objects, index, this.length - (index + 1));
+//    for (int i = index; i < (this.length - 1); i++) {
+//      this.objects[i] = this.objects[i + 1];
+//    }
     this.objects[--this.length] = null;
 
     return (E) deleted;
