@@ -4,15 +4,15 @@ import bitcamp.menu.Menu;
 import bitcamp.menu.MenuHandler;
 import bitcamp.myapp.vo.Board;
 import bitcamp.util.AnsiEscape;
-import bitcamp.util.ObjectRepository;
 import bitcamp.util.Prompt;
+import java.util.ArrayList;
 
 public class BoardAddHandler implements MenuHandler {
 
   Prompt prompt;
-  ObjectRepository<Board> objectRepository;
+  ArrayList<Board> objectRepository;
 
-  public BoardAddHandler(ObjectRepository<Board> boardRepository, Prompt prompt) {
+  public BoardAddHandler(ArrayList<Board> boardRepository, Prompt prompt) {
     this.objectRepository = boardRepository;
     this.prompt = prompt;
   }
