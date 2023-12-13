@@ -1,13 +1,13 @@
 package bitcamp.util;
 
-public class ObjectRepository<dataType> {
+public class ObjectRepository<E> {
 
   //수퍼 클래스의 레퍼런스는 서브 클래스의 인스턴스 주소를 담을 수 있다.
   // 따라서 Object 레퍼런스는 Member, Board, Assignment등 어떤 객체의 주소라도 담을 수 있다.
   private Object[] objects = new Object[3];
   private int length = 0;
 
-  public void add(dataType object) {
+  public void add(E object) {
     // 이관
     if (this.length == this.objects.length) {
       int oldSize = this.objects.length;
@@ -23,7 +23,7 @@ public class ObjectRepository<dataType> {
     this.objects[this.length++] = object;
   }
 
-  public dataType remove(int index) {
+  public E remove(int index) {
     if (index < 0 || index >= this.length) {
       return null;
     }
@@ -35,7 +35,7 @@ public class ObjectRepository<dataType> {
     }
     this.objects[--this.length] = null;
 
-    return (dataType) deleted;
+    return (E) deleted;
   }
 
   public Object[] toArray() {
@@ -46,21 +46,21 @@ public class ObjectRepository<dataType> {
     return arr;
   }
 
-  public void toArray(dataType[] arr) {
+  public void toArray(E[] arr) {
     for (int i = 0; i < this.length; i++) {
-      arr[i] = (dataType) this.objects[i];
+      arr[i] = (E) this.objects[i];
     }
   }
 
-  public dataType get(int index) {
+  public E get(int index) {
     if (index < 0 || index >= this.length) {
       return null;
     }
 
-    return (dataType) this.objects[index];
+    return (E) this.objects[index];
   }
 
-  public dataType set(int index, dataType object) {
+  public E set(int index, E object) {
     if (index < 0 || index >= this.length) {
       return null;
     }
@@ -68,7 +68,7 @@ public class ObjectRepository<dataType> {
     Object old = this.objects[index];
     this.objects[index] = object;
 
-    return (dataType) old;
+    return (E) old;
   }
 
   public int size() {
