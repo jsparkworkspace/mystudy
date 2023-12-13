@@ -17,7 +17,7 @@ dependencies {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -35,11 +35,11 @@ tasks.withType(JavaCompile).configureEach {
 // eclipse 프로젝트 이름을 설정하기(Eclipse로 컴파일 할 때)
 eclipse {
     project {
-        name = "myapp"
+        name = "algoritm-test"
     }
     jdt {
-        sourceCompatibility = 17
-        targetCompatibility = 17
-        javaRuntimeName = "JavaSE-17"
+        sourceCompatibility = 21
+        targetCompatibility = 21
+        javaRuntimeName = "JavaSE-21"
     }
 }

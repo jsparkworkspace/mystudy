@@ -18,13 +18,13 @@ public class Main {
       j = sc.nextInt();
       k = sc.nextInt();
 
-      for (int g = i - 1; g < j - 1; g++) {
+      for (int g = i - 1; g <= j - 1; g++) {
         arr[g] = k;
       }
 
     }
     for (int f = 0; f < n; f++) {
-      System.out.print(arr[f]);
+      System.out.print(arr[f] + " ");
     }
     sc.close();
   }
