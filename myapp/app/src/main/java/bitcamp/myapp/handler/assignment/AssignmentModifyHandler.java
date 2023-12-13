@@ -23,16 +23,16 @@ public class AssignmentModifyHandler implements MenuHandler {
     System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
 
     int index = this.prompt.inputInt("번호? ");
-    Assignment oldAssignment = this.objectRepository.get(index);
-    if (oldAssignment == null) {
+    Assignment old = this.objectRepository.get(index);
+    if (old == null) {
       System.out.println("과제 번호가 유효하지 않습니다.");
       return;
     }
 
     Assignment assignment = new Assignment();
-    assignment.title = this.prompt.input("과제명(%s)? ", oldAssignment.title);
-    assignment.content = this.prompt.input("내용(%s)? ", oldAssignment.content);
-    assignment.deadline = this.prompt.input("제출 마감일(%s)? ", oldAssignment.deadline);
+    assignment.title = this.prompt.input("과제명(%s)? ", old.title);
+    assignment.content = this.prompt.input("내용(%s)? ", old.content);
+    assignment.deadline = this.prompt.input("제출 마감일(%s)? ", old.deadline);
 
     this.objectRepository.set(index, assignment);
   }

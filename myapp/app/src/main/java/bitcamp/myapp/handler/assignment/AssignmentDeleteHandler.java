@@ -26,6 +26,5 @@ public class AssignmentDeleteHandler implements MenuHandler {
     if (this.objectRepository.remove(index) == null) {
       System.out.println("과제 번호가 유효하지 않습니다.");
     }
-
   }
 }
