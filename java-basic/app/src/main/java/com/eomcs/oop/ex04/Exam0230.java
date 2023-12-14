@@ -13,9 +13,9 @@ public class Exam0230 {
     // => floor() : 파라미터로 주어니 부동소수점의 바로 밑 작은 정수 값을 리턴
     System.out.println(Math.ceil(3.28)); // 4
     System.out.println(Math.floor(3.28)); // 3
-    
-    System.out.println(Math.ceil(-3.28)); // -3
-    System.out.println(Math.floor(-3.28)); // -4
+
+    System.out.println(Math.ceil(-3.28)); // -3.0
+    System.out.println(Math.floor(-3.28)); // -4.0
 
     // => 2의 7승 값을 알고 싶을 때
     System.out.println(Math.pow(2, 7));
@@ -27,8 +27,5 @@ public class Exam0230 {
 
   }
 }
-
-
-
 
 
