@@ -25,5 +25,4 @@ public class MenuItem extends AbstractMenu {
       this.menuHandler.action(this);
     }
   }
-  
 }

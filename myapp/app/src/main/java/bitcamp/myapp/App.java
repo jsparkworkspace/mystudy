@@ -26,9 +26,8 @@ import java.util.ArrayList;
 
 public class App {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     Prompt prompt = new Prompt(System.in);
-    //new MainMenu(prompt).execute();
 
     ArrayList<Board> boardRepository = new ArrayList<>();
     ArrayList<Assignment> assignmentRepository = new ArrayList<>();

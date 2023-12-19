@@ -9,7 +9,6 @@ public class AssignmentViewHandler extends AbstractMenuHandler {
 
   private ArrayList<Assignment> objectRepository;
 
-
   public AssignmentViewHandler(ArrayList<Assignment> objectRepository, Prompt prompt) {
     super(prompt);
     this.objectRepository = objectRepository;

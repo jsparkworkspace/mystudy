@@ -9,7 +9,6 @@ public class AssignmentDeleteHandler extends AbstractMenuHandler {
 
   private ArrayList<Assignment> objectRepository;
 
-
   public AssignmentDeleteHandler(ArrayList<Assignment> objectRepository, Prompt prompt) {
     super(prompt);
     this.objectRepository = objectRepository;
