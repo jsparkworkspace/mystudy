@@ -18,7 +18,7 @@ public class BoardListHandler extends AbstractMenuHandler {
   }
 
   @Override
-  public void action() {
+  protected void action() {
     System.out.printf("%-20s\t%10s\t%s\n", "Title", "Writer", "Date");
 
     // Repository 에 보관된 목록을 배열로 리턴 받기
