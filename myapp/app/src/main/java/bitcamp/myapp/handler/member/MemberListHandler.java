@@ -24,7 +24,8 @@ public class MemberListHandler implements MenuHandler {
     this.objectRepository.toArray(members);
 
     for (Member member : members) {
-      System.out.printf("%-10s\t%30s\t%s\n", member.name, member.email, member.createdDate);
+      System.out.printf("%-10s\t%30s\t%s\n", member.getName(), member.getEmail(),
+          member.getCreatedDate());
     }
   }
 }

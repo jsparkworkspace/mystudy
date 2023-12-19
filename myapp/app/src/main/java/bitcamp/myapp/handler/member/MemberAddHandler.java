@@ -22,10 +22,10 @@ public class MemberAddHandler implements MenuHandler {
     System.out.printf(AnsiEscape.ANSI_BOLD + "[%s]\n" + AnsiEscape.ANSI_CLEAR, menu.getTitle());
 
     Member member = new Member();
-    member.email = this.prompt.input("이메일? ");
-    member.name = this.prompt.input("이름? ");
-    member.password = this.prompt.input("암호? ");
-    member.createdDate = this.prompt.input("가입일? ");
+    member.setEmail(this.prompt.input("이메일? "));
+    member.setName(this.prompt.input("이름? "));
+    member.setPassword(this.prompt.input("암호? "));
+    member.setCreatedDate(this.prompt.input("가입일? "));
 
     this.objectRepository.add(member);
   }

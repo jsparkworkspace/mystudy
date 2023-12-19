@@ -33,9 +33,9 @@ public class BoardListHandler implements MenuHandler {
 
     for (Board board : boards) {
       System.out.printf("%-20s\t%10s\t%s\n",
-          board.title,
-          board.writer,
-          board.createdDate);
+          board.getTitle(),
+          board.getWriter(),
+          board.getCreatedDate());
     }
   }
 }
