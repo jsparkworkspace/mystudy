@@ -11,7 +11,7 @@ import java.util.ArrayList;
 //
 public class BoardListHandler implements MenuHandler {
 
-  ArrayList<Board> objectRepository;
+  private ArrayList<Board> objectRepository;
 
   public BoardListHandler(ArrayList<Board> objectRepository) {
     this.objectRepository = objectRepository;

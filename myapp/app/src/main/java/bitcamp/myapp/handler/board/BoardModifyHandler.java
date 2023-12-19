@@ -12,8 +12,8 @@ import java.util.ArrayList;
 //
 public class BoardModifyHandler implements MenuHandler {
 
-  ArrayList<Board> objectRepository;
-  Prompt prompt;
+  private ArrayList<Board> objectRepository;
+  private Prompt prompt;
 
   public BoardModifyHandler(ArrayList<Board> objectRepository, Prompt prompt) {
     this.objectRepository = objectRepository;

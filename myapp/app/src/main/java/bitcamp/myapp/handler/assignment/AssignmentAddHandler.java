@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class AssignmentAddHandler implements MenuHandler {
 
-  Prompt prompt;
-  ArrayList<Assignment> objectRepository;
+  private Prompt prompt;
+  private ArrayList<Assignment> objectRepository;
 
 
   public AssignmentAddHandler(ArrayList<Assignment> objectRepository, Prompt prompt) {

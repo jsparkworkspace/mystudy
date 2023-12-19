@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class MemberModifyHandler implements MenuHandler {
 
-  Prompt prompt;
-  ArrayList<Member> objectRepository;
+  private Prompt prompt;
+  private ArrayList<Member> objectRepository;
 
   public MemberModifyHandler(ArrayList<Member> objectRepository, Prompt prompt) {
     this.objectRepository = objectRepository;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class MemberListHandler implements MenuHandler {
 
-  ArrayList<Member> objectRepository;
+  private ArrayList<Member> objectRepository;
 
   public MemberListHandler(ArrayList<Member> objectRepository) {
     this.objectRepository = objectRepository;

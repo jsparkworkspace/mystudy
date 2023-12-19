@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class AssignmentListHandler implements MenuHandler {
 
-  ArrayList<Assignment> objectRepository;
+  private ArrayList<Assignment> objectRepository;
 
 
   public AssignmentListHandler(ArrayList<Assignment> objectRepository) {
