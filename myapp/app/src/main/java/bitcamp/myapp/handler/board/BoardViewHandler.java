@@ -29,6 +29,12 @@ public class BoardViewHandler extends AbstractMenuHandler {
     System.out.printf("제목: %s\n", board.getTitle());
     System.out.printf("내용: %s\n", board.getContent());
     System.out.printf("작성자: %s\n", board.getWriter());
-    System.out.printf("작성일: %s\n", board.getCreatedDate());
+    System.out.printf("작성일: %tY-%tm-%td %tH:%tM:%tS\n",
+        board.getCreatedDate(),
+        board.getCreatedDate(),
+        board.getCreatedDate(),
+        board.getCreatedDate(),
+        board.getCreatedDate(),
+        board.getCreatedDate());
   }
 }
