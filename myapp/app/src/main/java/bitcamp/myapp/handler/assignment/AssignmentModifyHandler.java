@@ -16,12 +16,22 @@ public class AssignmentModifyHandler extends AbstractMenuHandler {
 
   @Override
   protected void action() {
-    int index = this.prompt.inputInt("번호? ");
-    Assignment old = this.objectRepository.get(index);
-    if (old == null) {
+    int index = 0;
+    try {
+      index = this.prompt.inputInt("번호? ");
+    } catch (Exception e) {
+      System.out.println("숫자를 입력하세요!");
+      return;
+    }
+
+    Assignment old = null;
+    try {
+      old = this.objectRepository.get(index);
+    } catch (Exception e) {
       System.out.println("과제 번호가 유효하지 않습니다.");
       return;
     }
+
     try {
       Assignment assignment = new Assignment();
       assignment.setTitle(this.prompt.input("과제명(%s)? ", old.getTitle()));
