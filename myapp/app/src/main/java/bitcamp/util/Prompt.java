@@ -19,7 +19,12 @@ public class Prompt {
   }
 
   public int inputInt(String title, Object... args) {
-    return Integer.parseInt(this.input(title, args));
+    try {
+      return Integer.parseInt(this.input(title, args));
+    } catch (Exception e) {
+      System.out.println("숫자를 입력하세요!");
+    }
+    return -1;
   }
 
   public float inputFloat(String title, Object... args) {
