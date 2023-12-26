@@ -10,6 +10,8 @@ public class Test {
     list.add(new String("ddd"));
 
     System.out.println(list.first.value);
+    System.out.println(list.first.next.value);
+    System.out.println(list.first.next.next.value);
     System.out.println(list.last.value);
   }
 }
