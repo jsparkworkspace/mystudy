@@ -9,9 +9,14 @@ public class Test {
     list.add(new String("ccc"));
     list.add(new String("ddd"));
 
-    Object[] arr = list.toArray();
+    /*Object[] arr = list.toArray();
     for (Object value : arr) {
       System.out.println(value);
-    }
+    }*/
+    System.out.println(list.get(0));
+    System.out.println(list.get(1));
+    System.out.println(list.get(2));
+    System.out.println(list.get(3));
+    System.out.println(list.get(4)); // 예외 발생
   }
 }

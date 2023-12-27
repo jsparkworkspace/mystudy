@@ -31,4 +31,18 @@ public class LinkedList {
     }
     return arr;
   }
+
+  public Object get(int index) /*throws IndexOutOfBoundsException*/ {
+    if (index < 0 || index >= size) {
+      throw new IndexOutOfBoundsException("무효한 인덱스입니다.");
+    }
+
+    int cursor = 0;
+    Node node = first;
+    while (cursor++ < index) {
+      node = node.next;
+    }
+
+    return node.value;
+  }
 }
