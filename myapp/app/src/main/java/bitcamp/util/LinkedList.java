@@ -97,28 +97,19 @@ public class LinkedList {
     if (index < 0 || index >= size) {
       throw new IndexOutOfBoundsException("무효한 인덱스입니다.");
     }
+
     Object old = null;
-    // 1개 일 때
+
     if (size == 1) {
       old = first;
       first = last = null;
+
     } else if (index == 0) {
       old = first;
-      // 맨 앞 삭제 - index == 0
       first = first.next;
-    } else if (index == size - 1) {
-      // 맨 뒤 삭제 - index == size - 1
-      int cursor = 0;
-      Node currNode = first;
-      while (++cursor < index) {
-        currNode = currNode.next;
-      }
-      old = currNode.next;
-      currNode.next = null;
-      last = currNode;
 
     } else {
-      // 중간 삭제
+      // 공통된 부분을 추출 - 리펙토링
       int cursor = 0;
       Node currNode = first;
       while (++cursor < index) {
@@ -127,9 +118,12 @@ public class LinkedList {
       old = currNode.next;
       currNode.next = currNode.next.next;
 
+      if (index == (size - 1)) {
+        last = currNode;
+      }
     }
-    size--;
 
+    size--;
     return old;
   }
 }
