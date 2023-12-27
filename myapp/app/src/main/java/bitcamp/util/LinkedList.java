@@ -45,4 +45,38 @@ public class LinkedList {
 
     return node.value;
   }
+
+  public Object set(int index, Object value) {
+    if (index < 0 || index >= size) {
+      throw new IndexOutOfBoundsException("무효한 인덱스입니다.");
+    }
+
+    int cursor = 0;
+    Node node = first;
+    while (++cursor <= index) {
+      node = node.next;
+    }
+
+    Object old = node.value;
+    node.value = value;
+    return old;
+  }
+
+  public void add(int index, Object value) {
+    if (index < 0 || index >= size) {
+      throw new IndexOutOfBoundsException("무효한 인덱스입니다.");
+    }
+
+    Node node = new Node();
+    node.value = value;
+
+    // index가 0일 때,
+    node.next = first;
+    first = node;
+    if (last == null) {
+      last = first;
+    }
+    size++;
+
+  }
 }
