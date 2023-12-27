@@ -3,16 +3,25 @@ package bitcamp.util;
 public class Test {
 
   public static void main(String args[]) {
-    LinkedList list = new LinkedList();
-    list.add(new String("aaa"));
-    list.add(new String("bbb"));
-    list.add(new String("ccc"));
-    list.add(new String("ddd"));
+    LinkedList<String> list = new LinkedList<>();
+    list.add("aaa");
+    list.add("bbb");
+    list.add("ccc");
+    list.add("ddd");
 
-    list.remove(2); // aaa, bbb, ddd,
-    list.remove(2); // aaa, bbb,
-    list.remove(0); // bbb,
-    list.remove(0);
+    System.out.println(list.remove("xxx"));
+    System.out.println(list.remove("ccc"));
+    System.out.println(list.remove("ddd"));
+    System.out.println(list.remove("aaa"));
+    System.out.println(list.remove("bbb"));
+    list.add("xxx");
+    list.add("yyy");
+    list.add("zzz");
+
+//    list.remove(2); // aaa, bbb, ddd,
+//    list.remove(2); // aaa, bbb,
+//    list.remove(0); // bbb,
+//    list.remove(0);
 
     /*list.add(0, new String("xxx"));
     list.add(5, new String("yyy"));
