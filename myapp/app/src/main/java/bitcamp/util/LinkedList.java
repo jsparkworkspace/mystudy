@@ -39,7 +39,7 @@ public class LinkedList {
 
     int cursor = 0;
     Node node = first;
-    while (cursor++ < index) {
+    while (++cursor <= index) {
       node = node.next;
     }
 
