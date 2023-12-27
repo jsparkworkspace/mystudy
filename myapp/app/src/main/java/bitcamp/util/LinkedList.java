@@ -126,4 +126,10 @@ public class LinkedList {
     size--;
     return old;
   }
+
+  private static class Node {
+
+    Object value;
+    Node next;
+  }
 }
