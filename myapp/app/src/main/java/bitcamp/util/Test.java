@@ -11,6 +11,9 @@ public class Test {
 
     list.add(0, new String("xxx"));
     list.add(5, new String("yyy"));
+    list.add(1, new String("mmm"));
+    list.add(3, new String("ttt"));
+    list.add(7, new String("ppp"));
 
     Object[] arr = list.toArray();
     for (Object value : arr) {

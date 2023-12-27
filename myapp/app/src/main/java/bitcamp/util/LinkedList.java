@@ -80,6 +80,15 @@ public class LinkedList {
       // index가 size일 때,
       last.next = node;
       last = node;
+    } else {
+      // index가 중간일 때
+      int cursor = 0;
+      Node currNode = first;
+      while (++cursor < index) {
+        currNode = currNode.next;
+      }
+      node.next = currNode.next;
+      currNode.next = node;
     }
     size++;
   }
