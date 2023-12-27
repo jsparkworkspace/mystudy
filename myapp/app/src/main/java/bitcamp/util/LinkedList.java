@@ -63,20 +63,24 @@ public class LinkedList {
   }
 
   public void add(int index, Object value) {
-    if (index < 0 || index >= size) {
+    if (index < 0 || index > size) {
       throw new IndexOutOfBoundsException("무효한 인덱스입니다.");
     }
 
     Node node = new Node();
     node.value = value;
 
-    // index가 0일 때,
-    node.next = first;
-    first = node;
-    if (last == null) {
-      last = first;
+    if (first == null) {
+      first = last = node;
+    } else if (index == 0) {
+      // index가 0일 때,
+      node.next = first;
+      first = node;
+    } else if (index == size) {
+      // index가 size일 때,
+      last.next = node;
+      last = node;
     }
     size++;
-
   }
 }
