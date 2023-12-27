@@ -2,8 +2,9 @@ package bitcamp.util;
 
 public class LinkedList {
 
-  Node first;
-  Node last;
+  private Node first;
+  private Node last;
+  private int size;
 
   public void add(Object value) {
     Node node = new Node();
@@ -17,5 +18,17 @@ public class LinkedList {
       last.next = node;
       last = node; // last 주소 갱신
     }
+    size++;
+  }
+
+  public Object[] toArray() {
+    Object[] arr = new Object[size];
+    int index = 0;
+    Node node = first;
+    while (node != null) {
+      arr[index++] = node.value;
+      node = node.next;
+    }
+    return arr;
   }
 }

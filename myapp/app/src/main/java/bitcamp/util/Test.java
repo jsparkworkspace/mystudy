@@ -9,16 +9,9 @@ public class Test {
     list.add(new String("ccc"));
     list.add(new String("ddd"));
 
-    Node node = list.first; // 첫번째 노드
-    System.out.println(node.value);
-
-    node = node.next;
-    System.out.println(node.value);
-
-    node = node.next;
-    System.out.println(node.value);
-
-    node = node.next;
-    System.out.println(node.value);
+    Object[] arr = list.toArray();
+    for (Object value : arr) {
+      System.out.println(value);
+    }
   }
 }
