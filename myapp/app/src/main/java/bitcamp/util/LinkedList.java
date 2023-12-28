@@ -2,15 +2,10 @@ package bitcamp.util;
 
 import java.util.Arrays;
 
-public class LinkedList<E> implements List<E> {
+public class LinkedList<E> extends AbstractList<E> {
 
   private Node<E> first;
   private Node<E> last;
-  private int size;
-
-  public int size() {
-    return size;
-  }
 
   public void setSize(int size) {
     this.size = size;
