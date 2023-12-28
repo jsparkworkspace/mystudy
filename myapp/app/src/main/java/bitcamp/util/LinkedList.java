@@ -2,7 +2,7 @@ package bitcamp.util;
 
 import java.util.Arrays;
 
-public class LinkedList<E> {
+public class LinkedList<E> implements List<E> {
 
   private Node<E> first;
   private Node<E> last;

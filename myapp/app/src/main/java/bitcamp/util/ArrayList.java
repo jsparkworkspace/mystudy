@@ -2,7 +2,7 @@ package bitcamp.util;
 
 import java.util.Arrays;
 
-public class ArrayList<E> {
+public class ArrayList<E> implements List<E> {
 
   public int length = 0;
   private Object[] objects = new Object[3];
