@@ -78,12 +78,12 @@ public class ArrayList<E> extends AbstractList<E> {
 //  }
 
   // 2) 스태틱 중첩 클래스를 사용한 경우
-  @Override
-  public Iterator<E> iterator() {
-    return new IteratorImpl<>(this);
-  }
+//  @Override
+//  public Iterator<E> iterator() {
+//    return new IteratorImpl<>(this);
+//  }
 
-  private static class IteratorImpl<E> implements Iterator<E> {
+  /*private static class IteratorImpl<E> implements Iterator<E> {
 
     ArrayList<E> list;
     int cursor = 0;
@@ -100,6 +100,32 @@ public class ArrayList<E> extends AbstractList<E> {
     @Override
     public E next() {
       return list.get(cursor++);
+    }
+  }*/
+
+  // 3) 논스태틱 중첩 클래스를 사용한 경우
+  @Override
+  public Iterator<E> iterator() {
+    return new IteratorImpl<>(/*this*/);
+  }
+
+  private class IteratorImpl<E> implements Iterator<E> {
+
+    /*ArrayList this$0;*/
+    int cursor = 0;
+
+    /*public IteratorImpl(ArrayList list) {
+      this$0 = list;
+    }*/
+
+    @Override
+    public boolean hasNext() {
+      return cursor >= 0 && cursor < ArrayList.this.size();
+    }
+
+    @Override
+    public E next() {
+      return (E) ArrayList.this.get(cursor++);
     }
   }
 }
