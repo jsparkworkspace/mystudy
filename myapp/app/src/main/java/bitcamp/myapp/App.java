@@ -24,7 +24,6 @@ import bitcamp.util.ArrayList;
 import bitcamp.util.LinkedList;
 import bitcamp.util.List;
 import bitcamp.util.Prompt;
-import bitcamp.util.Stack;
 
 public class App {
 
@@ -35,9 +34,6 @@ public class App {
     List<Assignment> assignmentRepository = new LinkedList<>();
     List<Member> memberRepository = new ArrayList<>();
     List<Board> greetingRepository = new ArrayList<>();
-
-    // 메뉴의 경로를 저장할 스택 객체 준비
-    Stack<String> breadcrumb = new Stack<>();
 
     MenuGroup mainMenu = MenuGroup.getInstance("메인");
 
