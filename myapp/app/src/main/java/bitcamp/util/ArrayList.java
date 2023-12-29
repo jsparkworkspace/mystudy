@@ -104,28 +104,97 @@ public class ArrayList<E> extends AbstractList<E> {
   }*/
 
   // 3) 논스태틱 중첩 클래스를 사용한 경우
+  // 바깥 클래스의 인스턴스 주소를 두는 코드가 자동으로 추가된다.
+//  @Override
+//  public Iterator<E> iterator() {
+//    return new IteratorImpl<>(/*this*/);
+//  }
+//
+//  private class IteratorImpl<E> implements Iterator<E> {
+//
+//    /*ArrayList this$0;*/
+//    int cursor = 0;
+//
+//    /*public IteratorImpl(ArrayList list) {
+//      this$0 = list;
+//    }*/
+//
+//    @Override
+//    public boolean hasNext() {
+//      return cursor >= 0 && cursor < ArrayList.this.size();
+//    }
+//
+//    @Override
+//    public E next() {
+//      return (E) ArrayList.this.get(cursor++);
+//    }
+//  }
+
+  // 4) 로컬 클래스를 사용하는 경우
+//  @Override
+//  public Iterator<E> iterator() {
+//    //로컬 클래스는 이 메서드 안에서만 사용할 수 있다.
+//    class IteratorImpl<E> implements Iterator<E> {
+//
+//      // 로컬 클래스도 non-static nested 클래스처럼
+//      // 바깥 클래스의 인스턴스 주소를 저장하는 코드가 자동으로 추가된다.
+//      int cursor = 0;
+//
+//      @Override
+//      public boolean hasNext() {
+//        return cursor >= 0 && cursor < ArrayList.this.size();
+//      }
+//
+//      @Override
+//      public E next() {
+//        return (E) ArrayList.this.get(cursor++);
+//      }
+//    }
+//    return new IteratorImpl<>();
+//  }
+
+  // 5)익명 클래스
+//  @Override
+//  public Iterator<E> iterator() {
+//    //익명 클래스는 이름이 없기 때문에 정의하는 즉시 인스턴스를 생성해야한다.
+//    // 인스턴스 생성 구문 {} 형식으로 되어있으며 new 인스턴스의 인스턴스가 수퍼 클래스라는 것을 알 수 있고,
+//    // 익명 클래스는 이름이 없기 때문에 생성자가 없으며, 수퍼 클래스의 생성자를 호출한다.
+//    Iterator<E> obj = new Iterator<E>() {
+//
+//      // 익명 클래스도 non-static nested 클래스처럼
+//      // 바깥 클래스의 인스턴스 주소를 저장하는 코드가 자동으로 추가된다.
+//      int cursor = 0;
+//
+//      @Override
+//      public boolean hasNext() {
+//        return cursor >= 0 && cursor < ArrayList.this.size();
+//      }
+//
+//      @Override
+//      public E next() {
+//        return (E) ArrayList.this.get(cursor++);
+//      }
+//    }; // 인스턴스를 생성했기 때문에 세미콜론을 넣어주어야한다.
+//    return obj; //
+//  }
+
+  // 6) 익명 클래스를 사용한 경우 - 더 간결하게 표현하기
   @Override
   public Iterator<E> iterator() {
-    return new IteratorImpl<>(/*this*/);
+    Iterator<E> obj;
+    return new Iterator<E>() {
+      int cursor = 0;
+
+      @Override
+      public boolean hasNext() {
+        return cursor >= 0 && cursor < ArrayList.this.size();
+      }
+
+      @Override
+      public E next() {
+        return (E) ArrayList.this.get(cursor++);
+      }
+    };
   }
 
-  private class IteratorImpl<E> implements Iterator<E> {
-
-    /*ArrayList this$0;*/
-    int cursor = 0;
-
-    /*public IteratorImpl(ArrayList list) {
-      this$0 = list;
-    }*/
-
-    @Override
-    public boolean hasNext() {
-      return cursor >= 0 && cursor < ArrayList.this.size();
-    }
-
-    @Override
-    public E next() {
-      return (E) ArrayList.this.get(cursor++);
-    }
-  }
 }
