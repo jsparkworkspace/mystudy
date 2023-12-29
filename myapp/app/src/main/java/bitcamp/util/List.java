@@ -1,5 +1,6 @@
 package bitcamp.util;
 
+
 public interface List<E> {
 
   void add(E object);
@@ -17,4 +18,6 @@ public interface List<E> {
   E set(int index, E object);
 
   int size();
+
+  Iterator<E> iterator();
 }
