@@ -183,14 +183,146 @@ public class LinkedList<E> extends AbstractList<E> {
     return values;
   }
 
+  // 1) 패키지 멤버 클래스로 Iterator 구현하기
+//  @Override
+//  public Iterator<E> iterator() {
+//    return new LinkedListIterator<>(this);
+//  }
+
+  // 2) 스태틱 중첩 클래스로 Iterator 구현하기
+  /*@Override
+  public Iterator<E> iterator() {
+    return new IteratorImpl<>(this);
+  }
+
+  private static class IteratorImpl<E> implements Iterator<E> {
+
+    LinkedList<E> list;
+    int cursor;
+
+    public IteratorImpl(LinkedList<E> list) {
+      this.list = list;
+    }
+
+    @Override
+    public boolean hasNext() {
+      return cursor >= 0 && cursor < list.size();
+    }
+
+    @Override
+    public E next() {
+      return list.get(cursor++);
+    }
+  }*/
+
+  /*@Override
+  public Iterator<E> iterator() {
+    return new IteratorImpl<>();
+  }*/
+
+  // 3) 로컬 클래스로 Iterator 구현하기
+  /*@Override
+  public Iterator<E> iterator() {
+
+    class IteratorImpl<E> implements Iterator<E> {
+
+      Node<E> cursor;
+
+      public IteratorImpl() {
+        this.cursor = (Node<E>) LinkedList.this.first;
+      }
+
+      @Override
+      public boolean hasNext() {
+        return cursor != null;
+      }
+
+      @Override
+      public E next() {
+        E value = cursor.value;
+        cursor = cursor.next;
+        return value;
+      }
+    }
+
+    return new IteratorImpl<>();
+  }*/
+
+  /*// 4) 익명 클래스로 Iterator 구현하기
   @Override
   public Iterator<E> iterator() {
-    return new LinkedListIterator<>(this);
+
+    Iterator<E> obj = new Iterator() {
+
+      @Override
+      public boolean hasNext() {
+        return cursor != null;
+      }      Node<E> cursor = this.cursor = (Node<E>) LinkedList.this.first;
+
+      @Override
+      public E next() {
+        E value = cursor.value;
+        cursor = cursor.next;
+        return value;
+      }
+
+
+    };
+
+    return obj;
+  }*/
+
+  // 6) 익명 클래스로 Iterator 구현하기 - 더 간결하게 표현하기
+  @Override
+  public Iterator<E> iterator() {
+
+    Iterator<E> obj;
+
+    return new Iterator() {
+
+      @Override
+      public boolean hasNext() {
+        return cursor != null;
+      }
+
+      @Override
+      public E next() {
+        E value = cursor.value;
+        cursor = cursor.next;
+        return value;
+      }
+
+      Node<E> cursor = this.cursor = (Node<E>) LinkedList.this.first;
+      
+    };
   }
+
+  /*private class IteratorImpl<E> implements Iterator<E> {
+
+    Node<E> cursor;
+
+    public IteratorImpl() {
+      this.cursor = (Node<E>) LinkedList.this.first;
+    }
+
+    @Override
+    public boolean hasNext() {
+      return cursor != null;
+    }
+
+    @Override
+    public E next() {
+      E value = cursor.value;
+      cursor = cursor.next;
+      return value;
+    }
+  }*/
 
   private static class Node<E> {
 
     E value;
     Node<E> next;
   }
+
+
 }
