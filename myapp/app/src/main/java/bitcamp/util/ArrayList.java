@@ -71,8 +71,35 @@ public class ArrayList<E> extends AbstractList<E> {
     return (E) old;
   }
 
+  // 1) 외부에서 구현한 패키지 멤버 클래스를 사용한 경우
+//  @Override
+//  public Iterator<E> iterator() {
+//    return new ArrayListIterator<>(this);
+//  }
+
+  // 2) 스태틱 중첩 클래스를 사용한 경우
   @Override
   public Iterator<E> iterator() {
-    return new ArrayListIterator<>(this);
+    return new IteratorImpl<>(this);
+  }
+
+  private static class IteratorImpl<E> implements Iterator<E> {
+
+    ArrayList<E> list;
+    int cursor = 0;
+
+    public IteratorImpl(ArrayList<E> list) {
+      this.list = list;
+    }
+
+    @Override
+    public boolean hasNext() {
+      return cursor >= 0 && cursor < list.size();
+    }
+
+    @Override
+    public E next() {
+      return list.get(cursor++);
+    }
   }
 }
