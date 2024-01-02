@@ -11,6 +11,7 @@ class My {
   }
 }
 
+
 public class Exam0450 {
   // 인터페이스의 경우 static으로 선언하지 않아도 스태틱 멤버에서 사용할 수 있다.
   interface A {
@@ -46,16 +47,30 @@ public class Exam0450 {
     };
   }
 
+  // 람다 문법 - 추상 메서드가 1개만 있는 인터페이스만 람다 문법으로 줄일 수 있다.
   static A create3() {
     return () -> System.out.println("Hello3!");
+    // 컴파일러는 위의 문장을 다음과 같이 바꾼다.
+    //    return new A() {
+    //      @Override
+    //      public void print() {
+    //        System.out.println("Hello3!");
+    //      }
+    //    };
   }
 
+  // 스태틱 메서드
   static A create4() {
     return My::m1;
+    // 컴파일러는 위의 문장을 다음과 같이 바꾼다.
+    // return () -> My.m1();
   }
 
+  // 인스턴스 메서드
   static A create5() {
     return new My()::m2;
+    // 컴파일러는 위의 문장을 다음과 같이 바꾼다.
+    // return () -> new My().m2();
   }
 
   public static void main(String[] args) {
