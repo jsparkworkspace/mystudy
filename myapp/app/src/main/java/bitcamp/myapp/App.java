@@ -40,8 +40,9 @@ public class App {
   }
 
   public static void main(String[] args) throws Exception {
-    App app = new App();
-    app.run();
+//    App app = new App();
+//    app.run();
+    new App().run();
   }
 
   void run() {
