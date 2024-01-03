@@ -27,15 +27,34 @@ import java.util.List;
 
 public class App {
 
+  Prompt prompt = new Prompt(System.in);
+  List<Board> boardRepository = new LinkedList<>();
+  List<Assignment> assignmentRepository = new LinkedList<>();
+  List<Member> memberRepository = new ArrayList<>();
+  List<Board> greetingRepository = new ArrayList<>();
+  MenuGroup mainMenu;
+
+  // App 생성자 추가
+  App() {
+    prepareMenu();
+  }
+
   public static void main(String[] args) throws Exception {
-    Prompt prompt = new Prompt(System.in);
+    App app = new App();
+    app.run();
+  }
 
-    List<Board> boardRepository = new LinkedList<>();
-    List<Assignment> assignmentRepository = new LinkedList<>();
-    List<Member> memberRepository = new ArrayList<>();
-    List<Board> greetingRepository = new ArrayList<>();
+  void run() {
+    try {
+      mainMenu.execute(prompt);
+      prompt.close();
+    } catch (Exception e) {
+      System.out.println("예외 발생!");
+    }
+  }
 
-    MenuGroup mainMenu = MenuGroup.getInstance("메인");
+  void prepareMenu() {
+    mainMenu = MenuGroup.getInstance("메인");
 
     MenuGroup assignmentMenu = mainMenu.addGroup("과제");
     assignmentMenu.addItem("등록", new AssignmentAddHandler(assignmentRepository, prompt));
@@ -67,11 +86,6 @@ public class App {
 
     mainMenu.addItem("도움말", new HelpHandler(prompt));
 
-    try {
-      mainMenu.execute(prompt);
-      prompt.close();
-    } catch (Exception e) {
-      System.out.println("예외 발생!");
-    }
+
   }
 }
