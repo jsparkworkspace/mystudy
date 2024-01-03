@@ -34,9 +34,9 @@ public class App {
   List<Board> greetingRepository = new ArrayList<>();
   MenuGroup mainMenu;
 
-  // App 생성자 추가
   App() {
     prepareMenu();
+    loadAssignment();
   }
 
   public static void main(String[] args) throws Exception {
@@ -46,12 +46,16 @@ public class App {
   }
 
   void run() {
-    try {
-      mainMenu.execute(prompt);
-      prompt.close();
-    } catch (Exception e) {
-      System.out.println("예외 발생!");
+    while (true) {
+      try {
+        mainMenu.execute(prompt);
+        prompt.close();
+        break;
+      } catch (Exception e) {
+        System.out.println("예외 발생!");
+      }
     }
+    saveAssignment();
   }
 
   void prepareMenu() {
@@ -87,6 +91,14 @@ public class App {
 
     mainMenu.addItem("도움말", new HelpHandler(prompt));
 
+
+  }
+
+  void loadAssignment() {
+
+  }
+
+  void saveAssignment() {
 
   }
 }
