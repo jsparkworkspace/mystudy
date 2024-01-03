@@ -24,13 +24,13 @@ public class DataOutputStream extends FileOutputStream {
   }
 
   public void writeLong(long value) throws IOException {
-    write((int) value >> 56);
-    write((int) value >> 48);
-    write((int) value >> 40);
-    write((int) value >> 32);
-    write((int) value >> 24);
-    write((int) value >> 16);
-    write((int) value >> 8);
+    write((int) (value >> 56));
+    write((int) (value >> 48));
+    write((int) (value >> 40));
+    write((int) (value >> 32));
+    write((int) (value >> 24));
+    write((int) (value >> 16));
+    write((int) (value >> 8));
     write((int) value);
   }
 
