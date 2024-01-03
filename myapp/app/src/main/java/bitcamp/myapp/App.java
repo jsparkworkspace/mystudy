@@ -20,10 +20,10 @@ import bitcamp.myapp.handler.member.MemberViewHandler;
 import bitcamp.myapp.vo.Assignment;
 import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
-import bitcamp.util.ArrayList;
-import bitcamp.util.LinkedList;
-import bitcamp.util.List;
 import bitcamp.util.Prompt;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class App {
 
