@@ -41,6 +41,8 @@ public class App {
   App() {
     prepareMenu();
     loadAssignment();
+    loadBoard();
+    loadMember();
   }
 
   public static void main(String[] args) throws Exception {
@@ -60,6 +62,8 @@ public class App {
       }
     }
     saveAssignment();
+    saveBoard();
+    saveMember();
   }
 
   void prepareMenu() {
@@ -161,5 +165,175 @@ public class App {
       e.printStackTrace();
     }
 
+  }
+
+  void saveBoard() {
+    try (FileOutputStream out = new FileOutputStream("board.data")) {
+
+      out.write(boardRepository.size() >> 8);
+      out.write(boardRepository.size());
+
+      for (Board board : boardRepository) {
+        String title = board.getTitle();
+        byte[] bytes = title.getBytes(StandardCharsets.UTF_8);
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        String content = board.getContent();
+        bytes = content.getBytes(StandardCharsets.UTF_8);
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        String writer = board.getWriter();
+        bytes = writer.getBytes(StandardCharsets.UTF_8);
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        long date = board.getCreatedDate().getTime();
+        out.write((int) (date >> 56));
+        out.write((int) (date >> 48));
+        out.write((int) (date >> 40));
+        out.write((int) (date >> 32));
+        out.write((int) (date >> 24));
+        out.write((int) (date >> 16));
+        out.write((int) (date >> 8));
+        out.write((int) date);
+      }
+
+    } catch (Exception e) {
+      System.out.println("게시글 데이터 저장 중 오류 발생");
+      e.printStackTrace();
+    }
+  }
+
+  void loadBoard() {
+    try (FileInputStream in = new FileInputStream("board.data")) {
+      byte[] bytes = new byte[60000];
+      int size = in.read() << 8 | in.read();
+
+      for (int i = 0; i < size; i++) {
+        int len = in.read() << 8 | in.read();
+        in.read(bytes, 0, len);
+        String title = new String(bytes, 0, len, StandardCharsets.UTF_8);
+
+        len = in.read() << 8 | in.read();
+        in.read(bytes, 0, len);
+        String content = new String(bytes, 0, len, StandardCharsets.UTF_8);
+
+        len = in.read() << 8 | in.read();
+        in.read(bytes, 0, len);
+        String writer = new String(bytes, 0, len, StandardCharsets.UTF_8);
+
+        long date = ((long) in.read()) << 56 |
+            ((long) in.read()) << 42 |
+            ((long) in.read()) << 40 |
+            ((long) in.read()) << 32 |
+            ((long) in.read()) << 24 |
+            ((long) in.read()) << 16 |
+            ((long) in.read()) << 8 |
+            in.read();
+
+        Board board = new Board();
+        board.setTitle(title);
+        board.setContent(content);
+        board.setWriter(writer);
+        board.setCreatedDate(new java.util.Date(date));
+
+        boardRepository.add(board);
+      }
+
+
+    } catch (Exception e) {
+      System.out.println("회원 데이터 로딩 중 오류 발생");
+      e.printStackTrace();
+    }
+  }
+
+  void saveMember() {
+    try (FileOutputStream out = new FileOutputStream("member.data")) {
+
+      out.write(memberRepository.size() >> 8);
+      out.write(memberRepository.size());
+
+      for (Member member : memberRepository) {
+        String email = member.getEmail();
+        byte[] bytes = email.getBytes(StandardCharsets.UTF_8);
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        String name = member.getName();
+        bytes = name.getBytes(StandardCharsets.UTF_8);
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        String password = member.getPassword();
+        bytes = password.getBytes(StandardCharsets.UTF_8);
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        long date = member.getCreatedDate().getTime();
+        out.write((int) (date >> 56));
+        out.write((int) (date >> 48));
+        out.write((int) (date >> 40));
+        out.write((int) (date >> 32));
+        out.write((int) (date >> 24));
+        out.write((int) (date >> 16));
+        out.write((int) (date >> 8));
+        out.write((int) date);
+      }
+
+    } catch (Exception e) {
+      System.out.println("회원 데이터 저장 중 오류 발생");
+      e.printStackTrace();
+    }
+  }
+
+  void loadMember() {
+    try (FileInputStream in = new FileInputStream("member.data")) {
+      byte[] bytes = new byte[60000];
+      int size = in.read() << 8 | in.read();
+
+      for (int i = 0; i < size; i++) {
+        int len = in.read() << 8 | in.read();
+        in.read(bytes, 0, len);
+        String email = new String(bytes, 0, len, StandardCharsets.UTF_8);
+
+        len = in.read() << 8 | in.read();
+        in.read(bytes, 0, len);
+        String name = new String(bytes, 0, len, StandardCharsets.UTF_8);
+
+        len = in.read() << 8 | in.read();
+        in.read(bytes, 0, len);
+        String password = new String(bytes, 0, len, StandardCharsets.UTF_8);
+
+        long date = ((long) in.read()) << 56 |
+            ((long) in.read()) << 42 |
+            ((long) in.read()) << 40 |
+            ((long) in.read()) << 32 |
+            ((long) in.read()) << 24 |
+            ((long) in.read()) << 16 |
+            ((long) in.read()) << 8 |
+            in.read();
+
+        Member member = new Member();
+        member.setEmail(email);
+        member.setName(name);
+        member.setPassword(password);
+        member.setCreatedDate(new java.util.Date(date));
+
+        memberRepository.add(member);
+      }
+
+
+    } catch (Exception e) {
+      System.out.println("회원 데이터 로딩 중 오류 발생");
+      e.printStackTrace();
+    }
   }
 }
