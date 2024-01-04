@@ -2,8 +2,6 @@ package bitcamp.myapp;
 
 import bitcamp.io.BufferedDataInputStream;
 import bitcamp.io.BufferedDataOutputStream;
-import bitcamp.io.DataInputStream;
-import bitcamp.io.DataOutputStream;
 import bitcamp.menu.MenuGroup;
 import bitcamp.myapp.handler.HelpHandler;
 import bitcamp.myapp.handler.assignment.AssignmentAddHandler;
@@ -151,7 +149,7 @@ public class App {
   }
 
   void saveBoard() {
-    try (DataOutputStream out = new DataOutputStream("board.data")) {
+    try (BufferedDataOutputStream out = new BufferedDataOutputStream("board.data")) {
 
       out.writeShort(boardRepository.size());
 
@@ -170,7 +168,7 @@ public class App {
   }
 
   void loadBoard() {
-    try (DataInputStream in = new DataInputStream("board.data")) {
+    try (BufferedDataInputStream in = new BufferedDataInputStream("board.data")) {
       int size = in.readShort();
 
       for (int i = 0; i < size; i++) {
@@ -191,7 +189,7 @@ public class App {
   }
 
   void saveMember() {
-    try (DataOutputStream out = new DataOutputStream("member.data")) {
+    try (BufferedDataOutputStream out = new BufferedDataOutputStream("member.data")) {
 
       out.writeShort(memberRepository.size());
 
@@ -209,7 +207,7 @@ public class App {
   }
 
   void loadMember() {
-    try (DataInputStream in = new DataInputStream("member.data")) {
+    try (BufferedDataInputStream in = new BufferedDataInputStream("member.data")) {
       int size = in.readShort();
 
       for (int i = 0; i < size; i++) {
@@ -230,7 +228,7 @@ public class App {
   }
 
   void loadGreeting() {
-    try (DataInputStream in = new DataInputStream("greeting.data")) {
+    try (BufferedDataInputStream in = new BufferedDataInputStream("greeting.data")) {
 
       int size = in.readShort();
 
@@ -251,7 +249,7 @@ public class App {
   }
 
   void saveGreeting() {
-    try (DataOutputStream out = new DataOutputStream("greeting.data")) {
+    try (BufferedDataOutputStream out = new BufferedDataOutputStream("greeting.data")) {
 
       out.writeShort(greetingRepository.size());
 
