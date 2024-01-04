@@ -106,7 +106,7 @@ public class App {
   void loadAssignment() {
     try (DataInputStream in = new DataInputStream("assignment.data")) {
 
-      int size = in.readShort();
+      int size = in.readInt();
 
       for (int i = 0; i < size; i++) {
         Assignment assignment = new Assignment();
@@ -124,14 +124,20 @@ public class App {
   void saveAssignment() {
 
     try (DataOutputStream out = new DataOutputStream("assignment.data")) {
+      long start = System.currentTimeMillis();
+      out.writeInt(assignmentRepository.size() * 100);
 
-      out.writeShort(assignmentRepository.size());
+      for (int i = 0; i < 10000; i++) {
 
-      for (Assignment assignment : assignmentRepository) {
-        out.writeUTF(assignment.getTitle());
-        out.writeUTF(assignment.getContent());
-        out.writeUTF(assignment.getDeadline().toString());
+        for (Assignment assignment : assignmentRepository) {
+          out.writeUTF(assignment.getTitle());
+          out.writeUTF(assignment.getContent());
+          out.writeUTF(assignment.getDeadline().toString());
+        }
       }
+      long end = System.currentTimeMillis();
+      System.out.printf("걸린 시간 : %d\n", end - start);
+
     } catch (Exception e) {
       System.out.println("과제 데이터 저장 중 오류 발생");
       e.printStackTrace();
