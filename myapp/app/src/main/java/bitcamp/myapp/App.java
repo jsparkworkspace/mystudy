@@ -43,10 +43,15 @@ public class App {
   MenuGroup mainMenu;
 
   App() {
-    loadData("assignment.data", assignmentRepository);
-    loadData("board.data", boardRepository);
-    loadData("member.data", memberRepository);
-    loadData("greeting.data", greetingRepository);
+//    loadData("assignment.data", assignmentRepository);
+//    loadData("board.data", boardRepository);
+//    loadData("member.data", memberRepository);
+//    loadData("greeting.data", greetingRepository);
+
+    assignmentRepository = loadData("assignment.data", Assignment.class);
+    boardRepository = loadData("board.data", Board.class);
+    memberRepository = loadData("member.data", Member.class);
+    greetingRepository = loadData("greeting.data", Board.class);
     prepareMenu();
   }
 
@@ -108,6 +113,32 @@ public class App {
 
   }
 
+  //  <E> void loadData(String filepath, List<E> dataList) {
+//    try (ObjectInputStream in = new ObjectInputStream(
+//        new BufferedInputStream(new FileInputStream(filepath)))) {
+//
+//      List<E> list = (List<E>) in.readObject(); // 가비지가 생성된다는 단점이 있다.
+//      dataList.addAll(list);
+//
+//    } catch (Exception e) {
+//      System.out.printf("%s 파일 로딩 중 오류 발생\n", filepath);
+//      e.printStackTrace();
+//    }
+//  }
+
+  <E> List<E> loadData(String filepath, Class<E> clazz) {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new BufferedInputStream(new FileInputStream(filepath)))) {
+
+      return (List<E>) in.readObject();
+
+    } catch (Exception e) {
+      System.out.printf("%s 파일 로딩 중 오류 발생\n", filepath);
+      e.printStackTrace();
+    }
+    return new ArrayList<E>(); // 실패하면 무조건 ArrayList가 생성된다는 단점이 있다.
+  }
+
   void saveData(String filepath, List<?> dataList) {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new BufferedOutputStream(new FileOutputStream(filepath)))) {
@@ -119,19 +150,6 @@ public class App {
       e.printStackTrace();
     }
 
-  }
-
-  <E> void loadData(String filepath, List<E> dataList) {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new BufferedInputStream(new FileInputStream(filepath)))) {
-
-      List<E> list = (List<E>) in.readObject();
-      dataList.addAll(list);
-
-    } catch (Exception e) {
-      System.out.printf("%s 파일 로딩 중 오류 발생\n", filepath);
-      e.printStackTrace();
-    }
   }
 
 
