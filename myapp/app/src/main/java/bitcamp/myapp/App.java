@@ -27,7 +27,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.sql.Date;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -108,19 +109,14 @@ public class App {
   }
 
   void saveAssignment() {
-    try (DataOutputStream out = new DataOutputStream(
+    try (ObjectOutputStream out = new ObjectOutputStream(
         new BufferedOutputStream(new FileOutputStream("assignment.data")))) {
-      long start = System.currentTimeMillis();
+
       out.writeInt(assignmentRepository.size());
 
       for (Assignment assignment : assignmentRepository) {
-        out.writeUTF(assignment.getTitle());
-        out.writeUTF(assignment.getContent());
-        out.writeUTF(assignment.getDeadline().toString());
+        out.writeObject(assignment);
       }
-
-      long end = System.currentTimeMillis();
-      System.out.printf("걸린 시간 : %d\n", end - start);
 
     } catch (Exception e) {
       System.out.println("과제 데이터 저장 중 오류 발생");
@@ -130,22 +126,15 @@ public class App {
   }
 
   void loadAssignment() {
-    try (DataInputStream in = new DataInputStream(
+    try (ObjectInputStream in = new ObjectInputStream(
         new BufferedInputStream(new FileInputStream("assignment.data")))) {
 
-      long start = System.currentTimeMillis();
       int size = in.readInt();
 
       for (int i = 0; i < size; i++) {
-        Assignment assignment = new Assignment();
-        assignment.setTitle(in.readUTF());
-        assignment.setContent(in.readUTF());
-        assignment.setDeadline(Date.valueOf(in.readUTF()));
+        Assignment assignment = (Assignment) in.readObject();
         assignmentRepository.add(assignment);
       }
-
-      long end = System.currentTimeMillis();
-      System.out.printf("걸린 시간 : %d\n", end - start);
 
     } catch (Exception e) {
       System.out.println("과제 데이터 로딩 중 오류 발생");
