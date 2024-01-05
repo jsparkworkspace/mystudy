@@ -34,19 +34,19 @@ import java.util.List;
 public class App {
 
   Prompt prompt = new Prompt(System.in);
-  List<Board> boardRepository;
-  List<Assignment> assignmentRepository;
-  List<Member> memberRepository;
+  List<Board> boardRepository = new ArrayList<>();
+  List<Assignment> assignmentRepository = new LinkedList<>();
+  List<Member> memberRepository = new ArrayList<>();
   ;
-  List<Board> greetingRepository;
+  List<Board> greetingRepository = new LinkedList<>();
   ;
   MenuGroup mainMenu;
 
   App() {
-    loadAssignment();
-    loadBoard();
-    loadMember();
-    loadGreeting();
+    loadData("assignment.data", assignmentRepository);
+    loadData("board.data", boardRepository);
+    loadData("member.data", memberRepository);
+    loadData("greeting.data", greetingRepository);
     prepareMenu();
   }
 
@@ -66,10 +66,10 @@ public class App {
         System.out.println("예외 발생!");
       }
     }
-    saveAssignment();
-    saveBoard();
-    saveMember();
-    saveGreeting();
+    saveData("assignment.data", assignmentRepository);
+    saveData("board.data", boardRepository);
+    saveData("member.data", memberRepository);
+    saveData("greeting.data", greetingRepository);
   }
 
   void prepareMenu() {
@@ -108,105 +108,31 @@ public class App {
 
   }
 
-  void saveAssignment() {
+  void saveData(String filepath, List<?> dataList) {
     try (ObjectOutputStream out = new ObjectOutputStream(
-        new BufferedOutputStream(new FileOutputStream("assignment.data")))) {
+        new BufferedOutputStream(new FileOutputStream(filepath)))) {
 
-      out.writeObject(assignmentRepository);
+      out.writeObject(dataList);
 
     } catch (Exception e) {
-      System.out.println("과제 데이터 저장 중 오류 발생");
+      System.out.printf("%s 파일 저장 중 오류 발생\n", filepath);
       e.printStackTrace();
     }
 
   }
 
-  void loadAssignment() {
+  <E> void loadData(String filepath, List<E> dataList) {
     try (ObjectInputStream in = new ObjectInputStream(
-        new BufferedInputStream(new FileInputStream("assignment.data")))) {
+        new BufferedInputStream(new FileInputStream(filepath)))) {
 
-      assignmentRepository = (List<Assignment>) in.readObject();
+      List<E> list = (List<E>) in.readObject();
+      dataList.addAll(list);
 
     } catch (Exception e) {
-      assignmentRepository = new LinkedList<>();
-      System.out.println("과제 데이터 로딩 중 오류 발생");
+      System.out.printf("%s 파일 로딩 중 오류 발생\n", filepath);
       e.printStackTrace();
     }
   }
 
-  void saveBoard() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new BufferedOutputStream(new FileOutputStream("board.data")))) {
-
-      out.writeObject(boardRepository);
-
-    } catch (Exception e) {
-      System.out.println("게시글 데이터 저장 중 오류 발생");
-      e.printStackTrace();
-    }
-  }
-
-  void loadBoard() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new BufferedInputStream(new FileInputStream("board.data")))) {
-
-      boardRepository = (List<Board>) in.readObject();
-
-    } catch (Exception e) {
-      boardRepository = new LinkedList<>();
-      System.out.println("회원 데이터 로딩 중 오류 발생");
-      e.printStackTrace();
-    }
-  }
-
-  void saveMember() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new BufferedOutputStream(new FileOutputStream("member.data")))) {
-
-      out.writeObject(memberRepository);
-
-    } catch (Exception e) {
-      System.out.println("회원 데이터 저장 중 오류 발생");
-      e.printStackTrace();
-    }
-  }
-
-  void loadMember() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new BufferedInputStream(new FileInputStream("member.data")))) {
-
-      memberRepository = (List<Member>) in.readObject();
-
-    } catch (Exception e) {
-      memberRepository = new ArrayList<>();
-      System.out.println("회원 데이터 로딩 중 오류 발생");
-      e.printStackTrace();
-    }
-  }
-
-  void saveGreeting() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new BufferedOutputStream(new FileOutputStream("greeting.data")))) {
-
-      out.writeObject(greetingRepository);
-
-    } catch (Exception e) {
-      System.out.println("가입인사 데이터 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  void loadGreeting() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new BufferedInputStream(new FileInputStream("greeting.data")))) {
-
-      greetingRepository = (List<Board>) in.readObject();
-
-    } catch (Exception e) {
-      greetingRepository = new LinkedList<>();
-      System.out.println("가입인사 데이터 로딩 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
 
 }
