@@ -48,10 +48,10 @@ public class App {
 //    loadData("member.data", memberRepository);
 //    loadData("greeting.data", greetingRepository);
 
-    assignmentRepository = loadData("assignment.data", Assignment.class);
-    boardRepository = loadData("board.data", Board.class);
-    memberRepository = loadData("member.data", Member.class);
-    greetingRepository = loadData("greeting.data", Board.class);
+    assignmentRepository = loadData("assignment.data");
+    boardRepository = loadData("board.data");
+    memberRepository = loadData("member.data");
+    greetingRepository = loadData("greeting.data");
     prepareMenu();
   }
 
@@ -126,7 +126,7 @@ public class App {
 //    }
 //  }
 
-  <E> List<E> loadData(String filepath, Class<E> clazz) {
+  <E> List<E> loadData(String filepath) {
     try (ObjectInputStream in = new ObjectInputStream(
         new BufferedInputStream(new FileInputStream(filepath)))) {
 
