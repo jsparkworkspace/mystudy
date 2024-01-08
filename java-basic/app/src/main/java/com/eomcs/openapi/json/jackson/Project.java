@@ -15,7 +15,7 @@ public class Project {
   // ObjectMapper 객체가 이 필드의 값을 읽고 쓸 때 사용할 날짜 패턴을 지정한다.
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private Date startDate;
-  
+
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
   private Date endDate;
   
@@ -33,6 +33,7 @@ public class Project {
   public int getNo() {
     return no;
   }
+ 
   public void setNo(int no) {
     this.no = no;
   }
@@ -53,7 +54,10 @@ public class Project {
   }
   public void setStartDate(Date startDate) {
     this.startDate = startDate;
+    System.out.println("startDate.getTime() 값(밀리초): " + startDate.getTime());
+//    startDate.setTime(0);
   }
+
   public Date getEndDate() {
     return endDate;
   }
