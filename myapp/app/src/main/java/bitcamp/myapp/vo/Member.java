@@ -3,7 +3,7 @@ package bitcamp.myapp.vo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Member implements Serializable, CsvString {
+public class Member implements Serializable {
 
   private static final long serialVersionUID = 100L;
   private String email;
@@ -33,11 +33,6 @@ public class Member implements Serializable, CsvString {
     this.createdDate = new Date(Long.valueOf(values[3]));
   }
 
-  @Override
-  public String toCsvString() {
-    return String.format("%s,%s,%s,%d", this.email, this.name, this.password,
-        this.createdDate.getTime());
-  }
 
   public String getEmail() {
     return email;

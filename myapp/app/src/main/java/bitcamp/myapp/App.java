@@ -19,9 +19,10 @@ import bitcamp.myapp.handler.member.MemberModifyHandler;
 import bitcamp.myapp.handler.member.MemberViewHandler;
 import bitcamp.myapp.vo.Assignment;
 import bitcamp.myapp.vo.Board;
-import bitcamp.myapp.vo.CsvString;
 import bitcamp.myapp.vo.Member;
 import bitcamp.util.Prompt;
+import com.google.gson.GsonBuilder;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Method;
@@ -66,10 +67,10 @@ public class App {
         System.out.println("예외 발생!");
       }
     }
-    saveData("assignment.csv", assignmentRepository);
-    saveData("board.csv", boardRepository);
-    saveData("member.csv", memberRepository);
-    saveData("greeting.csv", greetingRepository);
+    saveData("assignment.json", assignmentRepository);
+    saveData("board.json", boardRepository);
+    saveData("member.json", memberRepository);
+    saveData("greeting.json", greetingRepository);
   }
 
   void prepareMenu() {
@@ -135,12 +136,10 @@ public class App {
     return list;
   }
 
-  void saveData(String filepath, List<? extends CsvString> dataList) {
-    try (FileWriter out = new FileWriter(filepath)) {
+  void saveData(String filepath, List<?> dataList) {
+    try (BufferedWriter out = new BufferedWriter(new FileWriter(filepath))) {
 
-      for (CsvString csvObject : dataList) {
-        out.write(csvObject.toCsvString() + "\n");
-      }
+      out.write(new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(dataList));
 
 
     } catch (Exception e) {
