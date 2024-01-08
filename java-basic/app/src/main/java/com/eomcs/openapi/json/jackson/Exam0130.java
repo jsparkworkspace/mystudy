@@ -26,7 +26,7 @@ public class Exam0130 {
     // - 주의!
     //   Gson 과 달리 JSON 프로퍼티에 해당하는 객체 프로퍼티가 없다면 예외가 발생한다.
     //   @JsonIgnoreProperties 애노테이션을 사용하여 JSON 프로퍼티 중에서 무시할 항목을 지정해야 한다.
-    //   
+    //   Board 클래스의 @JsonIgnoreProperties 애노테이션을 주석 후 확인해 보자
     // 
     // 
 
