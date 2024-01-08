@@ -26,6 +26,7 @@ public class Exam0114 {
     m.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     // 2) JSON 처리 객체 준비
+    // - 메서드를 호출할 때 체인 방식으로 처리하기
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Gson gson = new GsonBuilder()
         .registerTypeAdapter(Date.class, new JsonSerializer<Date>() {
