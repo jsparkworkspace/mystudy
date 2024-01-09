@@ -8,18 +8,6 @@ public class Exam0530 {
     public static int plus(int a, int b) {
       return a + b;
     }
-
-    public static int minus(int a, int b) {
-      return a - b;
-    }
-
-    public static int multiple(int a, int b) {
-      return a * b;
-    }
-
-    public static int divide(int a, int b) {
-      return a / b;
-    }
   }
 
   interface Calculator1 {
@@ -50,6 +38,9 @@ public class Exam0530 {
 
     // 리턴 타입 int ===> double
     Calculator1 c1 = MyCalculator::plus; // OK!
+    // 위의 코드는 다음의 람다 코드로 변환된다.
+    // Calculator1 c1 = (x, y) -> MtCalculator.plus(x, y);
+    // 
     // 위 문장은 다음 문장과 같다.
     //    Calculator1 c1 = new Calculator1() {
     //      @Override
@@ -88,6 +79,8 @@ public class Exam0530 {
 
     // 리턴 타입 int ===> Object
     Calculator5 c5 = MyCalculator::plus; // OK!
+    // => Calculator5 c5 = (int x, int y) -> {return Integer.valueOf(MyCalculator.plus(x, y));};
+    // 
     // 위 문장은 다음과 같다.
     //    Calculator5 c5 = new Calculator5() {
     //      @Override
