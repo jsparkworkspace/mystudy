@@ -8,17 +8,9 @@ public class Exam0540 {
     public static int plus(int a, int b) {
       return a + b;
     }
-
-    public static int minus(int a, int b) {
-      return a - b;
-    }
-
-    public static int multiple(int a, int b) {
-      return a * b;
-    }
-
-    public static int divide(int a, int b) {
-      return a / b;
+    
+    public static int plus2() {
+      return 100;
     }
   }
 
@@ -134,6 +126,8 @@ public class Exam0540 {
     //      }
     //    };
 
+    //  Calculator8 c99 = MyCalculator::plus2; 컴파일 오류
+    
     // 메서드 레퍼런스를 지정할 때 파라미터 타입 규칙:
     // => 인터페이스 규칙에 따라 받은 값을
     //    실제 메서드에 그대로 전달할 수 있다면 가능하다.
