@@ -8,10 +8,10 @@ public class Exam0211 {
     // 레퍼런스를 선언할 때 제네릭 타입을 지정하지 않으면 
     // 객체 생성시 어떤 제네릭 타입을 지정하더라도 상관없다.
     ArrayList list1; 
-    //    list1 = new ArrayList();
-    //    list1 = new ArrayList<>();
-    //    list1 = new ArrayList<Object>();
-    //    list1 = new ArrayList<String>();
+    //    list1 = new ArrayList(); // OK
+    //    list1 = new ArrayList<>(); // OK
+    //    list1 = new ArrayList<Object>(); // OK
+    //    list1 = new ArrayList<String>(); // OK
     list1 = new ArrayList<Member>();
 
     //=> 레퍼런스를 선언할 때 제네릭 타입을 지정하지 않으면 
@@ -26,11 +26,11 @@ public class Exam0211 {
     // 객체 생성시 어떤 제네릭 타입을 지정하더라도 상관없다.
     // 단, 메서드를 사용할 때 주의해야 한다.
     ArrayList<?> list2; 
-    //    list2 = new ArrayList();
-    //    list2 = new ArrayList<>();
-    list2 = new ArrayList<Object>();
-    //    list2 = new ArrayList<String>();
-    //    list2 = new ArrayList<Member>();
+    //    list2 = new ArrayList(); // OK
+    //    list2 = new ArrayList<>(); // OK
+    list2 = new ArrayList<Object>(); // OK
+    //    list2 = new ArrayList<String>(); // OK
+    //    list2 = new ArrayList<Member>(); // OK
 
     //=> 레퍼런스 선언할 때 제네릭 타입을 ? 로 설정했기 때문에
     //   add() 메서드의 파라미터 타입은 ? 가 된다.
