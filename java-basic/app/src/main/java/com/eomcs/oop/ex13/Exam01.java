@@ -6,8 +6,8 @@ import java.util.Properties;
 
 public class Exam01 {
   static String filename = "label";
-  static String userCountry = "KR";
-  static String userLanguage = "ko";
+  static String userCountry = "US";
+  static String userLanguage = "en";
   static Properties label;
 
   static void init() throws Exception {

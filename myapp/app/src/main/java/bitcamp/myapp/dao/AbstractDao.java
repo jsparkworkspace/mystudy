@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public abstract class AbstractDao<T> {
 
-  ArrayList<T> list;
+  protected ArrayList<T> list;
 
-  void loadData(String filepath) {
+  public void loadData(String filepath) {
     try (BufferedReader in = new BufferedReader(new FileReader(filepath))) {
 
       StringBuilder strBuilder = new StringBuilder();
@@ -24,9 +24,9 @@ public abstract class AbstractDao<T> {
 
       // 이 클래스가 다루는 데이터의 클래스 정보를 알아낸다.
       // 타입 파라미터 T가 가리키는 클래스가 무엇인지 알아낸다.
-      Class<?> dataType = (Class) ((ParameterizedType) this.getClass() // 이 메서드를 호출한 클래스의 정보를 알아낸다
+      Class<T> dataType = (Class<T>) ((ParameterizedType) this.getClass() // 이 메서드를 호출한 클래스의 정보를 알아낸다
           .getGenericSuperclass() // AbstractDao 클래스의 정보를 알아낸다.
-      ).getActualTypeArguments()[0]; // AbstractDao에 전달한 제네릭 타입의 클래스 정보를 알아낸다.
+      ).getActualTypeArguments()[0]; // AbstractDao 에 전달한 제네릭 타입의 클래스 정보를 알아낸다.
 
       list = (ArrayList<T>) new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(
           strBuilder.toString(),
@@ -37,7 +37,7 @@ public abstract class AbstractDao<T> {
     }
   }
 
-  void saveData(String filepath) {
+  public void saveData(String filepath) {
     try (BufferedWriter out = new BufferedWriter(new FileWriter(filepath))) {
       out.write(new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(list));
     } catch (Exception e) {
