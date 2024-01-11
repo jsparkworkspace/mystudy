@@ -12,8 +12,14 @@ import java.util.ArrayList;
 public abstract class AbstractDao<T> {
 
   protected ArrayList<T> list;
+  private String filepath;
 
-  public void loadData(String filepath) {
+  public AbstractDao(String filepath) {
+    this.filepath = filepath;
+    loadData();
+  }
+
+  protected void loadData() {
     try (BufferedReader in = new BufferedReader(new FileReader(filepath))) {
 
       StringBuilder strBuilder = new StringBuilder();
@@ -37,7 +43,7 @@ public abstract class AbstractDao<T> {
     }
   }
 
-  public void saveData(String filepath) {
+  protected void saveData() {
     try (BufferedWriter out = new BufferedWriter(new FileWriter(filepath))) {
       out.write(new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(list));
     } catch (Exception e) {

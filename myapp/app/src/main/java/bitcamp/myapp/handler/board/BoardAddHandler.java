@@ -28,5 +28,6 @@ public class BoardAddHandler extends AbstractMenuHandler {
     board.setWriter(this.prompt.input("작성자? "));
     board.setCreatedDate(new Date());
 
+    boardDao.add(board);
   }
 }
