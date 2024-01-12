@@ -30,7 +30,7 @@ public class AssignmentModifyHandler extends AbstractMenuHandler {
       assignment.setContent(this.prompt.input("내용(%s)? ", old.getContent()));
       assignment.setDeadline(this.prompt.inputDate("제출 마감일(%s)? ", old.getDeadline()));
 
-      this.assignmentDao.update(no, assignment);
+      this.assignmentDao.update(assignment);
       System.out.println("과제를 변경했습니다.");
 
     } catch (NumberFormatException e) {
