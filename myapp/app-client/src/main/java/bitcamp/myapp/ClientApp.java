@@ -23,13 +23,13 @@ import bitcamp.myapp.handler.member.MemberDeleteHandler;
 import bitcamp.myapp.handler.member.MemberListHandler;
 import bitcamp.myapp.handler.member.MemberModifyHandler;
 import bitcamp.myapp.handler.member.MemberViewHandler;
+import bitcamp.myapp.vo.Board;
+import bitcamp.myapp.vo.Member;
 import bitcamp.util.Prompt;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +37,13 @@ import java.util.List;
 public class ClientApp {
 
   Prompt prompt = new Prompt(System.in);
-  AssignmentDao assignmentDao = new AssignmentDaoImpl("assignment.json");
-  MemberDao memberDao = new MemberDaoImpl("member.json");
+
+  List<Member> memberRepository = new ArrayList<>();
+
   BoardDao boardDao = new BoardDaoImpl("board.json");
   BoardDao greetingDao = new BoardDaoImpl("greeting.json");
+  AssignmentDao assignmentDao = new AssignmentDaoImpl("assignment.json");
+  MemberDao memberDao = new MemberDaoImpl("member.json");
 
   MenuGroup mainMenu;
 
@@ -48,39 +51,45 @@ public class ClientApp {
     prepareMenu();
   }
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     System.out.println("[과제관리 시스템]");
 
     try {
       // 1) 서버와 연결한 후 연결 정보 준비
-      // => new Socket(서버주소, 포트번호);
-      //    - 서버 주소 : IP주소, 도메인명
-      //    - 포트번호 : 서버 포트 번호
+      // => new Socket(서버주소, 포트번호)
+      //    - 서버 주소: IP 주소, 도메인명
+      //    - 포트 번호: 서버 포트 번호
       // => 로컬 컴퓨터를 가리키는 주소
-      //    - IP 주소 : 127.0.0.1
-      //    - 도메인명 : localhost
+      //   - IP 주소: 127.0.0.1
+      //   - 도메인명: localhost
       System.out.println("서버 연결 중...");
       Socket socket = new Socket("localhost", 8888);
       System.out.println("서버와 연결되었음!");
-      
+
+      DataInputStream in = new DataInputStream(socket.getInputStream());
+      DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+      System.out.println("입출력 준비 완료!");
+
+      out.writeUTF("board");
+      out.writeUTF("findAll");
+      out.writeUTF("");
+      System.out.println("서버에 데이터를 보냈음!");
+
+      String response = in.readUTF();
+      ArrayList<Board> list = (ArrayList<Board>) new GsonBuilder().setDateFormat("yyyy-MM-dd")
+          .create().fromJson(response,
+              TypeToken.getParameterized(ArrayList.class, Board.class));
+
+      for (Board board : list) {
+        System.out.println(board);
+      }
+
+
     } catch (Exception e) {
       System.out.println("통신 오류!");
       e.printStackTrace();
     }
     //new ClientApp().run();
-  }
-
-  void run() {
-    while (true) {
-      try {
-        mainMenu.execute(prompt);
-        prompt.close();
-        break;
-      } catch (Exception e) {
-        System.out.println("예외 발생!");
-      }
-    }
-
   }
 
   void prepareMenu() {
@@ -115,44 +124,17 @@ public class ClientApp {
     greetingMenu.addItem("목록", new BoardListHandler(greetingDao, prompt));
 
     mainMenu.addItem("도움말", new HelpHandler(prompt));
-
-
   }
 
-  <E> List<E> loadData(String filepath, Class<E> clazz) {
-
-    try (BufferedReader in = new BufferedReader(new FileReader(filepath))) {
-
-      // 파일에서 JSON 문자열을 모두 읽어서 버퍼에 저장한다.
-      StringBuilder strBuilder = new StringBuilder();
-      String str;
-      while ((str = in.readLine()) != null) {
-        strBuilder.append(str);
+  void run() {
+    while (true) {
+      try {
+        mainMenu.execute(prompt);
+        prompt.close();
+        break;
+      } catch (Exception e) {
+        System.out.println("예외 발생!");
       }
-
-      // 버퍼에 저장된 JSON 문자열을 가지고 컬렉션 객체를 생성한다.
-      return (List<E>) new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(
-          strBuilder.toString(),
-          TypeToken.getParameterized(ArrayList.class, clazz));
-    } catch (Exception e) {
-      System.out.printf("%s 파일 로딩 중 오류 발생\n", filepath);
-      e.printStackTrace();
     }
-    return new ArrayList<>();
   }
-
-  void saveData(String filepath, List<?> dataList) {
-    try (BufferedWriter out = new BufferedWriter(new FileWriter(filepath))) {
-
-      out.write(new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(dataList));
-
-
-    } catch (Exception e) {
-      System.out.printf("%s 파일 저장 중 오류 발생\n", filepath);
-      e.printStackTrace();
-    }
-
-  }
-
-
 }
