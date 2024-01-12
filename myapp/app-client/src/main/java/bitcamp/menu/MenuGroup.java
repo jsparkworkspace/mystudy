@@ -16,6 +16,7 @@ public class MenuGroup extends AbstractMenu {
     super(title, breadcrumb);
   }
 
+  // GoF의 Factory Method 디자인패턴!
   public static MenuGroup getInstance(String title) {
     return new MenuGroup(title, new Stack<String>());
   }
@@ -45,12 +46,13 @@ public class MenuGroup extends AbstractMenu {
         }
 
         this.menus.get(menuNo - 1).execute(prompt);
+
       } catch (Exception e) {
-        System.out.println("메뉴가 올지 않습니다!");
+        System.out.println("메뉴가 옳지 않습니다!");
       }
     }
 
-    // 메뉴를 나갈 때 breadcrumb 메뉴 경로에서 제목을 제거한다.
+    // 메뉴를 나갈 때 breadcrumb 메뉴 경로에서 메뉴 제목을 제거한다.
     breadcrumb.pop();
   }
 
@@ -73,7 +75,7 @@ public class MenuGroup extends AbstractMenu {
 
   public MenuItem addItem(String title, MenuHandler handler) {
     MenuItem menuItem = new MenuItem(title, this.breadcrumb, handler);
-    add(menuItem);
+    this.add(menuItem);
     return menuItem;
   }
 
@@ -86,5 +88,4 @@ public class MenuGroup extends AbstractMenu {
   public void remove(Menu menu) {
     this.menus.remove(menu);
   }
-
 }

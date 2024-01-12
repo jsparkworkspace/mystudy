@@ -9,7 +9,6 @@ public interface AssignmentDao {
 
   int delete(int no);
 
-
   List<Assignment> findAll();
 
   Assignment findBy(int no);

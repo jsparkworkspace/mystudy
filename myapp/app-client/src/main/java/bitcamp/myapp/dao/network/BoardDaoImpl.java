@@ -18,7 +18,6 @@ public class BoardDaoImpl implements BoardDao {
   DataOutputStream out;
   Gson gson;
 
-
   public BoardDaoImpl(String dataName, DataInputStream in, DataOutputStream out) {
     this.dataName = dataName;
     this.in = in;
@@ -39,7 +38,6 @@ public class BoardDaoImpl implements BoardDao {
       if (!statusCode.equals("200")) {
         throw new Exception(entity);
       }
-
     } catch (Exception e) {
       throw new DaoException(e);
     }
@@ -71,7 +69,7 @@ public class BoardDaoImpl implements BoardDao {
     try {
       out.writeUTF(dataName);
       out.writeUTF("findAll");
-      out.writeUTF(""); //파라미터가 없어서 빈 문자열을 보냄
+      out.writeUTF("");
 
       String statusCode = in.readUTF();
       String entity = in.readUTF();
@@ -129,5 +127,4 @@ public class BoardDaoImpl implements BoardDao {
       throw new DaoException(e);
     }
   }
-
 }

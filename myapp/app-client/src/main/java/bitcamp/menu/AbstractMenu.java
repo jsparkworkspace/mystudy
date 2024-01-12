@@ -17,7 +17,6 @@ public abstract class AbstractMenu implements Menu {
     return this.title;
   }
 
-
   public String getMenuPath() {
     return String.join("/", breadcrumb.toArray(new String[0]));
   }

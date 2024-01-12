@@ -14,15 +14,12 @@ import java.net.Socket;
 
 public class ServerApp {
 
-
-  AssignmentDao assignmentDao = new AssignmentDaoImpl("assignment.json");
-  MemberDao memberDao = new MemberDaoImpl("member.json");
   BoardDao boardDao = new BoardDaoImpl("board.json");
   BoardDao greetingDao = new BoardDaoImpl("greeting.json");
+  AssignmentDao assignmentDao = new AssignmentDaoImpl("assignment.json");
+  MemberDao memberDao = new MemberDaoImpl("member.json");
 
-
-  public static void main(String[] args) throws Exception {
-
+  public static void main(String[] args) {
     new ServerApp().run();
   }
 
@@ -34,7 +31,7 @@ public class ServerApp {
       // => 랜카드와 연결하는 것은 실제 OS가 수행한다.
       // => JVM은 OS가 작업한 결과를 가져온다.
       // new ServerSocket(포트번호)
-      // => 포트번호 : 랜카드로 들어온 데이터를 받을 때 사용할 식별 번호. 중복 불가.
+      // => 포트번호: 랜카드로 들어온 데이터를 받을 때 사용할 식별 번호. 중복 불가.
       ServerSocket serverSocket = new ServerSocket(8888);
       System.out.println("서버 실행!");
 

@@ -8,7 +8,6 @@ public class BoardDaoImpl extends AbstractDao<Board> implements BoardDao {
 
   private int lastKey;
 
-
   public BoardDaoImpl(String filepath) {
     super(filepath);
 

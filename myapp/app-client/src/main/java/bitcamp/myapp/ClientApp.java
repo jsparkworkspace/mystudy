@@ -77,7 +77,6 @@ public class ClientApp {
       assignmentDao = new AssignmentDaoImpl("assignment", in, out);
       memberDao = new MemberDaoImpl("member", in, out);
 
-
     } catch (Exception e) {
       System.out.println("통신 오류!");
       e.printStackTrace();

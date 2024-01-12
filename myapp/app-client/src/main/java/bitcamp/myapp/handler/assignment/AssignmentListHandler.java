@@ -17,12 +17,14 @@ public class AssignmentListHandler extends AbstractMenuHandler {
 
   @Override
   protected void action() {
-    System.out.printf("%-4s\t%-20s\t%s\n", "No", "과제", "제출마감일");
+    System.out.printf("%-4s\t%-20s\t%s\n", "번호", "과제", "제출마감일");
 
-    List<Assignment> list = this.assignmentDao.findAll();
+    List<Assignment> list = assignmentDao.findAll();
 
     for (Assignment assignment : list) {
-      System.out.printf("%-4s\t%-20s\t%s\n", assignment.getNo(), assignment.getTitle(),
+      System.out.printf("%-4d\t%-20s\t%s\n",
+          assignment.getNo(),
+          assignment.getTitle(),
           assignment.getDeadline());
     }
   }

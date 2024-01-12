@@ -6,12 +6,12 @@ import java.util.Date;
 public class Board implements Serializable {
 
   private static final long serialVersionUID = 100L;
+
   private int no;
   private String title;
   private String content;
   private String writer;
   private Date createdDate;
-
   
   @Override
   public String toString() {

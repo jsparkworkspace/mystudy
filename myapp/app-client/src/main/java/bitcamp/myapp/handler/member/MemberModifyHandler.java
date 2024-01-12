@@ -17,9 +17,10 @@ public class MemberModifyHandler extends AbstractMenuHandler {
   @Override
   protected void action() {
     int no = this.prompt.inputInt("번호? ");
+
     Member old = memberDao.findBy(no);
     if (old == null) {
-      System.out.println("회원 번호가 유효하지 않습니다.");
+      System.out.println("회원 번호가 유효하지 않습니다!");
       return;
     }
 

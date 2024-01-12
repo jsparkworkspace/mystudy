@@ -10,13 +10,14 @@ public class AssignmentDaoImpl extends AbstractDao<Assignment> implements Assign
 
   public AssignmentDaoImpl(String filepath) {
     super(filepath);
+
     lastKey = list.getLast().getNo();
   }
 
   @Override
   public void add(Assignment assignment) {
     assignment.setNo(++lastKey);
-    this.list.add(assignment);
+    list.add(assignment);
     saveData();
   }
 
@@ -27,21 +28,23 @@ public class AssignmentDaoImpl extends AbstractDao<Assignment> implements Assign
       return 0;
     }
 
-    this.list.remove(index);
+    list.remove(index);
     saveData();
     return 1;
   }
 
   @Override
   public List<Assignment> findAll() {
-    return this.list.subList(0, list.size());
+    return list.subList(0, list.size());
   }
 
+  @Override
   public Assignment findBy(int no) {
     int index = indexOf(no);
     if (index == -1) {
       return null;
     }
+
     return list.get(index);
   }
 
@@ -51,17 +54,19 @@ public class AssignmentDaoImpl extends AbstractDao<Assignment> implements Assign
     if (index == -1) {
       return 0;
     }
+
     list.set(index, assignment);
     saveData();
     return 1;
   }
-
+  
   private int indexOf(int no) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getNo() == no) {
         return i;
       }
     }
+
     return -1;
   }
 }
