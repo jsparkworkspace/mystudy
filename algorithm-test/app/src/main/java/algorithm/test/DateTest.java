@@ -1,21 +1,33 @@
 package algorithm.test;
 
-import java.util.Date;
+import java.util.Scanner;
 
 public class DateTest {
 
   public static void main(String[] args) {
-    // TODO Auto-generated method stub
-    Date date = new Date();
-    date.setTime(0);
-    System.out.println(date);
+    // 여기에 코드를 작성해주세요.
 
-    Long test = date.getTime();
+    Scanner sc = new Scanner(System.in);
 
-    System.out.println(test);
-    java.sql.Date sqlDate1 = new java.sql.Date(test);
-    System.out.println(sqlDate1);
+    int a = sc.nextInt();
+    int b = sc.nextInt();
 
+    int value, remain;
+
+    value = a / b;
+    remain = a % b;
+
+    System.out.print(value);
+    System.out.print(".");
+
+    for (int i = 0; i < 20; i++) {
+
+      remain *= 10;
+      value = remain / b;
+      remain = remain % b;
+      System.out.print(value);
+
+    }
 
   }
 
