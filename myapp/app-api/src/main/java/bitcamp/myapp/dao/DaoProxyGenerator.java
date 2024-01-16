@@ -2,21 +2,16 @@ package bitcamp.myapp.dao;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DaoProxyGenerator {
 
   private DataInputStream in;
   private DataOutputStream out;
   private Gson gson;
-
 
   public DaoProxyGenerator(DataInputStream in, DataOutputStream out) {
     this.in = in;
@@ -47,20 +42,12 @@ public class DaoProxyGenerator {
 
             Type returnType = method.getGenericReturnType();
 
-            if (returnType == List.class) {
-              return gson.fromJson(entity,
-                  TypeToken.getParameterized(
-                      ArrayList.class,
-                      ((ParameterizedType) returnType).getActualTypeArguments()));
-              /*Type genericType = method.getGenericReturnType();
-              Type elementType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
-              return gson.fromJson(entity,
-                  TypeToken.getParameterized(List.class, elementType).getType());*/
-            } else if (returnType == void.class) {
+            if (returnType == void.class) {
               return null;
             } else {
               return gson.fromJson(entity, returnType);
             }
+
 
           } catch (Exception e) {
             e.printStackTrace();
