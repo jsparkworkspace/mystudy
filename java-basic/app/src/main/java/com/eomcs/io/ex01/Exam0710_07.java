@@ -45,6 +45,7 @@ public class Exam0710_07 {
     }
   }
 
+  // 들여쓰기 부분을 별도의 메서드로 리펙토링
   static String getIndent(int level) {
     StringBuilder strBuilder = new StringBuilder();
     for (int i = 0; i < level; i++) {
