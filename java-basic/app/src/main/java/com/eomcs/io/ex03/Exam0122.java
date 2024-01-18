@@ -33,6 +33,7 @@ public class Exam0122 {
     in.close();
 
     System.out.printf("%04x, %04x, %04x, %04x\n", ch1, ch2, ch3, ch4);
+    System.out.printf("%c, %c, %c, %c\n", ch1, ch2, ch3, ch4);
   }
 }
 

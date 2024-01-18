@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 public class Exam0520 {
 
   public static void main(String[] args) throws Exception {
-    FileInputStream in = new FileInputStream("test6.data");
+    FileInputStream in = new FileInputStream("temp/test6.data");
 
     // float 값에 해당하는 바이트 읽기
     int temp = (in.read() << 24) 
