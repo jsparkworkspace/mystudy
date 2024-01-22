@@ -1,4 +1,4 @@
-// stateful 방식의 이점 활용 - 계산기 서버 만들기
+// stateful 방식의 이점 활용 - 계산기 서버 만들기 - 스레드 적용
 package com.eomcs.net.ex04.stateful2;
 
 import java.io.DataInputStream;
