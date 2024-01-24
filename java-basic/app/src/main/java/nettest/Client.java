@@ -8,39 +8,41 @@ import java.util.Scanner;
 
 public class Client {
 
-  public static void main(String[] agrs) {
+  public static void main(String[] args) {
 
     try (Scanner sc = new Scanner(System.in);
         Socket socket = new Socket("localhost", 8888);
-        PrintStream out = new PrintStream(socket.getOutputStream());
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintStream out = new PrintStream(socket.getOutputStream())) {
 
       readResponse(in);
+
       while (true) {
-        String input = sc.nextLine();
-        sendRequest(out, input);
-        readResponse(in); // 서버의 실행 결과를 출력
+        String request = sc.nextLine();
+        out.println(request);
+        out.println();
+        out.flush();
+
+        readResponse(in);
       }
 
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
 
-  static void readResponse(BufferedReader in) throws Exception {
+  static public void readResponse(BufferedReader in) throws Exception {
     while (true) {
       String input = in.readLine();
-      if (input.length() == 0) {
+      if (input.equals("")) { // 객체의 비교연산자는 동일한 객체인지 확인한다. equals()는 값을 비교
         break;
       }
       System.out.println(input);
     }
   }
 
-  static void sendRequest(PrintStream out, String input) {
-    out.println(input);
-    out.flush();
+  static void sendRequest(PrintStream out, String request) {
 
   }
+
 }
