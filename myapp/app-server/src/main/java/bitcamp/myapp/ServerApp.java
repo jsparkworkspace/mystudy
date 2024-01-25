@@ -57,14 +57,14 @@ public class ServerApp {
     try (Socket s = socket; DataInputStream in = new DataInputStream(socket.getInputStream());
         DataOutputStream out = new DataOutputStream(socket.getOutputStream())) {
 
-      System.out.printf("[%s] 클라이언트와 연결됨!", Thread.currentThread().getName());
+      System.out.printf("[%s] 클라이언트와 연결됨!\n", Thread.currentThread().getName());
 
       processRequest(in, out);
 
-      System.out.printf("[%s] 클라이언트 연결 종료!", Thread.currentThread().getName());
+      System.out.printf("[%s] 클라이언트 연결 종료!\n", Thread.currentThread().getName());
 
     } catch (Exception e) {
-      System.out.printf("[%s] 클라이언트 연결 오류!", Thread.currentThread().getName());
+      System.out.printf("[%s] 클라이언트 연결 오류!\n", Thread.currentThread().getName());
     }
   }
 
