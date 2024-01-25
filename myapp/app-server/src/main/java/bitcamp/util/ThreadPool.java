@@ -10,10 +10,13 @@ public class ThreadPool implements Pooling<WorkerThread> {
   @Override
   public WorkerThread get() {
     if (list.size() > 0) {
-      return list.remove(0);
+      WorkerThread t = list.remove(0);
+      System.out.printf("기존 스레드를 꺼냄!(%s)\n", Thread.currentThread().getName());
+      return t;
     }
     WorkerThread thread = new WorkerThread(this);
     thread.start();
+    System.out.printf("새 스레드를 만들어 리턴!(%s)\n", thread.getName());
     return thread;
   }
 
