@@ -2,10 +2,10 @@ package bitcamp.util;
 
 public class WorkerThread extends Thread {
 
-  ThreadPool pool;
+  Pooling<WorkerThread> pool;
   Worker worker;
 
-  public WorkerThread(ThreadPool pool) {
+  public WorkerThread(Pooling<WorkerThread> pool) {
     this.pool = pool;
   }
 
