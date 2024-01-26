@@ -38,7 +38,6 @@ public class AssignmentDaoImpl extends AbstractDao<Assignment> implements Assign
     try {
       Thread.sleep(2000);
     } catch (Exception e) {
-
     }
     return list.subList(0, list.size());
   }
@@ -49,7 +48,6 @@ public class AssignmentDaoImpl extends AbstractDao<Assignment> implements Assign
     if (index == -1) {
       return null;
     }
-
     return list.get(index);
   }
 

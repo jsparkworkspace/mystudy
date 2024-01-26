@@ -24,7 +24,7 @@ public class WorkerThread extends Thread {
         try {
           worker.play();
         } catch (Exception e) {
-          System.out.println("클라이언트 요청 처리 중 오류 발생");
+          System.out.println("클라이언트 요청 처리 중 오류 발생!");
           e.printStackTrace();
         }
         // 작업을 완료했으면 다시 풀로 돌아간다.
