@@ -22,7 +22,7 @@ public class MemberDaoImpl implements MemberDao {
     try {
       Statement stmt = con.createStatement();
       stmt.executeUpdate(String.format(
-          "insert into members(email,name,password) values('%s','%s','%s')",
+          "insert into members(email,name,password) values('%s','%s',sha2('%s',256))",
           member.getEmail(), member.getName(), member.getPassword()));
 
     } catch (Exception e) {
@@ -53,6 +53,9 @@ public class MemberDaoImpl implements MemberDao {
 
         Member member = new Member();
         member.setNo(rs.getInt("member_no"));
+        member.setEmail(rs.getString("email"));
+        member.setName(rs.getString("name"));
+        member.setCreatedDate(rs.getDate("created_date"));
 
         list.add(member);
       }
@@ -70,10 +73,9 @@ public class MemberDaoImpl implements MemberDao {
 
       if (rs.next()) {
         Member member = new Member();
-        member.setNo(rs.getInt("board_no"));
-        member.setTitle(rs.getString("title"));
-        member.setContent(rs.getString("content"));
-        member.setWriter(rs.getString("writer"));
+        member.setNo(rs.getInt("member_no"));
+        member.setEmail(rs.getString("email"));
+        member.setName(rs.getString("name"));
         member.setCreatedDate(rs.getDate("created_date"));
 
         return member;
@@ -90,8 +92,8 @@ public class MemberDaoImpl implements MemberDao {
     try {
       Statement stmt = con.createStatement();
       return stmt.executeUpdate(String.format(
-          "update members set title='%s', content='%s', writer='%s' where member_no=%d",
-          member.getTitle(), member.getContent(), member.getWriter(), member.getNo()));
+          "update members set email='%s', name='%s', password=sha2('%s',256) where member_no=%d",
+          member.getEmail(), member.getName(), member.getPassword(), member.getNo()));
 
     } catch (Exception e) {
       throw new DaoException("데이터 입력 오류", e);
