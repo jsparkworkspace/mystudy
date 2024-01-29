@@ -12,8 +12,8 @@ public class Main {
       if (str.contains(c[i])) {
         str = str.replace(c[i], "@");
       }
-      System.out.println(str.length());
-      sc.close();
     }
+    System.out.println(str.length());
+    sc.close();
   }
 }
