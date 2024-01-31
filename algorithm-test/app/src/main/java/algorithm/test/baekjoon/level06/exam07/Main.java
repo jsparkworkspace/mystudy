@@ -6,19 +6,21 @@ public class Main {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     int n = sc.nextInt();
+    int count = n;
 
     for (int i = 0; i < n; i++) {
       String str = sc.next();
-
-      for (int j = 0; j < str.length() - 1; j++) {
-
-        if (str.charAt(j) == str.charAt(j + 1)) {
-          String str2 = str.replaceAll(str.charAt(j) + str.charAt(j + 1), str.j);
+      int[] arr = new int[26];
+      for (int j = 0; j < str.length(); j++) {
+        if (arr[str.charAt(j) - 'a'] == 0) {
+          arr[str.charAt(j) - 'a']++;
+        } else if (j > 0 && str.charAt(j) != str.charAt(j - 1)) {
+          count--;
+          break;
         }
-
       }
-
     }
-
+    System.out.println(count);
+    sc.close();
   }
 }
