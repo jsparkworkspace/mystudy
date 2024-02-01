@@ -22,7 +22,7 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
     try {
       Statement stmt = con.createStatement();
       stmt.executeUpdate(String.format(
-          "insert into blockpolicy(risk_level,block_cidr,expiration_date,note) values('%s','%s','%s','%s')",
+          "insert into cidr_block_pol(risk_level,block_cidr,expiration_date,note) values('%s','%s','%s','%s')",
           blockCidr.getRiskLevel(), blockCidr.getBlockCidr(), blockCidr.getExpirationDate(), blockCidr.getNote()));
 
     } catch (Exception e) {
@@ -35,7 +35,7 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
     try {
       Statement stmt = con.createStatement();
       return stmt.executeUpdate(
-          String.format("delete from blockpolicy where block_cidr_no=%d", no));
+          String.format("delete from cidr_block_pol where cidr_pol_no=%d", no));
     } catch (Exception e) {
       throw new DaoException("데이터 입력 오류", e);
     }
@@ -45,13 +45,13 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
   public List<BlockCidr> findAll() {
     try {
       Statement stmt = con.createStatement();
-      ResultSet rs = stmt.executeQuery("select * from blockpolicy");
+      ResultSet rs = stmt.executeQuery("select * from cidr_block_pol");
 
       ArrayList<BlockCidr> list = new ArrayList<>();
 
       while (rs.next()) {
         BlockCidr blockCidr = new BlockCidr();
-        blockCidr.setNo(rs.getInt("block_cidr_no"));
+        blockCidr.setNo(rs.getInt("cidr_pol_no"));
         blockCidr.setRiskLevel(rs.getString("risk_level"));
         blockCidr.setBlockCidr(rs.getString("block_cidr"));
         blockCidr.setExpirationDate(rs.getDate("expiration_date"));
@@ -69,11 +69,11 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
   public BlockCidr findBy(int no) {
     try {
       Statement stmt = con.createStatement();
-      ResultSet rs = stmt.executeQuery("select * from blockpolicy where block_cidr_no = " + no);
+      ResultSet rs = stmt.executeQuery("select * from cidr_block_pol where cidr_pol_no = " + no);
 
       if (rs.next()) {
         BlockCidr blockCidr = new BlockCidr();
-        blockCidr.setNo(rs.getInt("block_cidr_no"));
+        blockCidr.setNo(rs.getInt("cidr_pol_no"));
         blockCidr.setRiskLevel(rs.getString("risk_level"));
         blockCidr.setBlockCidr(rs.getString("block_cidr"));
         blockCidr.setExpirationDate(rs.getDate("expiration_date"));
@@ -92,7 +92,7 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
     try {
       Statement stmt = con.createStatement();
       return stmt.executeUpdate(String.format(
-          "update blockpolicy set risk_level='%s', block_cidr='%s', expiration_date='%s', note='%s' where block_cidr_no=%d",
+          "update cidr_block_pol set risk_level='%s', block_cidr='%s', expiration_date='%s', note='%s' where cidr_pol_no=%d",
           blockCidr.getRiskLevel(), blockCidr.getBlockCidr(), blockCidr.getExpirationDate(), blockCidr.getNote(),
           blockCidr.getNo()));
     } catch (Exception e) {

@@ -35,7 +35,7 @@ public class App {
     void prepareDatabase() {
         try {
             Connection con = DriverManager.getConnection(
-                "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/blockcidrdb", "wafadmin",
+                "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/wafdb", "wafadmin",
                 "Bitcamp!@#123");
 
             //boardDao = new BoardDaoImpl(con, 1);

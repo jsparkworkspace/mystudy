@@ -22,7 +22,7 @@ public class BlockCidrListHandler extends AbstractMenuHandler {
     List<BlockCidr> list = blockCidrDao.findAll();
 
     for (BlockCidr blockCidr : list) {
-      System.out.printf("%-4d\t%-10s\t%-20s\t%-20s\t%-20s\n",
+      System.out.printf("%-7d\t%-12s\t%-20s\t%-20s\t%-18s\n",
           blockCidr.getNo(),
           blockCidr.getRiskLevel(),
           blockCidr.getBlockCidr(),
