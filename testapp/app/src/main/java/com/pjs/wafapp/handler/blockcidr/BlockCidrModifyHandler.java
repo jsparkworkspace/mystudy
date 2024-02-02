@@ -29,6 +29,7 @@ public class BlockCidrModifyHandler extends AbstractMenuHandler {
       blockCidr.setNo(old.getNo());
       blockCidr.setRiskLevel(this.prompt.input("위험등급(%s)? ", old.getRiskLevel()));
       blockCidr.setBlockCidr(this.prompt.input("변경할 차단 IP(%s)? ", old.getBlockCidr()));
+      blockCidr.setWebIp(this.prompt.input("적용할 웹서버(%s)? ", old.getWebIp()));
       blockCidr.setExpirationDate(this.prompt.inputDate("변경할 차단 만료일(%s)? ", old.getExpirationDate()));
       blockCidr.setNote(this.prompt.input("비고(%s)", old.getNote()));
 

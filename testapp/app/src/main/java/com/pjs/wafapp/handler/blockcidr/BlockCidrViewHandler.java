@@ -27,6 +27,7 @@ public class BlockCidrViewHandler extends AbstractMenuHandler {
       System.out.printf("번호: %s\n", blockCidr.getNo());
       System.out.printf("위험등급: %s\n", blockCidr.getRiskLevel());
       System.out.printf("차단 IP: %s\n", blockCidr.getBlockCidr());
+      System.out.printf("적용 웹서버: %s\n", blockCidr.getWebIp());
       System.out.printf("정책 만료일: %s\n", blockCidr.getExpirationDate());
       System.out.printf("비고: %s\n", blockCidr.getNote());
 

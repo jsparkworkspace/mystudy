@@ -12,6 +12,7 @@ public class BlockCidr implements Serializable {
   private String blockCidr; // 차단할 IP 혹은 네트워크
   private Date registrationDate; // 등록일
   private Date expirationDate; // 만료일
+  private String webIp;
   private String note; // 비고
 
   @Override
@@ -57,6 +58,14 @@ public class BlockCidr implements Serializable {
 //  public void setRegistrationDate(Date registrationDate) {
 //    this.registrationDate = registrationDate;
 //  }
+
+  public String getWebIp() {
+    return webIp;
+  }
+
+  public void setWebIp(String webIp) {
+    this.webIp = webIp;
+  }
 
   public Date getExpirationDate() {
     return expirationDate;

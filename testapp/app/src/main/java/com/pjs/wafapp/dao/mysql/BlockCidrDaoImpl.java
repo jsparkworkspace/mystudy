@@ -22,8 +22,8 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
     try {
       Statement stmt = con.createStatement();
       stmt.executeUpdate(String.format(
-          "insert into cidr_block_pol(risk_level,block_cidr,expiration_date,note) values('%s','%s','%s','%s')",
-          blockCidr.getRiskLevel(), blockCidr.getBlockCidr(), blockCidr.getExpirationDate(), blockCidr.getNote()));
+          "insert into cidr_block_pol(risk_level,block_cidr,web_ip,expiration_date,note) values('%s','%s','%s','%s','%s')",
+          blockCidr.getRiskLevel(), blockCidr.getBlockCidr(), blockCidr.getWebIp(), blockCidr.getExpirationDate(), blockCidr.getNote()));
 
     } catch (Exception e) {
       throw new DaoException("데이터 입력 오류", e);
@@ -54,6 +54,7 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
         blockCidr.setNo(rs.getInt("cidr_pol_no"));
         blockCidr.setRiskLevel(rs.getString("risk_level"));
         blockCidr.setBlockCidr(rs.getString("block_cidr"));
+        blockCidr.setWebIp(rs.getString("web_ip"));
         blockCidr.setExpirationDate(rs.getDate("expiration_date"));
         blockCidr.setNote(rs.getString("note"));
 
@@ -76,6 +77,7 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
         blockCidr.setNo(rs.getInt("cidr_pol_no"));
         blockCidr.setRiskLevel(rs.getString("risk_level"));
         blockCidr.setBlockCidr(rs.getString("block_cidr"));
+        blockCidr.setWebIp(rs.getString("web_ip"));
         blockCidr.setExpirationDate(rs.getDate("expiration_date"));
         blockCidr.setNote(rs.getString("note"));
 
@@ -92,8 +94,8 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
     try {
       Statement stmt = con.createStatement();
       return stmt.executeUpdate(String.format(
-          "update cidr_block_pol set risk_level='%s', block_cidr='%s', expiration_date='%s', note='%s' where cidr_pol_no=%d",
-          blockCidr.getRiskLevel(), blockCidr.getBlockCidr(), blockCidr.getExpirationDate(), blockCidr.getNote(),
+          "update cidr_block_pol set risk_level='%s', block_cidr='%s', web_ip='%s',expiration_date='%s', note='%s' where cidr_pol_no=%d",
+          blockCidr.getRiskLevel(), blockCidr.getBlockCidr(), blockCidr.getWebIp(), blockCidr.getExpirationDate(), blockCidr.getNote(),
           blockCidr.getNo()));
     } catch (Exception e) {
       throw new DaoException("데이터 입력 오류", e);
