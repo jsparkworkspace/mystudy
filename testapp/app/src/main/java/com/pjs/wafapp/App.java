@@ -4,7 +4,11 @@
 package com.pjs.wafapp;
 
 import com.pjs.wafapp.dao.BlockCidrDao;
+import com.pjs.wafapp.dao.BlockFqdnDao;
+import com.pjs.wafapp.dao.WebServerDao;
 import com.pjs.wafapp.dao.mysql.BlockCidrDaoImpl;
+import com.pjs.wafapp.dao.mysql.BlockFqdnDaoImpl;
+import com.pjs.wafapp.dao.mysql.WebServerDaoImpl;
 import com.pjs.wafapp.handler.blockcidr.BlockCidrAddHandler;
 import com.pjs.wafapp.handler.blockcidr.BlockCidrDeleteHandler;
 import com.pjs.wafapp.handler.blockcidr.BlockCidrListHandler;
@@ -12,13 +16,25 @@ import com.pjs.wafapp.handler.blockcidr.BlockCidrModifyHandler;
 import com.pjs.wafapp.handler.blockcidr.BlockCidrViewHandler;
 import com.pjs.menu.MenuGroup;
 import com.pjs.util.Prompt;
+import com.pjs.wafapp.handler.blockfqdn.BlockFqdnAddHandler;
+import com.pjs.wafapp.handler.blockfqdn.BlockFqdnDeleteHandler;
+import com.pjs.wafapp.handler.blockfqdn.BlockFqdnListHandler;
+import com.pjs.wafapp.handler.blockfqdn.BlockFqdnModifyHandler;
+import com.pjs.wafapp.handler.blockfqdn.BlockFqdnViewHandler;
+import com.pjs.wafapp.handler.webserver.WebServerAddHandler;
+import com.pjs.wafapp.handler.webserver.WebServerDeleteHandler;
+import com.pjs.wafapp.handler.webserver.WebServerListHandler;
+import com.pjs.wafapp.handler.webserver.WebServerModifyHandler;
+import com.pjs.wafapp.handler.webserver.WebServerViewHandler;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class App {
 
     Prompt prompt = new Prompt(System.in);
+    WebServerDao webServerDao;
     BlockCidrDao blockCidrDao;
+    BlockFqdnDao blockFqdnDao;
 
     MenuGroup mainMenu;
 
@@ -40,8 +56,9 @@ public class App {
 
             //boardDao = new BoardDaoImpl(con, 1);
             //greetingDao = new BoardDaoImpl(con, 2);
+            webServerDao = new WebServerDaoImpl(con);
             blockCidrDao = new BlockCidrDaoImpl(con);
-            //assignmentDao = new AssignmentDaoImpl(con);
+            blockFqdnDao = new BlockFqdnDaoImpl(con);
 
         } catch (Exception e) {
             System.out.println("통신 오류!");
@@ -52,13 +69,26 @@ public class App {
     void prepareMenu() {
         mainMenu = MenuGroup.getInstance("WAF");
 
-        MenuGroup assignmentMenu = mainMenu.addGroup("IP차단");
-        assignmentMenu.addItem("정책 등록", new BlockCidrAddHandler(blockCidrDao, prompt));
-        assignmentMenu.addItem("정책 조회", new BlockCidrViewHandler(blockCidrDao, prompt));
-        assignmentMenu.addItem("정책 변경", new BlockCidrModifyHandler(blockCidrDao, prompt));
-        assignmentMenu.addItem("정책 삭제", new BlockCidrDeleteHandler(blockCidrDao, prompt));
-        assignmentMenu.addItem("목록", new BlockCidrListHandler(blockCidrDao, prompt));
+        MenuGroup webServerMenu = mainMenu.addGroup("웹서버");
+        webServerMenu.addItem("웹서버 등록", new WebServerAddHandler(webServerDao, prompt));
+        webServerMenu.addItem("웹서버 상세 조회", new WebServerViewHandler(webServerDao, prompt));
+        webServerMenu.addItem("웹서버 정보 변경", new WebServerModifyHandler(webServerDao, prompt));
+        webServerMenu.addItem("웹서버 삭제", new WebServerDeleteHandler(webServerDao, prompt));
+        webServerMenu.addItem("웹서버 목록", new WebServerListHandler(webServerDao, prompt));
 
+        MenuGroup cidrMenu = mainMenu.addGroup("IP차단");
+        cidrMenu.addItem("차단 IP 등록", new BlockCidrAddHandler(blockCidrDao, prompt));
+        cidrMenu.addItem("차단 IP 상세 조회", new BlockCidrViewHandler(blockCidrDao, prompt));
+        cidrMenu.addItem("차단 IP 정책 변경", new BlockCidrModifyHandler(blockCidrDao, prompt));
+        cidrMenu.addItem("차단 IP 정책 삭제", new BlockCidrDeleteHandler(blockCidrDao, prompt));
+        cidrMenu.addItem("차단 IP 정책 목록", new BlockCidrListHandler(blockCidrDao, prompt));
+
+        MenuGroup fqdnMenu = mainMenu.addGroup("URL차단");
+        fqdnMenu.addItem("정책 등록", new BlockFqdnAddHandler(blockFqdnDao, prompt));
+        fqdnMenu.addItem("정책 조회", new BlockFqdnViewHandler(blockFqdnDao, prompt));
+        fqdnMenu.addItem("정책 변경", new BlockFqdnModifyHandler(blockFqdnDao, prompt));
+        fqdnMenu.addItem("정책 삭제", new BlockFqdnDeleteHandler(blockFqdnDao, prompt));
+        fqdnMenu.addItem("목록", new BlockFqdnListHandler(blockFqdnDao, prompt));
         //mainMenu.addItem("도움말", new HelpHandler(prompt));
     }
 
