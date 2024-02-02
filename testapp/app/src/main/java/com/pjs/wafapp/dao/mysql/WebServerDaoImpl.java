@@ -93,7 +93,7 @@ public class WebServerDaoImpl implements WebServerDao {
           "update web_server set web_ip='%s', hostname='%s' where web_no=%d",
           webServer.getWebIp(), webServer.getHostname(), webServer.getNo()));
     } catch (Exception e) {
-      throw new DaoException("데이터 입력 오류", e);
+      throw new DaoException("데이터 입력 오류");
     }
   }
 }

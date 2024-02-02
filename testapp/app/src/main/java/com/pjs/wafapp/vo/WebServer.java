@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class WebServer implements Serializable {
 
-  private static final long serialVersionUID = 100L;
+//  private static final long serialVersionUID = 100L;
 
   private int no;
   private String webIp; // 웹서버 IP

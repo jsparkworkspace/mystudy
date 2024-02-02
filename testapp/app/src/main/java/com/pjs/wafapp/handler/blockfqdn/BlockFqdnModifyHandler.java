@@ -30,9 +30,9 @@ public class BlockFqdnModifyHandler extends AbstractMenuHandler {
       BlockFqdn blockFqdn = new BlockFqdn();
       blockFqdn.setNo(old.getNo());
       blockFqdn.setRiskLevel(this.prompt.input("위험등급(%s)? ", old.getRiskLevel()));
-      blockFqdn.setBlockUrl(this.prompt.input("변경할 차단 IP(%s)? ", old.getBlockUrl()));
+      blockFqdn.setBlockUrl(this.prompt.input("변경 URL(%s)? ", old.getBlockUrl()));
       blockFqdn.setSubDirectory(this.prompt.input("변경할 서브 디렉토리(%s)?", old.getSubDirectory()));
-      blockFqdn.setExpirationDate(this.prompt.inputDate("변경할 차단 만료일(%s)? ", old.getExpirationDate()));
+      blockFqdn.setExpirationDate(this.prompt.inputDate("차단 만료일 변경(%s)? ", old.getExpirationDate()));
       blockFqdn.setNote(this.prompt.input("비고(%s)", old.getNote()));
 
       blockFqdnDao.update(blockFqdn);

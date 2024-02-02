@@ -44,7 +44,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        System.out.println("[IP 차단 시스템]");
+        System.out.println("[WAF Application]");
         new com.pjs.wafapp.App().run();
     }
 
