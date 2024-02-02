@@ -15,7 +15,7 @@ public class BlockCidr implements Serializable {
   private String webIp;
   private String note; // 비고
 
-  @Override
+  /*@Override
   public String toString() {
     return "BlockCidr{" +
         "no=" + no +
@@ -25,7 +25,7 @@ public class BlockCidr implements Serializable {
         ", expirationDate=" + expirationDate +
         ", note=" + note +
         '}';
-  }
+  }*/
 
   public int getNo() {
     return no;

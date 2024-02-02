@@ -12,14 +12,14 @@ public class WebServer implements Serializable {
   private String hostname; // 웹서버 호스트네임
 
 
-  @Override
+  /*@Override
   public String toString() {
-    return "BlockCidr{" +
+    return "WebServer{" +
         "no=" + no +
         ", webIp='" + webIp + '\'' +
-        ", hostname='" + hostname +
+        ", hostname='" + hostname + '\'' +
         '}';
-  }
+  }*/
 
   public int getNo() {
     return no;

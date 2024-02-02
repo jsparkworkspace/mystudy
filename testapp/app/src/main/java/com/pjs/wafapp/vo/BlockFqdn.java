@@ -14,7 +14,7 @@ public class BlockFqdn implements Serializable {
   private Date expirationDate; // 만료일
   private String note; // 비고
 
-  @Override
+  /*@Override
   public String toString() {
     return "BlockCidr{" +
         "no=" + no +
@@ -24,7 +24,7 @@ public class BlockFqdn implements Serializable {
         ", expirationDate=" + expirationDate +
         ", note=" + note +
         '}';
-  }
+  }*/
 
   public int getNo() {
     return no;

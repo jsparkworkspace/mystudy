@@ -19,12 +19,12 @@ public class BlockFqdnListHandler extends AbstractMenuHandler {
 
   @Override
   protected void action() {
-    System.out.printf("%-4s\t%-10s\t%-20s\t%-20s\t%-20s\n", "정책번호", "위험등급", "차단 URL", "만료일", "비고");
+    System.out.printf("%-4s\t%-10s\t%-30s\t%-15s\t%-20s\n", "정책번호", "위험등급", "차단 URL", "만료일", "비고");
 
     List<BlockFqdn> list = blockFqdnDao.findAll();
 
     for (BlockFqdn blockFqdn : list) {
-      System.out.printf("%-7d\t%-12s\t%-20s\t%-20s\t%-18s\n",
+      System.out.printf("%-7d\t%-12s\t%-30s\t%-16s\t%-20s\n",
           blockFqdn.getNo(),
           blockFqdn.getRiskLevel(),
           blockFqdn.getBlockUrl() + blockFqdn.getSubDirectory(),
