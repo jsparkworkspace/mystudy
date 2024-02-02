@@ -45,7 +45,10 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
   public List<BlockCidr> findAll() {
     try {
       Statement stmt = con.createStatement();
-      ResultSet rs = stmt.executeQuery("select * from cidr_block_pol");
+      //ResultSet rs = stmt.executeQuery("select * from cidr_block_pol");
+      ResultSet rs = stmt.executeQuery("select cbp.cidr_pol_no, cbp.risk_level, cbp.block_cidr, cbp.expiration_date, ws.hostname, cbp.note\n"
+          + "  from cidr_block_pol cbp\n"
+          + "  join web_server ws on cbp.web_ip=ws.web_ip");
 
       ArrayList<BlockCidr> list = new ArrayList<>();
 
@@ -54,7 +57,8 @@ public class BlockCidrDaoImpl implements BlockCidrDao {
         blockCidr.setNo(rs.getInt("cidr_pol_no"));
         blockCidr.setRiskLevel(rs.getString("risk_level"));
         blockCidr.setBlockCidr(rs.getString("block_cidr"));
-        blockCidr.setWebIp(rs.getString("web_ip"));
+        //blockCidr.setWebIp(rs.getString("web_ip"));
+        blockCidr.setHostname(rs.getString("hostname"));
         blockCidr.setExpirationDate(rs.getDate("expiration_date"));
         blockCidr.setNote(rs.getString("note"));
 

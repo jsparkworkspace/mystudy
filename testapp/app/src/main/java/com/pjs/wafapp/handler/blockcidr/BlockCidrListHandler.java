@@ -26,7 +26,8 @@ public class BlockCidrListHandler extends AbstractMenuHandler {
           blockCidr.getNo(),
           blockCidr.getRiskLevel(),
           blockCidr.getBlockCidr(),
-          blockCidr.getWebIp(),
+          //blockCidr.getWebIp(),
+          blockCidr.getHostname(),
           blockCidr.getExpirationDate(),
           blockCidr.getNote());
     }

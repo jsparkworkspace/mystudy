@@ -14,6 +14,7 @@ public class BlockCidr implements Serializable {
   private Date expirationDate; // 만료일
   private String webIp;
   private String note; // 비고
+  private String hostname;
 
   /*@Override
   public String toString() {
@@ -26,6 +27,14 @@ public class BlockCidr implements Serializable {
         ", note=" + note +
         '}';
   }*/
+
+  public String getHostname() {
+    return hostname;
+  }
+
+  public void setHostname(String hostname) {
+    this.hostname = hostname;
+  }
 
   public int getNo() {
     return no;
