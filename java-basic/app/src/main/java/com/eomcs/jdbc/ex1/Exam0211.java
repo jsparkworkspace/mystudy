@@ -1,12 +1,13 @@
-// JDBC 프로그래밍 - DBMS에 연결하기
+// JDBC 프로그래밍 - close() 호출의 중요성
 package com.eomcs.jdbc.ex1;
 
 import java.sql.DriverManager;
 
-public class Exam0210 {
+public class Exam0211 {
 
   public static void main(String[] args) throws Exception {
-
+    int count = 0;
+    while(true) {
     java.sql.Connection con = null;
 
     try {
@@ -53,6 +54,7 @@ public class Exam0210 {
       // MariaDB의 Driver 구현체가 리턴한 Connection 객체는
       // 어떤 클래스일까?
       System.out.println(con.getClass().getName());
+      System.out.println(++count);
 
     } finally {
       // 자원해제
@@ -65,6 +67,9 @@ public class Exam0210 {
         // 처리할 필요도 없다.
       }
       System.out.println("DBMS와 연결 해제됨!");
+    }
+      
+      
     }
   }
 }
