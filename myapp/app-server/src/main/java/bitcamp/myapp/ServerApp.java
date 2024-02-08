@@ -121,10 +121,7 @@ public class ServerApp {
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
         DataInputStream in = new DataInputStream(s.getInputStream());
         Prompt prompt = new Prompt(in, out)) {
-
-      String request = prompt.input();
-      System.out.println(request);
-
+      
       while (true) {
         try {
           mainMenu.execute(prompt);
