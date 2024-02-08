@@ -37,8 +37,7 @@ import java.util.concurrent.Executors;
 public class ServerApp {
 
   ExecutorService executorService = Executors.newCachedThreadPool();
-
-  Prompt prompt = new Prompt(System.in);
+  
   BoardDao boardDao;
   BoardDao greetingDao;
   AssignmentDao assignmentDao;
