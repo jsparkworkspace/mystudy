@@ -23,7 +23,6 @@ import bitcamp.myapp.handler.member.MemberDeleteHandler;
 import bitcamp.myapp.handler.member.MemberListHandler;
 import bitcamp.myapp.handler.member.MemberModifyHandler;
 import bitcamp.myapp.handler.member.MemberViewHandler;
-import bitcamp.util.NetPrompt;
 import bitcamp.util.Prompt;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -121,33 +120,27 @@ public class ServerApp {
     try (Socket s = socket;
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
         DataInputStream in = new DataInputStream(s.getInputStream());
-        NetPrompt prompt = new NetPrompt(in, out)) {
-
-      prompt.println("[과제관리 시스템]");
-      prompt.println("환영합니다!");
-      prompt.println("반가워요");
-      prompt.end();
+        Prompt prompt = new Prompt(in, out)) {
 
       String request = prompt.input();
       System.out.println(request);
+
+      while (true) {
+        try {
+          mainMenu.execute(prompt);
+          prompt.print("[[quit!]]");
+          prompt.end();
+          break;
+        } catch (Exception e) {
+          System.out.println("예외 발생!");
+          e.printStackTrace();
+        }
+      }
 
     } catch (Exception e) {
       System.out.println("클라이언트 통신 오류!");
       e.printStackTrace();
     }
   }
-
-//  void run() {
-//    while (true) {
-//      try {
-//        mainMenu.execute(prompt);
-//        prompt.close();
-//        break;
-//      } catch (Exception e) {
-//        System.out.println("예외 발생!");
-//        e.printStackTrace();
-//      }
-//    }
-//  }
 
 }
