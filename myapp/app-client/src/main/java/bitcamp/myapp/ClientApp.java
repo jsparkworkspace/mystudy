@@ -66,7 +66,6 @@ public class ClientApp {
 
     } catch (Exception e) {
       System.out.println("통신 오류!");
-      e.printStackTrace();
     }
   }
 
@@ -112,6 +111,7 @@ public class ClientApp {
         break;
       } catch (Exception e) {
         System.out.println("예외 발생!");
+        e.printStackTrace();
       }
     }
   }
