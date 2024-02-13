@@ -25,6 +25,7 @@ import bitcamp.myapp.handler.member.MemberListHandler;
 import bitcamp.myapp.handler.member.MemberModifyHandler;
 import bitcamp.myapp.handler.member.MemberViewHandler;
 import bitcamp.util.Prompt;
+import bitcamp.util.ThreadConnection;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
@@ -60,10 +61,14 @@ public class ServerApp {
           "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
           "Bitcamp!@#123");*/
 
-      boardDao = new BoardDaoImpl(1);
-      greetingDao = new BoardDaoImpl(2);
-      assignmentDao = new AssignmentDaoImpl();
-      memberDao = new MemberDaoImpl();
+      ThreadConnection threadConnection = new ThreadConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
+
+      boardDao = new BoardDaoImpl(threadConnection, 1);
+      greetingDao = new BoardDaoImpl(threadConnection, 2);
+      assignmentDao = new AssignmentDaoImpl(threadConnection);
+      memberDao = new MemberDaoImpl(threadConnection);
 
     } catch (Exception e) {
       System.out.println("통신 오류!");
