@@ -4,6 +4,7 @@ import bitcamp.myapp.dao.BoardDao;
 import bitcamp.myapp.dao.DaoException;
 import bitcamp.myapp.vo.Board;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -12,16 +13,19 @@ import java.util.List;
 public class BoardDaoImpl implements BoardDao {
 
   int category; // 게시판 카테고리 넘버
-  Connection con;
 
-  public BoardDaoImpl(Connection con, int category) {
-    this.con = con;
+  public BoardDaoImpl(int category) {
     this.category = category;
   }
 
   @Override
   public void add(Board board) {
+    Connection con = null;
     try {
+      con = DriverManager.getConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
+
       con.setAutoCommit(false);
       try (PreparedStatement pstmt = con.prepareStatement(
           "insert into boards(title,content,writer,category) values(?,?,?,?)")) {
@@ -48,88 +52,141 @@ public class BoardDaoImpl implements BoardDao {
         con.setAutoCommit(true);
       } catch (Exception e) {
       }
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
   }
 
   @Override
   public int delete(int no) {
-    try (PreparedStatement pstmt = con.prepareStatement("delete from boards where board_no=?")) {
-      pstmt.setInt(1, no);
-      return pstmt.executeUpdate();
+    Connection con = null;
+    try {
+      con = DriverManager.getConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
+
+      try (PreparedStatement pstmt = con.prepareStatement("delete from boards where board_no=?")) {
+        pstmt.setInt(1, no);
+        return pstmt.executeUpdate();
+      }
 
     } catch (Exception e) {
       throw new DaoException("데이터 입력 오류", e);
+    } finally {
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
   }
 
   @Override
   public List<Board> findAll() {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "select board_no, title, writer, created_date from boards where category=? order by board_no desc");) {
+    Connection con = null;
+    try {
+      con = DriverManager.getConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
 
-      pstmt.setInt(1, this.category);
+      try (PreparedStatement pstmt = con.prepareStatement(
+          "select board_no, title, writer, created_date from boards where category=? order by board_no desc");) {
 
-      try (ResultSet rs = pstmt.executeQuery()) {
+        pstmt.setInt(1, this.category);
 
-        ArrayList<Board> list = new ArrayList<>();
+        try (ResultSet rs = pstmt.executeQuery()) {
 
-        while (rs.next()) {
+          ArrayList<Board> list = new ArrayList<>();
 
-          Board board = new Board();
-          board.setNo(rs.getInt("board_no"));
-          board.setTitle(rs.getString("title"));
-          board.setWriter(rs.getString("writer"));
-          board.setCreatedDate(rs.getDate("created_date"));
+          while (rs.next()) {
 
-          list.add(board);
+            Board board = new Board();
+            board.setNo(rs.getInt("board_no"));
+            board.setTitle(rs.getString("title"));
+            board.setWriter(rs.getString("writer"));
+            board.setCreatedDate(rs.getDate("created_date"));
+
+            list.add(board);
+          }
+          return list;
         }
-        return list;
       }
 
     } catch (Exception e) {
       throw new DaoException("데이터 가져오기 오류", e);
+    } finally {
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
   }
 
   @Override
   public Board findBy(int no) {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "select * from boards where board_no =?")) {
+    Connection con = null;
+    try {
+      con = DriverManager.getConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
 
-      pstmt.setInt(1, no);
-      try (ResultSet rs = pstmt.executeQuery()) {
+      try (PreparedStatement pstmt = con.prepareStatement(
+          "select * from boards where board_no =?")) {
 
-        if (rs.next()) {
-          Board board = new Board();
-          board.setNo(rs.getInt("board_no"));
-          board.setTitle(rs.getString("title"));
-          board.setContent(rs.getString("content"));
-          board.setWriter(rs.getString("writer"));
-          board.setCreatedDate(rs.getDate("created_date"));
+        pstmt.setInt(1, no);
+        try (ResultSet rs = pstmt.executeQuery()) {
 
-          return board;
+          if (rs.next()) {
+            Board board = new Board();
+            board.setNo(rs.getInt("board_no"));
+            board.setTitle(rs.getString("title"));
+            board.setContent(rs.getString("content"));
+            board.setWriter(rs.getString("writer"));
+            board.setCreatedDate(rs.getDate("created_date"));
+
+            return board;
+          }
+          return null;
         }
-        return null;
       }
+
     } catch (Exception e) {
       throw new DaoException("데이터 가져오기 오류", e);
+    } finally {
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
   }
 
   @Override
   public int update(Board board) {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "update boards set title=?, content=?, writer=? where board_no=?")) {
+    Connection con = null;
+    try {
+      con = DriverManager.getConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
 
-      pstmt.setString(1, board.getTitle());
-      pstmt.setString(2, board.getContent());
-      pstmt.setString(3, board.getWriter());
-      pstmt.setInt(4, board.getNo());
+      try (PreparedStatement pstmt = con.prepareStatement(
+          "update boards set title=?, content=?, writer=? where board_no=?")) {
 
-      return pstmt.executeUpdate();
+        pstmt.setString(1, board.getTitle());
+        pstmt.setString(2, board.getContent());
+        pstmt.setString(3, board.getWriter());
+        pstmt.setInt(4, board.getNo());
+
+        return pstmt.executeUpdate();
+      }
 
     } catch (Exception e) {
       throw new DaoException("데이터 입력 오류", e);
+    } finally {
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
   }
 }

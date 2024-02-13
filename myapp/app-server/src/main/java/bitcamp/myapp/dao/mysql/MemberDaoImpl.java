@@ -4,6 +4,7 @@ import bitcamp.myapp.dao.DaoException;
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.vo.Member;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,105 +12,155 @@ import java.util.List;
 
 public class MemberDaoImpl implements MemberDao {
 
-  Connection con;
-
-  public MemberDaoImpl(Connection con) {
-    this.con = con;
-  }
-
   @Override
   public void add(Member member) {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "insert into members(email,name,password) values(?,?,sha2(?,256))")) {
+    Connection con = null;
+    try {
+      con = DriverManager.getConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
 
-      pstmt.setString(1, member.getEmail());
-      pstmt.setString(2, member.getName());
-      pstmt.setString(3, member.getPassword());
+      try (PreparedStatement pstmt = con.prepareStatement(
+          "insert into members(email,name,password) values(?,?,sha2(?,256))")) {
 
-      pstmt.executeUpdate();
+        pstmt.setString(1, member.getEmail());
+        pstmt.setString(2, member.getName());
+        pstmt.setString(3, member.getPassword());
 
+        pstmt.executeUpdate();
+      }
     } catch (Exception e) {
       throw new DaoException("데이터 입력 오류", e);
+    } finally {
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
   }
 
   @Override
   public int delete(int no) {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "delete from members where member_no=?")) {
+    Connection con = null;
+    try {
+      con = DriverManager.getConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
 
-      pstmt.setInt(1, no);
+      try (PreparedStatement pstmt = con.prepareStatement(
+          "delete from members where member_no=?")) {
 
-      return pstmt.executeUpdate();
+        pstmt.setInt(1, no);
 
+        return pstmt.executeUpdate();
+      }
     } catch (Exception e) {
       throw new DaoException("데이터 입력 오류", e);
+    } finally {
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
   }
 
   @Override
   public List<Member> findAll() {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "select member_no, email, name, created_date from members order by member_no desc")) {
+    Connection con = null;
+    try {
+      con = DriverManager.getConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
 
-      try (ResultSet rs = pstmt.executeQuery()) {
-        ArrayList<Member> list = new ArrayList<>();
+      try (PreparedStatement pstmt = con.prepareStatement(
+          "select member_no, email, name, created_date from members order by member_no desc")) {
 
-        while (rs.next()) {
+        try (ResultSet rs = pstmt.executeQuery()) {
+          ArrayList<Member> list = new ArrayList<>();
 
-          Member member = new Member();
-          member.setNo(rs.getInt("member_no"));
-          member.setEmail(rs.getString("email"));
-          member.setName(rs.getString("name"));
-          member.setCreatedDate(rs.getDate("created_date"));
+          while (rs.next()) {
 
-          list.add(member);
+            Member member = new Member();
+            member.setNo(rs.getInt("member_no"));
+            member.setEmail(rs.getString("email"));
+            member.setName(rs.getString("name"));
+            member.setCreatedDate(rs.getDate("created_date"));
+
+            list.add(member);
+          }
+          return list;
         }
-        return list;
       }
     } catch (Exception e) {
       throw new DaoException("데이터 가져오기 오류", e);
+    } finally {
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
   }
 
   @Override
   public Member findBy(int no) {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "select * from members where member_no = ?")) {
-      pstmt.setInt(1, no);
+    Connection con = null;
+    try {
+      con = DriverManager.getConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
 
-      try (ResultSet rs = pstmt.executeQuery()) {
+      try (PreparedStatement pstmt = con.prepareStatement(
+          "select * from members where member_no = ?")) {
+        pstmt.setInt(1, no);
 
-        if (rs.next()) {
-          Member member = new Member();
-          member.setNo(rs.getInt("member_no"));
-          member.setEmail(rs.getString("email"));
-          member.setName(rs.getString("name"));
-          member.setCreatedDate(rs.getDate("created_date"));
+        try (ResultSet rs = pstmt.executeQuery()) {
 
-          return member;
+          if (rs.next()) {
+            Member member = new Member();
+            member.setNo(rs.getInt("member_no"));
+            member.setEmail(rs.getString("email"));
+            member.setName(rs.getString("name"));
+            member.setCreatedDate(rs.getDate("created_date"));
+
+            return member;
+          }
+          return null;
         }
-        return null;
       }
 
     } catch (Exception e) {
       throw new DaoException("데이터 가져오기 오류", e);
+    } finally {
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
   }
 
   @Override
   public int update(Member member) {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "update members set email=?, name=?, password=sha2(?,256) where member_no=?")) {
+    Connection con = null;
+    try {
+      con = DriverManager.getConnection(
+          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
+          "Bitcamp!@#123");
+      try (PreparedStatement pstmt = con.prepareStatement(
+          "update members set email=?, name=?, password=sha2(?,256) where member_no=?")) {
 
-      pstmt.setString(1, member.getEmail());
-      pstmt.setString(2, member.getName());
-      pstmt.setString(3, member.getPassword());
-      pstmt.setInt(4, member.getNo());
-      return pstmt.executeUpdate();
-
+        pstmt.setString(1, member.getEmail());
+        pstmt.setString(2, member.getName());
+        pstmt.setString(3, member.getPassword());
+        pstmt.setInt(4, member.getNo());
+        return pstmt.executeUpdate();
+      }
     } catch (Exception e) {
       throw new DaoException("데이터 입력 오류", e);
+    } finally {
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
   }
 }
