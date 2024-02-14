@@ -107,4 +107,20 @@ public class AttachedFileDaoImpl implements AttachedFileDao {
       throw new DaoException("데이터 가져오기 오류", e);
     }
   }
+
+  @Override
+  public int update(AttachedFile attachedFile) {
+    try (Connection con = connectionPool.getConnection(); PreparedStatement pstmt = con.prepareStatement(
+        "update board_files set file_path=? where file_no=?")) {
+
+      pstmt.setString(1, attachedFile.getFilePath());
+      pstmt.setInt(2, attachedFile.getNo());
+
+      return pstmt.executeUpdate();
+
+    } catch (Exception e) {
+      throw new DaoException("데이터 변경 오류", e);
+    }
+  }
+
 }
