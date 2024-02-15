@@ -25,6 +25,7 @@ public class BoardAddHandler extends AbstractMenuHandler {
 
   @Override
   protected void action(Prompt prompt) {
+
     Member loginUser = (Member) prompt.getSession().getAttribute("loginUser");
     if (loginUser == null) {
       prompt.println("로그인하시기 바랍니다!");
@@ -38,7 +39,7 @@ public class BoardAddHandler extends AbstractMenuHandler {
 
     ArrayList<AttachedFile> files = new ArrayList<>();
     while (true) {
-      String filepath = prompt.input("파일?(종료는 그냥 엔터) ");
+      String filepath = prompt.input("파일?(종료: 그냥 엔터) ");
       if (filepath.length() == 0) {
         break;
       }
@@ -55,7 +56,6 @@ public class BoardAddHandler extends AbstractMenuHandler {
         for (AttachedFile file : files) {
           file.setBoardNo(board.getNo());
         }
-
         attachedFileDao.addAll(files);
       }
 

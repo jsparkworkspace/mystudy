@@ -27,7 +27,6 @@ public class MemberAddHandler extends AbstractMenuHandler {
 
     } catch (Exception e) {
       prompt.println("등록 오류!");
-
     }
   }
 }

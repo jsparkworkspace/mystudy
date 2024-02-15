@@ -20,7 +20,6 @@ public class AssignmentDaoImpl implements AssignmentDao {
 
   @Override
   public void add(Assignment assignment) {
-
     try (Connection con = connectionPool.getConnection();
         PreparedStatement pstmt = con.prepareStatement(
             "insert into assignments(title,content,deadline) values(?,?,?)")) {
@@ -46,7 +45,7 @@ public class AssignmentDaoImpl implements AssignmentDao {
       return pstmt.executeUpdate();
 
     } catch (Exception e) {
-      throw new DaoException("데이터 입력 오류", e);
+      throw new DaoException("데이터 삭제 오류", e);
     }
   }
 
@@ -78,11 +77,11 @@ public class AssignmentDaoImpl implements AssignmentDao {
   public Assignment findBy(int no) {
     try (Connection con = connectionPool.getConnection();
         PreparedStatement pstmt = con.prepareStatement(
-            "select * from assignments where assignment_no =?")) {
+            "select * from assignments where assignment_no=?")) {
 
       pstmt.setInt(1, no);
 
-      try (ResultSet rs = pstmt.executeQuery();) {
+      try (ResultSet rs = pstmt.executeQuery()) {
 
         if (rs.next()) {
           Assignment assignment = new Assignment();
@@ -90,7 +89,6 @@ public class AssignmentDaoImpl implements AssignmentDao {
           assignment.setTitle(rs.getString("title"));
           assignment.setContent(rs.getString("content"));
           assignment.setDeadline(rs.getDate("deadline"));
-
           return assignment;
         }
         return null;
@@ -115,7 +113,7 @@ public class AssignmentDaoImpl implements AssignmentDao {
       return pstmt.executeUpdate();
 
     } catch (Exception e) {
-      throw new DaoException("데이터 입력 오류", e);
+      throw new DaoException("데이터 변경 오류", e);
     }
   }
 }

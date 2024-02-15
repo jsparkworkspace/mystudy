@@ -44,7 +44,6 @@ public class BoardDeleteHandler extends AbstractMenuHandler {
 
     } catch (Exception e) {
       prompt.println("삭제 오류!");
-
     }
   }
 }

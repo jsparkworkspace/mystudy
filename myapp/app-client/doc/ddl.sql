@@ -81,4 +81,4 @@ insert into members(email,name,password,created_date)
 alter table boards
   add column category int not null;
 
-update boards set category = 1;
+update boards set category=1;

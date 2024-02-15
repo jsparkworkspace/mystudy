@@ -29,6 +29,14 @@ public class Board implements Serializable {
         '}';
   }
 
+  public Member getWriter() {
+    return writer;
+  }
+
+  public void setWriter(Member writer) {
+    this.writer = writer;
+  }
+
   public int getFileCount() {
     return fileCount;
   }
@@ -59,14 +67,6 @@ public class Board implements Serializable {
 
   public void setContent(String content) {
     this.content = content;
-  }
-
-  public Member getWriter() {
-    return writer;
-  }
-
-  public void setWriter(Member writer) {
-    this.writer = writer;
   }
 
   public Date getCreatedDate() {

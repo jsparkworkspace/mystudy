@@ -7,19 +7,15 @@ import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 import bitcamp.myapp.vo.Member;
 import bitcamp.util.Prompt;
-import bitcamp.util.TransactionManager;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BoardModifyHandler extends AbstractMenuHandler {
 
-  private TransactionManager txManager;
   private BoardDao boardDao;
   private AttachedFileDao attachedFileDao;
 
-  public BoardModifyHandler(TransactionManager txManager, BoardDao boardDao,
-      AttachedFileDao attachedFileDao) {
-    this.txManager = txManager;
+  public BoardModifyHandler(BoardDao boardDao, AttachedFileDao attachedFileDao) {
     this.boardDao = boardDao;
     this.attachedFileDao = attachedFileDao;
   }
@@ -51,79 +47,31 @@ public class BoardModifyHandler extends AbstractMenuHandler {
       board.setContent(prompt.input("내용(%s)? ", oldBoard.getContent()));
       board.setCreatedDate(oldBoard.getCreatedDate());
 
-      try {
-        txManager.startTransaction();
+      prompt.println("첨부파일:");
 
-        while (true) {
-          String q = prompt.input("첨부파일 관리 예)1.추가 / 2.변경 / 3.삭제 / 그냥 엔터는 종료 ");
-          if (q.equals("1")) {
-            // 첨부파일 추가
-            ArrayList<AttachedFile> files = new ArrayList<>();
-            while (true) {
-              String filepath = prompt.input("첨부파일?(종료는 그냥 엔터) ");
-              if (filepath.length() == 0) {
-                break;
-              }
-              files.add(new AttachedFile().filePath(filepath));
-            }
-
-            if (files.size() > 0) {
-              for (AttachedFile file : files) {
-                file.setBoardNo(board.getNo());
-              }
-              attachedFileDao.addAll(files);
-            }
-
-          } else if (q.equals("2")) {
-            // 첨부파일 변경
-            prompt.println("[현재 게시글의 첨부파일 리스트]");
-            prompt.printf("파일번호\t첨부파일명\n");
-            List<AttachedFile> files = attachedFileDao.findAllByBoardNo(no);
-            for (AttachedFile file : files) {
-              prompt.printf("%d\t\t   %s\n", file.getNo(), file.getFilePath());
-            }
-            int input2 = prompt.inputInt("변경하실 파일번호를 입력하세요 : ");
-            AttachedFile attachedFile = new AttachedFile();
-            attachedFile.setNo(input2);
-            attachedFile.setFilePath(prompt.input("첨부파일? "));
-            attachedFileDao.update(attachedFile);
-
-          } else if (q.equals("3")) {
-            // 첨부파일 삭제
-            prompt.println("[현재 게시글의 첨부파일 리스트]");
-            prompt.printf("파일번호\t첨부파일명\n");
-            List<AttachedFile> files = attachedFileDao.findAllByBoardNo(no);
-            for (AttachedFile file : files) {
-              prompt.printf("%d\t\t   %s\n", file.getNo(), file.getFilePath());
-            }
-            int input2 = prompt.inputInt("삭제하실 파일번호를 입력하세요 : ");
-            attachedFileDao.delete(input2);
-
-          } else if (q.length() == 0) {
-            // 종료
-            break;
-          } else {
-            prompt.println("잘못 입력하셨습니다.");
-          }
-
-          String q2 = prompt.input("첨부파일 추가 작업을 하시겠습니까?(Y/n) ");
-          if (q2.equals("n")) {
-            break;
-          }
-
+      List<AttachedFile> files = attachedFileDao.findAllByBoardNo(no);
+      for (AttachedFile file : files) {
+        if (prompt.input("  %s 삭제하시겠습니까? (y/N)", file.getFilePath()).equalsIgnoreCase("y")) {
+          attachedFileDao.delete(file.getNo());
         }
-
-        boardDao.update(board);
-        prompt.println("게시글을 변경했습니다.");
-
-        txManager.commit();
-      } catch (Exception e) {
-        prompt.println("게시글 변경 오류!");
-        txManager.rollback();
       }
+
+      List<AttachedFile> newFiles = new ArrayList<>();
+      while (true) {
+        String filepath = prompt.input("추가할 파일?(종료: 그냥 엔터) ");
+        if (filepath.length() == 0) {
+          break;
+        }
+        newFiles.add(new AttachedFile().filePath(filepath).boardNo(no));
+      }
+
+      boardDao.update(board);
+      attachedFileDao.addAll(newFiles);
+
+      prompt.println("게시글을 변경했습니다.");
+
     } catch (Exception e) {
       prompt.println("변경 오류!");
-
     }
   }
 }

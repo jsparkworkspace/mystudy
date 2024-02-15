@@ -1,7 +1,7 @@
 -- DDL(Data Definition Language)
 
-drop table if exists board_files restrict;
 drop table if exists boards restrict;
+drop table if exists board_files restrict;
 drop table if exists assignments restrict;
 drop table if exists members restrict;
 
@@ -18,8 +18,6 @@ alter table boards
   add constraint primary key (board_no),
   modify column board_no int not null auto_increment;
 
-
-
 create table board_files(
   file_no int not null,
   file_path varchar(255) not null,
@@ -31,7 +29,6 @@ alter table board_files
   modify column file_no int not null auto_increment,
   add constraint board_files_fk foreign key (board_no) references boards(board_no);
 
-
 create table assignments(
   assignment_no int not null,
   title varchar(255) not null,
@@ -42,7 +39,6 @@ create table assignments(
 alter table assignments
   add constraint primary key (assignment_no),
   modify column assignment_no int not null auto_increment;
-
 
 create table members(
   member_no int not null,
@@ -58,5 +54,3 @@ alter table members
 
 alter table boards
   add constraint boards_fk foreign key (writer) references members(member_no);
-
-

@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-// Composite 패턴에서 '복합 객체(composite object)' 역할을 하는 클래스
-// - 다른 Menu 객체를 포함한다.
 public class MenuGroup extends AbstractMenu {
 
   private List<Menu> menus = new LinkedList<>();
@@ -17,7 +15,6 @@ public class MenuGroup extends AbstractMenu {
     super(title);
   }
 
-  // GoF의 Factory Method 디자인패턴!
   public static MenuGroup getInstance(String title) {
     return new MenuGroup(title);
   }
@@ -30,8 +27,7 @@ public class MenuGroup extends AbstractMenu {
     this.printMenu(prompt);
 
     while (true) {
-
-      String input = prompt.input("%s%s> ", getLoginUsername(prompt), prompt.getFullPath());
+      String input = prompt.input("%s%s>", getLoginUsername(prompt), prompt.getFullPath());
 
       if (input.equals("menu")) {
         this.printMenu(prompt);
@@ -43,23 +39,24 @@ public class MenuGroup extends AbstractMenu {
       try {
         int menuNo = Integer.parseInt(input);
         if (menuNo < 1 || menuNo > this.menus.size()) {
-          prompt.println("메뉴 번호가 옳지 않습니다.");
+          System.out.println("메뉴 번호가 옳지 않습니다.");
           continue;
         }
 
         this.menus.get(menuNo - 1).execute(prompt);
 
       } catch (Exception e) {
-        prompt.println("메뉴가 옳지 않습니다!");
+        System.out.println("메뉴가 옳지 않습니다!");
       }
     }
 
     // 메뉴를 나갈 때 breadcrumb 메뉴 경로에서 메뉴 제목을 제거한다.
     prompt.popPath();
-
   }
 
   private String getLoginUsername(Prompt prompt) {
+//    Member loginUser = prompt.getLoginUser();
+//    Member loginUser = (Member) prompt.getAttribute("loginUser");
     Member loginUser = (Member) prompt.getSession().getAttribute("loginUser");
     if (loginUser != null) {
       return AnsiEscape.ANSI_BOLD_RED + loginUser.getName() + ":" + AnsiEscape.ANSI_CLEAR;

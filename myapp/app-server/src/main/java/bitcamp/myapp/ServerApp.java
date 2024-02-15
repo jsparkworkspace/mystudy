@@ -41,6 +41,7 @@ import java.util.concurrent.Executors;
 public class ServerApp {
 
   ExecutorService executorService = Executors.newCachedThreadPool();
+
   TransactionManager txManager;
   DBConnectionPool connectionPool;
 
@@ -53,7 +54,6 @@ public class ServerApp {
   MenuGroup mainMenu;
 
   ServerApp() {
-    //prepareNetwork();
     prepareDatabase();
     prepareMenu();
   }
@@ -65,12 +65,12 @@ public class ServerApp {
 
   void prepareDatabase() {
     try {
+//      Connection con = DriverManager.getConnection(
+//
+      //"jdbc:mysql://db-ld27b-kr.vpc-pub-cdb.ntruss.com/studydb", "study", "Bitcamp!@#123");
+
       connectionPool = new DBConnectionPool(
-          "jdbc:mysql://localhost/studydb", "study",
-          "Bitcamp!@#123");
-      /*connectionPool = new DBConnectionPool(
-          "jdbc:mysql://db-ld2as-kr.vpc-pub-cdb.ntruss.com/studydb", "study",
-          "Bitcamp!@#123");*/
+          "jdbc:mysql://localhost/studydb", "study", "Bitcamp!@#123");
       txManager = new TransactionManager(connectionPool);
 
       boardDao = new BoardDaoImpl(connectionPool, 1);
@@ -81,6 +81,7 @@ public class ServerApp {
 
     } catch (Exception e) {
       System.out.println("통신 오류!");
+      e.printStackTrace();
     }
   }
 
@@ -100,7 +101,7 @@ public class ServerApp {
     MenuGroup boardMenu = mainMenu.addGroup("게시글");
     boardMenu.addItem("등록", new BoardAddHandler(txManager, boardDao, attachedFileDao));
     boardMenu.addItem("조회", new BoardViewHandler(boardDao, attachedFileDao));
-    boardMenu.addItem("변경", new BoardModifyHandler(txManager, boardDao, attachedFileDao));
+    boardMenu.addItem("변경", new BoardModifyHandler(boardDao, attachedFileDao));
     boardMenu.addItem("삭제", new BoardDeleteHandler(boardDao, attachedFileDao));
     boardMenu.addItem("목록", new BoardListHandler(boardDao));
 
@@ -114,7 +115,7 @@ public class ServerApp {
     MenuGroup greetingMenu = mainMenu.addGroup("가입인사");
     greetingMenu.addItem("등록", new BoardAddHandler(txManager, greetingDao, attachedFileDao));
     greetingMenu.addItem("조회", new BoardViewHandler(greetingDao, attachedFileDao));
-    greetingMenu.addItem("변경", new BoardModifyHandler(txManager, greetingDao, attachedFileDao));
+    greetingMenu.addItem("변경", new BoardModifyHandler(greetingDao, attachedFileDao));
     greetingMenu.addItem("삭제", new BoardDeleteHandler(greetingDao, attachedFileDao));
     greetingMenu.addItem("목록", new BoardListHandler(greetingDao));
 
@@ -129,10 +130,10 @@ public class ServerApp {
         Socket socket = serverSocket.accept();
         executorService.execute(() -> processRequest(socket));
       }
-
     } catch (Exception e) {
       System.out.println("서버 소켓 생성 오류!");
       e.printStackTrace();
+
     } finally {
       connectionPool.closeAll();
     }
@@ -157,10 +158,11 @@ public class ServerApp {
       }
 
     } catch (Exception e) {
-      System.out.println("클라이언트 통신 오류!");
+      System.out.println("클라이언 통신 오류!");
       e.printStackTrace();
+
     } finally {
-      //threadConnection.returnConnection();
+      //threadConnection.remove();
     }
   }
 

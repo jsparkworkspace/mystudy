@@ -31,7 +31,6 @@ public class BoardListHandler extends AbstractMenuHandler {
       }
     } catch (Exception e) {
       prompt.println("목록 오류!");
-
     }
   }
 }

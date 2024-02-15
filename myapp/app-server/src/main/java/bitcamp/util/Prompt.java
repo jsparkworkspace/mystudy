@@ -15,6 +15,8 @@ public class Prompt implements AutoCloseable {
   private DataOutputStream out;
   private StringWriter stringWriter = new StringWriter();
   private PrintWriter writer = new PrintWriter(stringWriter);
+  //  private Member loginUser;
+//  private Map<String, Object> userMap = new HashMap<>();
   private Session session = new Session();
 
   public Prompt(DataInputStream in, DataOutputStream out) {
@@ -48,7 +50,7 @@ public class Prompt implements AutoCloseable {
     return Date.valueOf(this.input(str, args));
   }
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------
 
   public void print(String str) {
     writer.print(str);
@@ -64,7 +66,7 @@ public class Prompt implements AutoCloseable {
 
   public void end() throws Exception {
     // PrintWriter를 통해 출력한 내용은 StringWriter에 쌓여있다.
-    // StringWriter에 쌓여있는 문자열을 꺼낸다.
+    // StringWriter에 쌓여있는 있는 문자열을 꺼낸다.
     StringBuffer buf = stringWriter.getBuffer();
     String content = buf.toString();
 
@@ -96,4 +98,20 @@ public class Prompt implements AutoCloseable {
   public Session getSession() {
     return this.session;
   }
+
+//  public Member getLoginUser() {
+//    return this.loginUser;
+//  }
+//
+//  public void setLoginUser(Member m) {
+//    this.loginUser = m;
+//  }
+
+//  public void setAttribute(String name, Object value) {
+//    userMap.put(name, value);
+//  }
+//
+//  public Object getAttribute(String name) {
+//    return userMap.get(name);
+//  }
 }

@@ -30,7 +30,6 @@ public class MemberListHandler extends AbstractMenuHandler {
       }
     } catch (Exception e) {
       prompt.println("목록 오류!");
-
     }
   }
 }

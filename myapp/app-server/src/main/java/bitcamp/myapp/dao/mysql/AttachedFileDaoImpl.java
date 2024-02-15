@@ -20,11 +20,11 @@ public class AttachedFileDaoImpl implements AttachedFileDao {
 
   @Override
   public void add(AttachedFile file) {
-    try (Connection con = connectionPool.getConnection(); PreparedStatement pstmt = con.prepareStatement(
-        "insert into board_files(file_path,board_no) values(?,?)")) {
+    try (Connection con = connectionPool.getConnection();
+        PreparedStatement pstmt = con.prepareStatement(
+            "insert into board_files(file_path,board_no) values(?,?)")) {
 
       pstmt.setString(1, file.getFilePath());
-
       pstmt.setInt(2, file.getBoardNo());
 
       pstmt.executeUpdate();
@@ -42,9 +42,7 @@ public class AttachedFileDaoImpl implements AttachedFileDao {
 
       for (AttachedFile file : files) {
         pstmt.setString(1, file.getFilePath());
-
         pstmt.setInt(2, file.getBoardNo());
-
         pstmt.executeUpdate();
       }
 
@@ -57,8 +55,9 @@ public class AttachedFileDaoImpl implements AttachedFileDao {
 
   @Override
   public int delete(int no) {
-    try (Connection con = connectionPool.getConnection(); PreparedStatement pstmt = con.prepareStatement(
-        "delete from board_files where file_no=?")) {
+    try (Connection con = connectionPool.getConnection();
+        PreparedStatement pstmt = con.prepareStatement(
+            "delete from board_files where file_no=?")) {
       pstmt.setInt(1, no);
       return pstmt.executeUpdate();
 
@@ -82,9 +81,10 @@ public class AttachedFileDaoImpl implements AttachedFileDao {
 
   @Override
   public List<AttachedFile> findAllByBoardNo(int boardNo) {
-    try (Connection con = connectionPool.getConnection(); PreparedStatement pstmt = con.prepareStatement(
-        "select file_no, file_path, board_no"
-            + " from board_files where board_no=? order by file_no asc")) {
+    try (Connection con = connectionPool.getConnection();
+        PreparedStatement pstmt = con.prepareStatement(
+            "select file_no, file_path, board_no"
+                + " from board_files where board_no=? order by file_no asc")) {
 
       pstmt.setInt(1, boardNo);
 
@@ -107,20 +107,4 @@ public class AttachedFileDaoImpl implements AttachedFileDao {
       throw new DaoException("데이터 가져오기 오류", e);
     }
   }
-
-  @Override
-  public int update(AttachedFile attachedFile) {
-    try (Connection con = connectionPool.getConnection(); PreparedStatement pstmt = con.prepareStatement(
-        "update board_files set file_path=? where file_no=?")) {
-
-      pstmt.setString(1, attachedFile.getFilePath());
-      pstmt.setInt(2, attachedFile.getNo());
-
-      return pstmt.executeUpdate();
-
-    } catch (Exception e) {
-      throw new DaoException("데이터 변경 오류", e);
-    }
-  }
-
 }
