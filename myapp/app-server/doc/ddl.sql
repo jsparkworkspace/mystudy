@@ -18,8 +18,7 @@ alter table boards
   add constraint primary key (board_no),
   modify column board_no int not null auto_increment;
 
-alter table boards
-  add constraint boards_fk foreign key (writer) references members(member_no);
+
 
 create table board_files(
   file_no int not null,
@@ -57,6 +56,7 @@ alter table members
   add constraint primary key (member_no),
   modify column member_no int not null auto_increment;
 
-
+alter table boards
+  add constraint boards_fk foreign key (writer) references members(member_no);
 
 
