@@ -27,14 +27,15 @@ public class BoardListServlet extends GenericServlet {
   @Override
   public void service(ServletRequest servletRequest, ServletResponse servletResponse)
       throws ServletException, IOException {
+
     servletResponse.setContentType("text/html;charset=UTF-8");
     PrintWriter out = servletResponse.getWriter();
 
     out.println("<!DOCTYPE html>");
     out.println("<html lang='en'>");
     out.println("<head>");
-    out.println("<meta charset='UTF-8'>");
-    out.println("<title>비트캠프 데브옵스 5기</title>");
+    out.println("  <meta charset='UTF-8'>");
+    out.println("  <title>비트캠프 데브옵스 5기</title>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>게시글</h1>");
@@ -43,16 +44,16 @@ public class BoardListServlet extends GenericServlet {
 
     try {
       out.println("<table border='1'>");
-      out.println("<thead>");
-      out.println("<tr> <th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>첨부파일</th> </tr>");
-      out.println("</thead>");
-      out.println("<tbody>");
+      out.println("    <thead>");
+      out.println("    <tr> <th>번호</th> <th>제목</th> <th>작성자</th> <th>등록일</th> <th>첨부파일</th> </tr>");
+      out.println("    </thead>");
+      out.println("    <tbody>");
 
       List<Board> list = boardDao.findAll();
 
       for (Board board : list) {
         out.printf(
-            "<tr> <td>%d</td> <td><a href='/board/view?no=%1$d'>%s</td> <td>%s</td> <td>%s</td> <td>%d</td> <tr>\n",
+            "<tr> <td>%d</td> <td><a href='/board/view?no=%1$d'>%s</a></td> <td>%s</td> <td>%s</td> <td>%d</td> </tr>\n",
             board.getNo(),
             board.getTitle(),
             board.getWriter().getName(),
@@ -60,7 +61,7 @@ public class BoardListServlet extends GenericServlet {
             board.getFileCount());
       }
 
-      out.println("</body>");
+      out.println("    </tbody>");
       out.println("</table>");
 
     } catch (Exception e) {

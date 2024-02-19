@@ -116,7 +116,6 @@ public class AttachedFileDaoImpl implements AttachedFileDao {
                 + " from board_files where file_no=?")) {
       pstmt.setInt(1, no);
       try (ResultSet rs = pstmt.executeQuery()) {
-
         if (rs.next()) {
           AttachedFile file = new AttachedFile();
           file.setNo(rs.getInt("file_no"));

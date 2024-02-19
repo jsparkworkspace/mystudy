@@ -2,7 +2,6 @@ package bitcamp.myapp.servlet.member;
 
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.dao.mysql.MemberDaoImpl;
-import bitcamp.myapp.vo.Member;
 import bitcamp.util.DBConnectionPool;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,41 +32,20 @@ public class MemberDeleteServlet extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html lang='en'>");
     out.println("<head>");
-    out.println("<meta charset='UTF-8'>");
-    out.println("<title>비트캠프 데브옵스 5기</title>");
+    out.println("  <meta charset='UTF-8'>");
+    out.println("  <title>비트캠프 데브옵스 5기</title>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>회원</h1>");
 
-    Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-    if (loginUser == null) {
-      out.println("로그인하시기 바랍니다!");
-      out.println("</body>");
-      out.println("</html>");
-      return;
-    }
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
-      Member member = memberDao.findBy(no);
-      if (member == null) {
+      if (memberDao.delete(no) == -1) {
         out.println("<p>회원 번호가 유효하지 않습니다.</p>");
-        out.println("</body>");
-        out.println("</html>");
-        return;
-      } else if (member.getNo() != loginUser.getNo()) {
-        out.println("<p>권한이 없습니다.</p>");
-        out.println("</body>");
-        out.println("</html>");
-        return;
+      } else {
+        out.println("<p>회원을 삭제했습니다.</p>");
       }
-
-      memberDao.delete(no);
-      out.println(" <script>");
-      out.println("  location.href = '/'");
-      out.println("alert('회원 삭제 완료되었습니다.!')");
-      out.println("</script>");
 
     } catch (Exception e) {
       out.println("<p>삭제 오류!</p>");

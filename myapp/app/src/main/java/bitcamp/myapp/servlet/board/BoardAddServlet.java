@@ -28,8 +28,7 @@ public class BoardAddServlet extends HttpServlet {
   public BoardAddServlet() {
     DBConnectionPool connectionPool = new DBConnectionPool(
         "jdbc:mysql://localhost/studydb", "study", "Bitcamp!@#123");
-
-    this.txManager = new TransactionManager(connectionPool);
+    txManager = new TransactionManager(connectionPool);
     this.boardDao = new BoardDaoImpl(connectionPool, 1);
     this.attachedFileDao = new AttachedFileDaoImpl(connectionPool);
   }
@@ -37,21 +36,22 @@ public class BoardAddServlet extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
     out.println("<!DOCTYPE html>");
     out.println("<html lang='en'>");
     out.println("<head>");
-    out.println("<meta charset='UTF-8'>");
-    out.println("<title>비트캠프 데브옵스 5기</title>");
+    out.println("  <meta charset='UTF-8'>");
+    out.println("  <title>비트캠프 데브옵스 5기</title>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>게시글</h1>");
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
-      out.println("로그인하시기 바랍니다!");
+      out.println("<p>로그인하시기 바랍니다!</p>");
       out.println("</body>");
       out.println("</html>");
       return;
@@ -63,7 +63,6 @@ public class BoardAddServlet extends HttpServlet {
     board.setWriter(loginUser);
 
     ArrayList<AttachedFile> attachedFiles = new ArrayList<>();
-
     String[] files = request.getParameterValues("files");
     if (files != null) {
       for (String file : files) {
@@ -80,7 +79,6 @@ public class BoardAddServlet extends HttpServlet {
       boardDao.add(board);
 
       if (attachedFiles.size() > 0) {
-        // 첨부파일 객체에 게시글 번호 저장
         for (AttachedFile attachedFile : attachedFiles) {
           attachedFile.setBoardNo(board.getNo());
         }

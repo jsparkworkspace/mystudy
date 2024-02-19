@@ -39,8 +39,8 @@ public class BoardViewServlet extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html lang='en'>");
     out.println("<head>");
-    out.println("<meta charset='UTF-8'>");
-    out.println("<title>비트캠프 데브옵스 5기</title>");
+    out.println("  <meta charset='UTF-8'>");
+    out.println("  <title>비트캠프 데브옵스 5기</title>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>게시글</h1>");
@@ -73,13 +73,13 @@ public class BoardViewServlet extends HttpServlet {
       out.println("</div>");
       out.println("<div>");
       out.println("  첨부파일: <input multiple name='files' type='file'>");
-      out.println("<ul>");
+      out.println("  <ul>");
       for (AttachedFile file : files) {
         out.printf("    <li>%s <a href='/board/file/delete?no=%d'>삭제</a></li>\n",
             file.getFilePath(),
             file.getNo());
       }
-      out.println("</ul>");
+      out.println("  </ul>");
       out.println("</div>");
       out.println("<div>");
       out.println("  <button>변경</button>");

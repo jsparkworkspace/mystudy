@@ -38,15 +38,15 @@ public class BoardDeleteServlet extends HttpServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html lang='en'>");
     out.println("<head>");
-    out.println("<meta charset='UTF-8'>");
-    out.println("<title>비트캠프 데브옵스 5기</title>");
+    out.println("  <meta charset='UTF-8'>");
+    out.println("  <title>비트캠프 데브옵스 5기</title>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>게시글</h1>");
 
     Member loginUser = (Member) request.getSession().getAttribute("loginUser");
     if (loginUser == null) {
-      out.println("로그인하시기 바랍니다!");
+      out.println("<p>로그인하시기 바랍니다!</p>");
       out.println("</body>");
       out.println("</html>");
       return;
@@ -70,8 +70,8 @@ public class BoardDeleteServlet extends HttpServlet {
 
       attachedFileDao.deleteAll(no);
       boardDao.delete(no);
-//      out.println("<p>첨부파일을 삭제했습니다!</p>");
-      out.println(" <script>");
+
+      out.println("<script>");
       out.println("  location.href = '/board/list'");
       out.println("</script>");
 
@@ -86,4 +86,3 @@ public class BoardDeleteServlet extends HttpServlet {
     out.println("</html>");
   }
 }
-
