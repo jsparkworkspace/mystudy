@@ -1,4 +1,4 @@
-package algorithm.test.baekjoon.level06;
+package algorithm.test.baekjoon.level06.exam08;
 
 import java.util.Scanner;
 
