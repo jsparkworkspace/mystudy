@@ -29,7 +29,7 @@
     <param-value>Bitcamp!@#123</param-value>
   </context-param>
 
-  <servlet>
+  <!--<servlet>
     <servlet-name>Servlet04</servlet-name>
     <servlet-class>com.eomcs.web.ex06.Servlet04</servlet-class>
     <init-param>
@@ -54,6 +54,6 @@
   <servlet-mapping>
     <servlet-name>Servlet04</servlet-name>
     <url-pattern>/ex06/s4</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping>-->
 
 </web-app>
