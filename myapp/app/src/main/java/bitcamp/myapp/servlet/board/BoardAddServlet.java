@@ -50,17 +50,17 @@ public class BoardAddServlet extends HttpServlet {
     out.printf("<h1>%s</h1>\n", title);
 
     out.printf("<form action='/board/add?category=%d' method='post'>\n", category);
-    out.printf("<input name='category' type='hidden' value=%d>\n", category);
+    out.printf("<input name='category' type='hidden' value='%d'>\n", category);
     out.println("<div>");
-    out.println("  제목: <input name='title' type='text'>");
+    out.println("      제목: <input name='title' type='text'>");
     out.println("</div>");
     out.println("<div>");
-    out.println("  내용: <textarea name='content'></textarea>");
+    out.println("      내용: <textarea name='content'></textarea>");
     out.println("</div>");
 
     if (category == 1) {
       out.println("<div>");
-      out.println("  첨부파일: <input multiple name='files' type='file'>");
+      out.println("      첨부파일: <input multiple name='files' type='file'>");
       out.println("</div>");
     }
 

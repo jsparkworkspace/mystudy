@@ -16,14 +16,13 @@ public class AssignmentAddServlet extends HttpServlet {
 
   private AssignmentDao assignmentDao;
 
-
   @Override
   public void init() {
     assignmentDao = (AssignmentDao) this.getServletContext().getAttribute("assignmentDao");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     response.setContentType("text/html;charset=UTF-8");
