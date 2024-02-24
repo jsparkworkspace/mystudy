@@ -8,10 +8,10 @@ public class Main {
     // TODO Auto-generated method stub
     Scanner sc = new Scanner(System.in);
 
-    String n = sc.next();
+    int n = sc.nextInt();
     int b = sc.nextInt();
 
-    System.out.print(Integer.parseInt(n, b));
+    System.out.print(Integer.toString(n, b).toUpperCase());
 
     sc.close();
 
