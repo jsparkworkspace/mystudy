@@ -24,7 +24,6 @@ public class AssignmentDeleteServlet extends HttpServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-
       if (assignmentDao.delete(no) == 0) {
         throw new Exception("과제 번호가 유효하지 않습니다.");
       }

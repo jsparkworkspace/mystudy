@@ -1,6 +1,5 @@
 package bitcamp.myapp.servlet;
 
-import bitcamp.myapp.dao.BoardDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -11,13 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/error")
 public class ErrorServlet extends HttpServlet {
-
-  private BoardDao boardDao;
-
-  @Override
-  public void init() {
-    this.boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
-  }
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +29,7 @@ public class ErrorServlet extends HttpServlet {
     request.getRequestDispatcher("/header").include(request, response);
 
     out.println("<h1>오류!</h1>");
+    
     String message = (String) request.getAttribute("message");
     if (message != null) {
       out.printf("<p>%s</p>\n", message);

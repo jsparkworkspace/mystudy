@@ -1,6 +1,5 @@
 package bitcamp.myapp.servlet;
 
-import bitcamp.myapp.dao.BoardDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -11,13 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/index.html")
 public class HomeServlet extends HttpServlet {
-
-  private BoardDao boardDao;
-
-  @Override
-  public void init() {
-    this.boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
-  }
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)

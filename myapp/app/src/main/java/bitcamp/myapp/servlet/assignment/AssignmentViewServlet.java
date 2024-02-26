@@ -26,7 +26,6 @@ public class AssignmentViewServlet extends HttpServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-
       Assignment assignment = assignmentDao.findBy(no);
       if (assignment == null) {
         throw new Exception("과제 번호가 유효하지 않습니다.");
@@ -46,7 +45,6 @@ public class AssignmentViewServlet extends HttpServlet {
       request.getRequestDispatcher("/header").include(request, response);
 
       out.println("<h1>과제</h1>");
-
       out.println("<form action='/assignment/update' method='post'>");
       out.println("<div>");
       out.printf("  번호: <input readonly name='no' type='text' value='%d'>\n", assignment.getNo());

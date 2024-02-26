@@ -83,7 +83,7 @@ public class MemberViewServlet extends HttpServlet {
     }
 
     request.getRequestDispatcher("/footer").include(request, response);
-
+    
     out.println("</body>");
     out.println("</html>");
   }
