@@ -48,7 +48,7 @@ public class MemberViewServlet extends HttpServlet {
       out.println("<form action='/member/update' method='post' enctype='multipart/form-data'>");
       out.println("<div>");
       out.printf(
-          "  사진: <a href='%s'> <img src='%1$s' height='80px'></a><br> <input name='photo' type='file'>\n",
+          "  사진: <a href='%s'><img src='%1$s' height='80px'></a><br> <input name='photo' type='file'>\n",
           member.getPhoto() != null ? "/upload/" + member.getPhoto() : "/img/default-photo.jpeg");
       out.println("</div>");
       out.println("<div>");
