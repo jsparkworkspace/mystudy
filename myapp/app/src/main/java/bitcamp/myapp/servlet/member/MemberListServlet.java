@@ -42,7 +42,7 @@ public class MemberListServlet extends HttpServlet {
       request.getRequestDispatcher("/header").include(request, response);
 
       out.println("<h1>회원</h1>");
-      out.println("<a href='/member/form.jsp'>새 회원</a>");
+      out.println("<a href='/member/add'>새 회원</a>");
       out.println("<table border='1'>");
       out.println("    <thead>");
       out.println("    <tr> <th>번호</th> <th>이름</th> <th>이메일</th> <th>가입일</th> </tr>");
