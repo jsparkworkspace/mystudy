@@ -41,6 +41,7 @@ public class BoardAddServlet extends HttpServlet {
       throws ServletException, IOException {
 
     int category = Integer.valueOf(request.getParameter("category"));
+    request.setAttribute("boardName", category == 1 ? "게시글" : "가입인사");
     request.setAttribute("category", category);
     request.getRequestDispatcher("/board/form.jsp").forward(request, response);
   }
@@ -49,11 +50,11 @@ public class BoardAddServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    String title = "";
+    String boardName = "";
 
     try {
       int category = Integer.valueOf(request.getParameter("category"));
-      title = category == 1 ? "게시글" : "가입인사";
+      boardName = category == 1 ? "게시글" : "가입인사";
 
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
       if (loginUser == null) {
@@ -93,14 +94,14 @@ public class BoardAddServlet extends HttpServlet {
 
       txManager.commit();
 
-      response.sendRedirect("list?category=" + category);
+      response.sendRedirect("/board/list?category=" + category);
 
     } catch (Exception e) {
       try {
         txManager.rollback();
       } catch (Exception e2) {
       }
-      request.setAttribute("message", String.format("%s 등록 오류!", title));
+      request.setAttribute("message", String.format("%s 등록 오류!", boardName));
       request.setAttribute("exception", e);
       request.getRequestDispatcher("/error.jsp").forward(request, response);
     }

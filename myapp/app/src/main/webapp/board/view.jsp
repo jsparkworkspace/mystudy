@@ -11,16 +11,16 @@
 <body>
 
 <jsp:include page="/header.jsp"></jsp:include>
+
 <%
+  String boardName = (String) request.getAttribute("boardName");
   int category = (int) request.getAttribute("category");
-  String title = category == 1 ? "게시글" : "가입인사";
   Board board = (Board) request.getAttribute("board");
-  List<AttachedFile> files = (List<AttachedFile>) request.getAttribute("files");
 %>
 
-<h1><%=title%></h1>
+<h1><%=boardName%></h1>
 <form action='/board/update' method='post' enctype='multipart/form-data'>
-  <input name='category' type='hidden' value='<%=category%>'>;
+  <input name='category' type='hidden' value='<%=category%>'>
   <div>
     번호: <input readonly name='no' type='text' value='<%=board.getNo()%>'>
   </div>
@@ -35,24 +35,23 @@
   </div>
 <%
   if (category == 1) {%>
-  <div>
-    첨부파일: <input multiple name='files' type='file'>
-  <ul>
+    <div>
+      첨부파일: <input multiple name='files' type='file'>
+      <ul>
 <%
+    List<AttachedFile> files = (List<AttachedFile>) request.getAttribute("files");
     for (AttachedFile file : files) {%>
-    <li>
-      <a href='/upload/board/<%=file.getFilePath()%>'><%=file.getFilePath()%></a>
-      [<a href='/board/file/delete?category=<%=category%>&no=<%=file.getNo()%>'>삭제</a>]
-    </li>
+        <li><a href='/upload/board/<%=file.getFilePath()%>'><%=file.getFilePath()%></a>
+          [<a href='/board/file/delete?category=<%=category%>&no=<%=file.getNo()%>'>삭제</a>]</li>
 <%  }%>
-  </ul>
-</div>
+      </ul>
+    </div>
 <%}%>
 
-<div>
-  <button>변경</button>
-  <a href='/board/delete?category=<%=category%>&no=<%=board.getNo()%>'>[삭제]</a>
-</div>
+  <div>
+    <button>변경</button>
+    <a href='/board/delete?category=<%=category%>&no=<%=board.getNo()%>'>[삭제]</a>
+  </div>
 </form>
 
 <jsp:include page="/footer.jsp"></jsp:include>

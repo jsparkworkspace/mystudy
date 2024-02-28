@@ -26,6 +26,6 @@ public class CharacterEncodingFilter implements Filter {
 
     request.setCharacterEncoding(encoding);
 
-    filterChain.doFilter(request, response); // 다음 필터 체인이 없으면 클라이언트가 요청한 서블릿에 전달한다.
+    filterChain.doFilter(request, response);
   }
 }

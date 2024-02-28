@@ -45,6 +45,7 @@ public class LoginServlet extends HttpServlet {
     try {
       String email = request.getParameter("email");
       String password = request.getParameter("password");
+
       String saveEmail = request.getParameter("saveEmail");
       if (saveEmail != null) {
         Cookie cookie = new Cookie("email", email);

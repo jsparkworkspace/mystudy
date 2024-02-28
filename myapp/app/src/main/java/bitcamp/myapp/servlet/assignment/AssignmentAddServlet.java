@@ -23,9 +23,7 @@ public class AssignmentAddServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
     request.getRequestDispatcher("/assignment/form.jsp").forward(request, response);
-
   }
 
   @Override
@@ -38,7 +36,7 @@ public class AssignmentAddServlet extends HttpServlet {
       assignment.setDeadline(Date.valueOf(request.getParameter("deadline")));
 
       assignmentDao.add(assignment);
-      response.sendRedirect("list");
+      response.sendRedirect("/assignment/list");
 
     } catch (Exception e) {
       request.setAttribute("message", "과제 등록 오류!");

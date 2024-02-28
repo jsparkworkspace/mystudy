@@ -29,6 +29,7 @@ public class AssignmentViewServlet extends HttpServlet {
       if (assignment == null) {
         throw new Exception("과제 번호가 유효하지 않습니다.");
       }
+
       request.setAttribute("assignment", assignment);
       request.getRequestDispatcher("/assignment/view.jsp").forward(request, response);
 

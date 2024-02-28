@@ -9,7 +9,7 @@
 <body>
 
 <jsp:include page="/header.jsp"></jsp:include>
-<%
+<% 
   Member member = (Member) request.getAttribute("member");
 %>
 <h1>회원</h1>
