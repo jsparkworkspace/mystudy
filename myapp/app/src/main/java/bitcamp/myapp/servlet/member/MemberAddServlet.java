@@ -38,7 +38,6 @@ public class MemberAddServlet extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-
       Member member = new Member();
       member.setEmail(request.getParameter("email"));
       member.setName(request.getParameter("name"));
@@ -57,7 +56,7 @@ public class MemberAddServlet extends HttpServlet {
     } catch (Exception e) {
       request.setAttribute("message", "등록 오류!");
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/error").forward(request, response);
+      request.getRequestDispatcher("/error.jsp").forward(request, response);
     }
   }
 }
