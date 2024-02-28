@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ page import="java.util.List"%>
 <%@ page import="bitcamp.myapp.vo.Board"%>
+<%@ page import="bitcamp.myapp.vo.AttachedFile"%>
 <!DOCTYPE html>
 <html lang='en'>
   <head>
