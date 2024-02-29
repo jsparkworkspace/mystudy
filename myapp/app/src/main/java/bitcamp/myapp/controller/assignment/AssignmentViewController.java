@@ -6,11 +6,11 @@ import bitcamp.myapp.vo.Assignment;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AssignmentViewContoroller implements PageController {
+public class AssignmentViewController implements PageController {
 
   private AssignmentDao assignmentDao;
 
-  public AssignmentViewContoroller(AssignmentDao assignmentDao) {
+  public AssignmentViewController(AssignmentDao assignmentDao) {
     this.assignmentDao = assignmentDao;
   }
 
@@ -21,8 +21,8 @@ public class AssignmentViewContoroller implements PageController {
     if (assignment == null) {
       throw new Exception("과제 번호가 유효하지 않습니다.");
     }
-
     request.setAttribute("assignment", assignment);
     return "/assignment/view.jsp";
   }
+
 }

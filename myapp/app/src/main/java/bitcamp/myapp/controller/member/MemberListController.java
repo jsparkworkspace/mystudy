@@ -14,7 +14,8 @@ public class MemberListController implements PageController {
   }
 
   @Override
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String execute(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
     request.setAttribute("list", memberDao.findAll());
     return "/member/list.jsp";
   }

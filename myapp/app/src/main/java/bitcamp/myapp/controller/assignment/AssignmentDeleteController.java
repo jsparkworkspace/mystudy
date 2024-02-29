@@ -5,11 +5,11 @@ import bitcamp.myapp.dao.AssignmentDao;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AssignmentDeleteContoller implements PageController {
+public class AssignmentDeleteController implements PageController {
 
   private AssignmentDao assignmentDao;
 
-  public AssignmentDeleteContoller(AssignmentDao assignmentDao) {
+  public AssignmentDeleteController(AssignmentDao assignmentDao) {
     this.assignmentDao = assignmentDao;
   }
 
@@ -19,7 +19,6 @@ public class AssignmentDeleteContoller implements PageController {
     if (assignmentDao.delete(no) == 0) {
       throw new Exception("과제 번호가 유효하지 않습니다.");
     }
-
     return "redirect:list";
   }
 }

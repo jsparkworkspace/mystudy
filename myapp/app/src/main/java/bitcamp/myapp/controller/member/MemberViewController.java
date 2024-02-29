@@ -3,11 +3,9 @@ package bitcamp.myapp.controller.member;
 import bitcamp.myapp.controller.PageController;
 import bitcamp.myapp.dao.MemberDao;
 import bitcamp.myapp.vo.Member;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/view")
 public class MemberViewController implements PageController {
 
   private MemberDao memberDao;

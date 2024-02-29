@@ -3,10 +3,18 @@ package bitcamp.myapp.servlet;
 import bitcamp.myapp.controller.HomeController;
 import bitcamp.myapp.controller.PageController;
 import bitcamp.myapp.controller.assignment.AssignmentAddController;
-import bitcamp.myapp.controller.assignment.AssignmentDeleteContoller;
+import bitcamp.myapp.controller.assignment.AssignmentDeleteController;
 import bitcamp.myapp.controller.assignment.AssignmentListController;
 import bitcamp.myapp.controller.assignment.AssignmentUpdateController;
-import bitcamp.myapp.controller.assignment.AssignmentViewContoroller;
+import bitcamp.myapp.controller.assignment.AssignmentViewController;
+import bitcamp.myapp.controller.auth.LoginController;
+import bitcamp.myapp.controller.auth.LogoutController;
+import bitcamp.myapp.controller.board.BoardAddController;
+import bitcamp.myapp.controller.board.BoardDeleteController;
+import bitcamp.myapp.controller.board.BoardFileDeleteController;
+import bitcamp.myapp.controller.board.BoardListController;
+import bitcamp.myapp.controller.board.BoardUpdateController;
+import bitcamp.myapp.controller.board.BoardViewController;
 import bitcamp.myapp.controller.member.MemberAddController;
 import bitcamp.myapp.controller.member.MemberDeleteController;
 import bitcamp.myapp.controller.member.MemberListController;
@@ -16,6 +24,7 @@ import bitcamp.myapp.dao.AssignmentDao;
 import bitcamp.myapp.dao.AttachedFileDao;
 import bitcamp.myapp.dao.BoardDao;
 import bitcamp.myapp.dao.MemberDao;
+import bitcamp.util.TransactionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -38,6 +47,7 @@ public class DispatcherServlet extends HttpServlet {
   @Override
   public void init() throws ServletException {
     ServletContext ctx = this.getServletContext();
+    TransactionManager txManager = (TransactionManager) ctx.getAttribute("txManager");
     BoardDao boardDao = (BoardDao) ctx.getAttribute("boardDao");
     MemberDao memberDao = (MemberDao) ctx.getAttribute("memberDao");
     AssignmentDao assignmentDao = (AssignmentDao) ctx.getAttribute("assignmentDao");
@@ -51,12 +61,27 @@ public class DispatcherServlet extends HttpServlet {
     controllerMap.put("/member/add", new MemberAddController(memberDao, memberUploadDir));
     controllerMap.put("/member/update", new MemberUpdateController(memberDao, memberUploadDir));
     controllerMap.put("/member/delete", new MemberDeleteController(memberDao, memberUploadDir));
-    
+
     controllerMap.put("/assignment/list", new AssignmentListController(assignmentDao));
-    controllerMap.put("/assignment/view", new AssignmentViewContoroller(assignmentDao));
+    controllerMap.put("/assignment/view", new AssignmentViewController(assignmentDao));
     controllerMap.put("/assignment/add", new AssignmentAddController(assignmentDao));
     controllerMap.put("/assignment/update", new AssignmentUpdateController(assignmentDao));
-    controllerMap.put("/assignment/delete", new AssignmentDeleteContoller(assignmentDao));
+    controllerMap.put("/assignment/delete", new AssignmentDeleteController(assignmentDao));
+
+    controllerMap.put("/auth/login", new LoginController(memberDao));
+    controllerMap.put("/auth/logout", new LogoutController());
+
+    String boardUploadDir = this.getServletContext().getRealPath("/upload/board");
+    controllerMap.put("/board/list", new BoardListController(boardDao));
+    controllerMap.put("/board/view", new BoardViewController(boardDao, attachedFileDao));
+    controllerMap.put("/board/add",
+        new BoardAddController(txManager, boardDao, attachedFileDao, boardUploadDir));
+    controllerMap.put("/board/update",
+        new BoardUpdateController(txManager, boardDao, attachedFileDao, boardUploadDir));
+    controllerMap.put("/board/delete",
+        new BoardDeleteController(txManager, boardDao, attachedFileDao, boardUploadDir));
+    controllerMap.put("/board/file/delete",
+        new BoardFileDeleteController(boardDao, attachedFileDao, boardUploadDir));
   }
 
   @Override
@@ -68,6 +93,7 @@ public class DispatcherServlet extends HttpServlet {
     if (controller == null) {
       throw new ServletException(request.getPathInfo() + " 요청 페이지를 찾을 수 없습니다.");
     }
+
     try {
       String viewUrl = controller.execute(request, response);
 
@@ -77,6 +103,7 @@ public class DispatcherServlet extends HttpServlet {
       } else {
         request.getRequestDispatcher(viewUrl).forward(request, response);
       }
+
     } catch (Exception e) {
       // 페이지 컨트롤러에서 오류가 발생했으면 오류페이지로 포워딩한다.
       request.setAttribute("message", request.getPathInfo() + " 실행 오류!");
