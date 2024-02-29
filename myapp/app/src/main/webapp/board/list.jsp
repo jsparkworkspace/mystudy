@@ -21,7 +21,7 @@
 <c:forEach items="${list}" var="board">
     <tr>
       <td>${board.no}</td>
-      <td><a href='/board/view?category=${category}&no=${board.no}'${board.title}</a></td>
+      <td><a href='/board/view?category=${category}&no=${board.no}'>${board.title}</a></td>
       <td>${board.writer.name}</td>
       <td>${board.createdDate}</td>
       <td>${board.fileCount}</td>
