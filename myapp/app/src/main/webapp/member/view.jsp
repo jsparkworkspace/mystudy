@@ -9,6 +9,7 @@
 <body>
 
 <jsp:include page="/header.jsp"></jsp:include>
+
 <h1>회원</h1>
 <form action='/app/member/update' method='post' enctype='multipart/form-data'>
 <div>

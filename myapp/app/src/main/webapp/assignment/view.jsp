@@ -11,6 +11,7 @@
 <jsp:include page="/header.jsp"></jsp:include>
 
 <h1>과제</h1>
+
 <form action='/app/assignment/update' method='post'>
 <div>
   번호: <input readonly name='no' type='text' value='${assignment.no}'>

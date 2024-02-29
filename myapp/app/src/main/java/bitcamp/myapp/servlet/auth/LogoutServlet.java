@@ -15,6 +15,7 @@ public class LogoutServlet extends HttpServlet {
       throws ServletException, IOException {
 
     request.getSession().invalidate();
-    request.setAttribute("viewUrl", "/index.html");
+
+    request.setAttribute("viewUrl", "redirect:/index.html");
   }
 }

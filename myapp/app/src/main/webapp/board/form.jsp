@@ -10,9 +10,9 @@
 
 <jsp:include page="/header.jsp"></jsp:include>
 
-<h1>${"boardName"}</h1>
+<h1>${boardName}</h1>
 
-<form action='/board/add?category=${category}' method='post' enctype='multipart/form-data'>
+<form action='/app/board/add?category=${category}' method='post' enctype='multipart/form-data'>
   <input name='category' type='hidden' value='${category}'>
   <div>
         제목: <input name='title' type='text'>
@@ -20,14 +20,12 @@
   <div>
         내용: <textarea name='content'></textarea>
   </div>
-
-<c:choose>
-  <c:when test="${category == 1}">
+<c:if test="${category == 1}">
   <div>
         첨부파일: <input multiple name='files' type='file'>
   </div>
-  </c:when>
-</c:choose>
+</c:if>
+
 <div>
   <button>등록</button>
 </div>

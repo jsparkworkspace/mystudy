@@ -18,6 +18,7 @@
     <tr> <th>번호</th> <th>과제</th> <th>제출마감일</th> </tr>
   </thead>
   <tbody>
+
 <c:forEach items="${list}" var="assignment">
     <tr>
       <td>${assignment.no}</td>
@@ -25,6 +26,7 @@
       <td>${assignment.deadline}</td>
     </tr>
 </c:forEach>
+
   </tbody>
 </table>
 

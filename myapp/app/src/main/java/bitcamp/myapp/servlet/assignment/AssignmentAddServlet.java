@@ -36,7 +36,6 @@ public class AssignmentAddServlet extends HttpServlet {
       assignment.setDeadline(Date.valueOf(request.getParameter("deadline")));
 
       assignmentDao.add(assignment);
-      //response.sendRedirect("/assignment/list");
       request.setAttribute("viewUrl", "redirect:list");
 
     } catch (Exception e) {

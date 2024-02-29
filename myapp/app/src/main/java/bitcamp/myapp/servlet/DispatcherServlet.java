@@ -27,6 +27,7 @@ public class DispatcherServlet extends HttpServlet {
     Throwable exception = (Throwable) request.getAttribute("exception");
     if (exception != null) {
       request.setAttribute("message", request.getPathInfo() + " 실행 오류!");
+
       StringWriter stringWriter = new StringWriter();
       PrintWriter printWriter = new PrintWriter(stringWriter);
       exception.printStackTrace(printWriter);
@@ -51,6 +52,5 @@ public class DispatcherServlet extends HttpServlet {
     } else {
       request.getRequestDispatcher(viewUrl).forward(request, response);
     }
-
   }
 }

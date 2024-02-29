@@ -36,6 +36,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     request.setAttribute("viewUrl", "/auth/form.jsp");
+
   }
 
   @Override
