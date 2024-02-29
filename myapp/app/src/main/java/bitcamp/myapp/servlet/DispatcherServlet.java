@@ -2,6 +2,11 @@ package bitcamp.myapp.servlet;
 
 import bitcamp.myapp.controller.HomeController;
 import bitcamp.myapp.controller.PageController;
+import bitcamp.myapp.controller.assignment.AssignmentAddController;
+import bitcamp.myapp.controller.assignment.AssignmentDeleteContoller;
+import bitcamp.myapp.controller.assignment.AssignmentListController;
+import bitcamp.myapp.controller.assignment.AssignmentUpdateController;
+import bitcamp.myapp.controller.assignment.AssignmentViewContoroller;
 import bitcamp.myapp.controller.member.MemberAddController;
 import bitcamp.myapp.controller.member.MemberDeleteController;
 import bitcamp.myapp.controller.member.MemberListController;
@@ -46,6 +51,12 @@ public class DispatcherServlet extends HttpServlet {
     controllerMap.put("/member/add", new MemberAddController(memberDao, memberUploadDir));
     controllerMap.put("/member/update", new MemberUpdateController(memberDao, memberUploadDir));
     controllerMap.put("/member/delete", new MemberDeleteController(memberDao, memberUploadDir));
+    
+    controllerMap.put("/assignment/list", new AssignmentListController(assignmentDao));
+    controllerMap.put("/assignment/view", new AssignmentViewContoroller(assignmentDao));
+    controllerMap.put("/assignment/add", new AssignmentAddController(assignmentDao));
+    controllerMap.put("/assignment/update", new AssignmentUpdateController(assignmentDao));
+    controllerMap.put("/assignment/delete", new AssignmentDeleteContoller(assignmentDao));
   }
 
   @Override
