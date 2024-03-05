@@ -51,7 +51,7 @@ public class AuthController {
   }
 
   @RequestMapping("/auth/logout")
-  public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     request.getSession().invalidate();
     return "redirect:/index.html";
   }

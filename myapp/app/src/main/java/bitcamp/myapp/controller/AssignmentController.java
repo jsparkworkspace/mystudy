@@ -73,5 +73,4 @@ public class AssignmentController {
     }
     return "redirect:list";
   }
-
 }
