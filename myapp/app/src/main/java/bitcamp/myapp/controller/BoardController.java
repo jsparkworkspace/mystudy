@@ -25,6 +25,7 @@ public class BoardController {
 
   public BoardController(TransactionManager txManager, BoardDao boardDao,
       AttachedFileDao attachedFileDao) {
+    System.out.println("BoardController() 호출됨!");
     this.txManager = txManager;
     this.boardDao = boardDao;
     this.attachedFileDao = attachedFileDao;
