@@ -19,21 +19,27 @@
   <!-- ContextLoaderListener가 사용할 IoC 컨테이너 설정 파일 정보 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/app-servlet.xml</param-value>
+    <param-value>/WEB-INF/config/application-context.xml</param-value>
   </context-param>
 
   <servlet>
     <servlet-name>app</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value></param-value> <!-- 비어있더라도 글로벌 Spring IoC 컨테이너 설정 파일을 읽어 사용한다.-->
-    </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>app</servlet-name>
     <url-pattern>/app/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>admin</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>admin</servlet-name>
+    <url-pattern>/admin/*</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>
