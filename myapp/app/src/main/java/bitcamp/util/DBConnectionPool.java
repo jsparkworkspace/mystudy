@@ -11,21 +11,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class DBConnectionPool implements ConnectionPool {
 
-
   // 개별 스레드용 DB 커넥션 저장소
   private static final ThreadLocal<Connection> connectionThreadLocal = new ThreadLocal<>();
   private final Log log = LogFactory.getLog(this.getClass());
   // DB 커넥션 목록
   ArrayList<Connection> connections = new ArrayList<>();
+
   @Value("${jdbc.url}")
   private String jdbcUrl;
+
   @Value("${jdbc.username}")
   private String username;
+
   @Value("${jdbc.password}")
   private String password;
 
   public DBConnectionPool() {
-    log.debug("DBConnectionPool() 호출됨!");
+    log.debug("생성자 호출됨!");
   }
 
   public Connection getConnection() throws Exception {

@@ -14,7 +14,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 public class AppWebApplicationInitializer1 /*implements WebApplicationInitializer*/ {
 
-  /*@Override*/
   public void onStartup(ServletContext servletContext) throws ServletException {
 
     AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
@@ -49,5 +48,6 @@ public class AppWebApplicationInitializer1 /*implements WebApplicationInitialize
     );
 
   }
+
 
 }

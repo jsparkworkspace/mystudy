@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
@@ -28,7 +27,8 @@ public class AuthController {
   }
 
   @GetMapping("form")
-  public String form(@CookieValue(value = "email", defaultValue = "") String email,
+  public String form(
+      @CookieValue(value = "email", required = false) String email,
       Model model) {
     model.addAttribute("email", email);
     return "/auth/form.jsp";

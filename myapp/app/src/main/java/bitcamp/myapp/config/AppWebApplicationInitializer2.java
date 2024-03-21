@@ -16,7 +16,6 @@ public class AppWebApplicationInitializer2 /*extends AbstractContextLoaderInitia
 
   AnnotationConfigWebApplicationContext rootContext;
 
-  /*@Override*/
   protected WebApplicationContext createRootApplicationContext() {
     rootContext = new AnnotationConfigWebApplicationContext();
     rootContext.register(RootConfig.class);
@@ -24,11 +23,10 @@ public class AppWebApplicationInitializer2 /*extends AbstractContextLoaderInitia
     return rootContext;
   }
 
-  /*@Override*/
   public void onStartup(ServletContext servletContext) throws ServletException {
-    // 수퍼 클래스의 onStartup() 에서 ContextLoaderListener를 생성하기 때문에
+    // 수퍼 클래스의 onStartup()에서 ContextLoaderListener를 생성하기 때문에
     // 기존의 기능을 그대로 수행하도록 수퍼 클래스의 메서드를 호출한다.
-    /*super.onStartup(servletContext);*/
+    //super.onStartup(servletContext);
 
     AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
     appContext.register(AppConfig.class);

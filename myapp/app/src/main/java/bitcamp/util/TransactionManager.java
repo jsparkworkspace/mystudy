@@ -12,7 +12,7 @@ public class TransactionManager {
   ConnectionPool connectionPool;
 
   public TransactionManager(ConnectionPool connectionPool) {
-    log.debug("TransactionManager() 호출됨!");
+    log.debug("생성자 호출됨!");
     this.connectionPool = connectionPool;
   }
 

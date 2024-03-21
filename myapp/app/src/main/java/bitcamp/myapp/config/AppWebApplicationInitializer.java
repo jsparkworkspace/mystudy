@@ -18,7 +18,6 @@ public class AppWebApplicationInitializer extends
     log.debug("생성자 호출됨!");
   }
 
-
   @Override
   protected Class<?>[] getRootConfigClasses() {
     return new Class[]{RootConfig.class};

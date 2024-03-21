@@ -29,6 +29,7 @@ public class AssignmentController {
 
   @PostMapping("add")
   public String add(Assignment assignment) throws Exception {
+    System.out.println(assignment);
     assignmentDao.add(assignment);
     return "redirect:list";
   }
@@ -51,7 +52,6 @@ public class AssignmentController {
 
   @PostMapping("update")
   public String update(Assignment assignment) throws Exception {
-
     Assignment old = assignmentDao.findBy(assignment.getNo());
     if (old == null) {
       throw new Exception("과제 번호가 유효하지 않습니다.");

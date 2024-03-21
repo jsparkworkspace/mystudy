@@ -15,7 +15,6 @@ public class AppWebApplicationInitializer3 /*extends AbstractDispatcherServletIn
   ServletContext servletContext;
   AnnotationConfigWebApplicationContext rootContext;
 
-  //@Override
   protected WebApplicationContext createRootApplicationContext() {
     rootContext = new AnnotationConfigWebApplicationContext();
     rootContext.register(RootConfig.class);
@@ -23,7 +22,6 @@ public class AppWebApplicationInitializer3 /*extends AbstractDispatcherServletIn
     return rootContext;
   }
 
-  //@Override
   protected WebApplicationContext createServletApplicationContext() {
     AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
     appContext.register(AppConfig.class);
@@ -33,12 +31,10 @@ public class AppWebApplicationInitializer3 /*extends AbstractDispatcherServletIn
     return appContext;
   }
 
-  //@Override
   protected String[] getServletMappings() {
     return new String[]{"/app/*"};
   }
 
-  //@Override
   protected void customizeRegistration(Dynamic registration) {
     registration.setMultipartConfig(new MultipartConfigElement(
         new File("./temp").getAbsolutePath(),
@@ -49,12 +45,10 @@ public class AppWebApplicationInitializer3 /*extends AbstractDispatcherServletIn
     ));
   }
 
-  //@Override
   protected Filter[] getServletFilters() {
     return new Filter[]{new CharacterEncodingFilter("UTF-8")};
   }
 
-  //@Override
   public void onStartup(ServletContext servletContext) throws ServletException {
     this.servletContext = servletContext;
     //super.onStartup(servletContext);

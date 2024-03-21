@@ -20,7 +20,6 @@ public class AppConfig {
 
   @Bean
   MultipartResolver multipartResolver() {
-    StandardServletMultipartResolver mr = new StandardServletMultipartResolver();
-    return mr;
+    return new StandardServletMultipartResolver();
   }
 }

@@ -35,13 +35,11 @@ public class MemberController {
 
   @PostMapping("add")
   public String add(Member member, MultipartFile file) throws Exception {
-
     if (file.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
       member.setPhoto(filename);
       file.transferTo(new File(this.uploadDir + "/" + filename));
     }
-
     memberDao.add(member);
     return "redirect:list";
   }
@@ -54,6 +52,7 @@ public class MemberController {
 
   @GetMapping("view")
   public String view(int no, Model model) throws Exception {
+
     Member member = memberDao.findBy(no);
     if (member == null) {
       throw new Exception("회원 번호가 유효하지 않습니다.");
@@ -64,6 +63,7 @@ public class MemberController {
 
   @PostMapping("update")
   public String update(Member member, MultipartFile file) throws Exception {
+
     Member old = memberDao.findBy(member.getNo());
     if (old == null) {
       throw new Exception("회원 번호가 유효하지 않습니다.");
