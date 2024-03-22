@@ -27,8 +27,7 @@ public class AuthController {
   }
 
   @GetMapping("form")
-  public void form(
-      @CookieValue(required = false) String email, Model model) {
+  public void form(@CookieValue(required = false) String email, Model model) {
     model.addAttribute("email", email);
   }
 
@@ -54,6 +53,7 @@ public class AuthController {
     if (member != null) {
       session.setAttribute("loginUser", member);
     }
+
     return "auth/login";
   }
 

@@ -14,6 +14,17 @@
     delete from members where member_no=#{value}
   </delete>
 
+  <select id="findAll" resultType="bitcamp.myapp.vo.Member">
+    select
+      member_no as no,
+      email,
+      name,
+      photo,
+      created_date as createdDate
+    from
+      members
+  </select>
+
   <select id="findBy" resultType="bitcamp.myapp.vo.Member" parameterType="int">
     select
       member_no as no,
@@ -22,7 +33,9 @@
       photo,
       created_date as createdDate
     from
-      members where member_no=#{value}
+      members
+    where
+      member_no=#{value}
   </select>
 
   <update id="update" parameterType="bitcamp.myapp.vo.Member">
@@ -37,27 +50,16 @@
       member_no=#{no}
   </update>
 
-  <select id="findAll" resultType="bitcamp.myapp.vo.Member">
-    select
-      member_no as no,
-      email,
-      name,
-      photo,
-      created_date as createdDate
-    from
-      members
-  </select>
-
   <select id="findByEmailAndPassword" resultType="bitcamp.myapp.vo.Member" parameterType="map">
     select
       member_no as no,
       email,
       name,
-      created_date as createDate
+      created_date as createdDate
     from
       members
     where
-      email=#{email}
+      email= #{email}
       and password=sha2(#{password},256)
   </select>
 </mapper>
