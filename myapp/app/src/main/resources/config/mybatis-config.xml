@@ -5,6 +5,10 @@
 <configuration>
 
   <properties resource="config/jdbc.properties"/>
+  
+  <typeAliases>
+    <package name="bitcamp.myapp.vo"/>
+  </typeAliases>
 
   <environments default="development">
     <environment id="development">
