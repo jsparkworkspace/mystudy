@@ -22,7 +22,7 @@ public class AuthController {
 
   private static final Log log = LogFactory.getLog(AuthController.class);
   private final MemberService memberService;
-  
+
   @GetMapping("form")
   public void form(@CookieValue(required = false) String email, Model model) {
     model.addAttribute("email", email);

@@ -15,4 +15,5 @@ public class Assignment implements Serializable {
   private String title;
   private String content;
   private Date deadline;
+
 }

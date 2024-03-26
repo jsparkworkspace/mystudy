@@ -67,7 +67,7 @@
       bf.file_no,
       bf.file_path
     from
-      boards b inner join members m on b.writer=m.member_no  
+      boards b inner join members m on b.writer=m.member_no
       left outer join board_files bf on b.board_no=bf.board_no
     where
       b.board_no=#{value}

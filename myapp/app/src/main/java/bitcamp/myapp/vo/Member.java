@@ -17,4 +17,5 @@ public class Member implements Serializable {
   private String password;
   private String photo;
   private Date createdDate;
+
 }

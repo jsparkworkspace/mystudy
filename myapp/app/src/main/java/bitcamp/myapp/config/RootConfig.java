@@ -19,15 +19,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @MapperScan("bitcamp.myapp.dao")
 @ComponentScan({"bitcamp.myapp.dao", "bitcamp.myapp.service"})
-@PropertySource({
-    "classpath:config/jdbc.properties"
-})
+@PropertySource({"classpath:config/jdbc.properties"})
 public class RootConfig {
 
   private final Log log = LogFactory.getLog(this.getClass());
 
   public RootConfig() {
     log.debug("생성자 호출됨!");
+  }
+
+  @Bean
+  public PlatformTransactionManager transactionManager(DataSource dataSource) {
+    return new DataSourceTransactionManager(dataSource);
   }
 
   @Bean
@@ -39,11 +42,7 @@ public class RootConfig {
   }
 
   @Bean
-  public PlatformTransactionManager transactionManager(DataSource dataSource) {
-    return new DataSourceTransactionManager(dataSource);
-  }
 
-  @Bean
   public SqlSessionFactory sqlSessionFactory(ApplicationContext ctx, DataSource dataSource)
       throws Exception {
     SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
