@@ -49,16 +49,16 @@ public class NcpStorageService implements StorageService, InitializingBean {
 
   @Override
   public void afterPropertiesSet() throws Exception {
-    log.debug(String.format("endpoint: %s", this.endPoint));
-    log.debug(String.format("regionname: %s", this.regionName));
-    log.debug(String.format("accesskey: %s", this.accessKey));
-    log.debug(String.format("secretkey: %s", this.secretKey));
+    log.debug(String.format("endPoint: %s", this.endPoint));
+    log.debug(String.format("regionName: %s", this.regionName));
+    log.debug(String.format("accessKey: %s", this.accessKey));
+    log.debug(String.format("secretKey: %s", this.secretKey));
   }
 
   @Override
   public String upload(String bucketName, String path, MultipartFile multipartFile)
       throws Exception {
-    
+
     try (InputStream fileIn = multipartFile.getInputStream()) {
 
       String filename = UUID.randomUUID().toString();
@@ -67,6 +67,10 @@ public class NcpStorageService implements StorageService, InitializingBean {
       // 서버에 업로드할 파일의 정보를 준비
       ObjectMetadata objectMetadata = new ObjectMetadata();
       objectMetadata.setContentType(multipartFile.getContentType());
+
+      log.info(String.format("%s(%s)",
+          multipartFile.getOriginalFilename(),
+          multipartFile.getContentType()));
 
       // 서버에 업로드 요청 정보 생성
       PutObjectRequest putObjectRequest = new PutObjectRequest(
@@ -83,5 +87,12 @@ public class NcpStorageService implements StorageService, InitializingBean {
 
       return filename;
     }
+  }
+
+  @Override
+  public void delete(String bucketName, String path, String objectName) throws Exception {
+    s3.deleteObject(bucketName, path + objectName);
+
+    log.debug(String.format("Object %s has been deleted.\n", objectName));
   }
 }
