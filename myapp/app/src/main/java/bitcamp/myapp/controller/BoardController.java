@@ -70,7 +70,7 @@ public class BoardController {
 
     boardService.add(board);
 
-    return "redirect:list";
+    return "redirect:list?category=" + board.getCategory();
 
   }
 
