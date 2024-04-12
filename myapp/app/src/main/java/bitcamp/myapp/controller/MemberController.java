@@ -22,9 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberController implements InitializingBean {
 
   private static final Log log = LogFactory.getLog(MemberController.class);
+
   private final MemberService memberService;
   private final StorageService storageService;
   private String uploadDir;
+
   @Value("${ncp.ss.bucketname}")
   private String bucketName;
 
@@ -66,6 +68,9 @@ public class MemberController implements InitializingBean {
 
     int numOfRecord = memberService.countAll();
     int numOfPage = numOfRecord / pageSize + ((numOfRecord % pageSize) > 0 ? 1 : 0);
+
+    log.debug(String.format("numOfRecord: %s", numOfRecord));
+    log.debug(String.format("numOfPage: %s", numOfPage));
 
     if (pageNo > numOfPage) {
       pageNo = numOfPage;

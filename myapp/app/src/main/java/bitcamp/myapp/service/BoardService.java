@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface BoardService {
 
-  int countAll(int category);
-
   void add(Board board);
 
   List<Board> list(int category, int pageNo, int pageSize);
@@ -23,4 +21,6 @@ public interface BoardService {
   AttachedFile getAttachedFile(int fileNo);
 
   int deleteAttachedFile(int fileNo);
+
+  int countAll(int category);
 }

@@ -55,8 +55,7 @@
       assignment_no=#{no}
   </update>
 
-  <select id="countAll" resultType="int" parameterType="int">
-    select count(*) from assignments
+  <select id="countAll" resultType="int">
+    select count(*) from assignments;
   </select>
-
 </mapper>
